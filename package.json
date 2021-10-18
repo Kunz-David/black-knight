@@ -7,7 +7,9 @@
     "@testing-library/react": "^11.2.7",
     "@testing-library/user-event": "^12.8.3",
     "axios": "^0.22.0",
+    "concurrently": "^6.3.0",
     "esm": "^3.2.25",
+    "express": "^4.17.1",
     "node-fetch": "^3.0.0",
     "react": "^17.0.2",
     "react-dom": "^17.0.2",
@@ -17,8 +19,10 @@
     "xhr2": "^0.2.1"
   },
   "scripts": {
-    "start": "react-scripts start",
+    "start": "concurrently \"yarn run backend\" \"yarn run client\"",
+    "client": "react-scripts start",
     "backend": "node backend-wrapper.js",
+    "debug-scraper": "node testing/debugScraper-wrapper.js",
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject"
@@ -41,5 +45,5 @@
       "last 1 safari version"
     ]
   },
-  "proxy": "http://localhost:8433"
+  "proxy": "http://localhost:3001"
 }
