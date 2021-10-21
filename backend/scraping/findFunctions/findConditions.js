@@ -7,8 +7,8 @@ function findTreatments(html) {
     const names = findWebNames(html)
     const foundConditions = names.map(name => Object
         .keys(cardConditions)
-        .filter(treatment => name.includes(cardConditions[treatment])))
-    return fillEmptyWith(foundConditions, "near mint").flat()
+        .find(treatment => name.includes(cardConditions[treatment])))
+    return fillEmptyWith(foundConditions, "near mint")
 }
 
 export default findTreatments

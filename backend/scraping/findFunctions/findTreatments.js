@@ -6,8 +6,8 @@ function findTreatments(html) {
     const names = findWebNames(html)
     const foundTreatments = names.map(name => Object
         .keys(cardTreatments)
-        .filter(treatment => name.includes(cardTreatments[treatment])))
-    return fillEmptyWith(foundTreatments, "none").flat()
+        .find(treatment => name.includes(cardTreatments[treatment])))
+    return fillEmptyWith(foundTreatments, "none")
 }
 
 export default findTreatments

@@ -2,7 +2,7 @@ import axios from 'axios'
 import scrapeWithAllFunctions from "../backend/scraping/scrapeWithAllFunctions";
 import scrapedToJsons from "../backend/scraping/utils/scrapedToJsons";
 import scrapeCard from "../backend/scraping/scrapeCard";
-import cardSearchURL from "../backend/scraping/cardSearchURL";
+import exactCardSearchURL from "../backend/scraping/exactCardSearchURL";
 
 // const cardJSON = require("../testing/aether_vial.json")
 
@@ -11,10 +11,11 @@ import cardSearchURL from "../backend/scraping/cardSearchURL";
 // get the url from json
 // let urlSearch = new URLSearchParams(cardJSON).toString();
 // console.log(urlSearch)
-const cardName = "Aether Vial"
+// const cardName = "Aether Vial"
 // const cardName = "Swamp"
+const cardName = "Dark confidant"
 
-const rytirSearchURL = cardSearchURL(cardName)
+const rytirSearchURL = exactCardSearchURL(cardName)
 
 scrapeCard(rytirSearchURL).then(res => {
     console.log(res)

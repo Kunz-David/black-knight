@@ -6,6 +6,7 @@ import findTreatments from "./findTreatments";
 import findLanguages from "./findLanguages";
 import findConditions from "./findConditions";
 import findWebNames from "./findWebNames";
+import findImages from "./findImages";
 
 const findFunctions = {
     "cost": findCosts,
@@ -15,7 +16,8 @@ const findFunctions = {
     "treatment": findTreatments,
     "language": findLanguages,
     "condition": findConditions,
-    "web_name": findWebNames
+    "rytir_name": findWebNames,
+    "rytir_image": findImages
 }
 
 export default findFunctions
