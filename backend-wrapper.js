@@ -1,2 +1,3 @@
+require('dotenv').config()
 require = require('esm')(module /*, options*/)
-module.exports = require('./backend/backend.js')
+module.exports = require('./src/backend/backend.js')

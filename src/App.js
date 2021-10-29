@@ -1,25 +1,20 @@
-import logo from './logo.svg';
 import './App.css';
+import Header from "./components/Header";
+import {MtgCardViewer} from 'mtg-card-viewer';
+import SearchForm from "./components/SearchForm";
+import CardsContainer from "./components/CardsContainer";
+
 
 function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+    return (
+        <div className="App">
+            <Header/>
+            <p>Of all MTG cards, <MtgCardViewer searchTerm='lightning bolt'/> is my favorite!</p>
+            {/*<Mana symbol="2b" cost fixed size="2x"/>*/}
+            <SearchForm/>
+            <CardsContainer/>
+        </div>
+    )
 }
 
 export default App;

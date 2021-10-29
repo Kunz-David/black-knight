@@ -3,12 +3,22 @@ import ReactDOM from 'react-dom';
 import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
+import {RecoilRoot} from 'recoil';
+import {ReactQueryDevtools} from 'react-query/devtools'
+import {QueryClient, QueryClientProvider} from 'react-query'
+
+const queryClient = new QueryClient()
 
 ReactDOM.render(
-  <React.StrictMode>
-    <App />
-  </React.StrictMode>,
-  document.getElementById('root')
+    <React.StrictMode>
+        <RecoilRoot>
+            <QueryClientProvider client={queryClient}>
+                <App/>
+                <ReactQueryDevtools initialIsOpen={true}/>
+            </QueryClientProvider>
+        </RecoilRoot>
+    </React.StrictMode>,
+    document.getElementById('root')
 );
 
 // If you want to start measuring performance in your app, pass a function

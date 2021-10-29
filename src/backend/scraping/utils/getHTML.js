@@ -5,6 +5,7 @@ async function getHTML(url) {
     try {
         const response = await axios
             .request({
+                // headers: {"Access-Control-Allow-Origin": "*"},
                 method: 'GET',
                 url: url,
                 responseType: 'arraybuffer'

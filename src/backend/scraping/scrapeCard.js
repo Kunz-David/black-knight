@@ -3,17 +3,19 @@ import getPageURLs from "./utils/getOtherPageURLs";
 import scrapeWithAllFunctions from "./scrapeWithAllFunctions";
 import scrapedToJsons from "./utils/scrapedToJsons";
 import searchSuccessful from "./utils/searchSuccessful";
-import axios from "axios";
+// import axios from "axios";
 
-async function addSetCodes(cards) {
-    const scryfallSets = await axios.get("https://api.scryfall.com/sets").then(res => res.data)
-    console.log(scryfallSets)
-    return scryfallSets
-}
+//TODO: add set code to search
 
-function addSetCode(card) {
-
-}
+// async function addSetCodes(cards) {
+//     const scryfallSets = await axios.get("https://api.scryfall.com/sets").then(res => res.data)
+//     console.log(scryfallSets)
+//     return scryfallSets
+// }
+//
+// function addSetCode(card) {
+//
+// }
 
 // scrapes results of search from all the result pages
 async function scrapeCard(url) {

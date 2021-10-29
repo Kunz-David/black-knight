@@ -1,8 +1,8 @@
 import axios from 'axios'
-import scrapeWithAllFunctions from "../backend/scraping/scrapeWithAllFunctions";
-import scrapedToJsons from "../backend/scraping/utils/scrapedToJsons";
-import scrapeCard from "../backend/scraping/scrapeCard";
-import exactCardSearchURL from "../backend/scraping/exactCardSearchURL";
+import scrapeWithAllFunctions from "../src/backend/scraping/scrapeWithAllFunctions";
+import scrapedToJsons from "../src/backend/scraping/utils/scrapedToJsons";
+import scrapeCard from "../src/backend/scraping/scrapeCard";
+import exactCardSearchURL from "../src/backend/scraping/exactCardSearchURL";
 
 // const cardJSON = require("../testing/aether_vial.json")
 
