@@ -32,6 +32,7 @@ function CardItem(prop) {
     return (
         <div>
             <MtgCardViewer searchTerm={prop.card.name}/>
+            {/*{prop.card.name}*/}
             <input type="checkbox"
                    checked={prop.card.buyCard}
                    onChange={toggleCardBuy}/>

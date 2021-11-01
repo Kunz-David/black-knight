@@ -1,4 +1,4 @@
-import {atom} from "recoil";
+import {atom, atomFamily} from "recoil";
 
 const cardListAtom = atom({
     key: "cardListState",
@@ -9,5 +9,7 @@ const cardListAtom = atom({
         {name: "Plains", buyCard: false},
     ]
 })
+
+// const cardListAtomFamily = atomFamily()
 
 export {cardListAtom}

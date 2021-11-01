@@ -18,7 +18,7 @@ class Server {
         this.setupMiddlewares();
         this.setupRoutes();
         // this.createDBFromScryfall()
-        this.db = this.connectToDB()
+        // this.db = this.connectToDB()
     }
 
     setupMiddlewares() {

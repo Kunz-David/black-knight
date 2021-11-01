@@ -1,7 +1,7 @@
 import React, {useState} from 'react';
-import {useSetRecoilState,} from 'recoil';
+import {useRecoilState, useSetRecoilState,} from 'recoil';
 import {cardListAtom} from "../atoms";
-import {useQuery} from 'react-query'
+// import {useQuery} from 'react-query'
 import axios from "axios";
 import {DEFAULT_BACKEND_HOST} from "../utils/constants/backendHost";
 import {DEFAULT_BACKEND_PORT} from "../utils/constants/backendPort";
@@ -16,27 +16,34 @@ function SearchForm() {
     // card name
     const [inputCardName, setInputCardName] = useState("")
     // card list setter
-    const setCardList = useSetRecoilState(cardListAtom)
+    const [cardList, setCardList] = useRecoilState(cardListAtom)
 
     // Queries
-    // const query = useQuery('card', () => getNamedCardsRytir("Dark Confidant"))
-    const query = useQuery("cards", getCardsFromBackend)
+    // const query = useQuery('card', () => getCardsFromBackend("Lightning bolt"))
+    // const query = useQuery("cards", getCardsFromBackend)
 
-    const addCard = () => {
-
+    const addCard = event => {
+        event.preventDefault()
         setCardList((oldCardList) => [
             ...oldCardList,
             {
-                // id: generateUniqueID(inputCardName),
-                // cardName: inputCardName,
-
+                name: inputCardName,
+                buyCard: true,
             }
         ])
+        setInputCardName("")
+        console.log("list updated:" + cardList.toString())
     }
 
     const onCardNameInputChange = ({target: {value}}) => {
         setInputCardName(value);
     };
+
+    const handleKeyDown = (event) => {
+        if (event.key === 'Enter') {
+            addCard(event)
+        }
+    }
 
     return (
         <form>
@@ -47,6 +54,7 @@ function SearchForm() {
                     name="Search for card..."
                     value={inputCardName}
                     onChange={onCardNameInputChange}
+                    onKeyDown={handleKeyDown}
                 />
                 <button onClick={addCard}>Add</button>
                 <br/>
