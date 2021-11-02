@@ -1,14 +1,22 @@
-import React from 'react';
-import {useRecoilState} from 'recoil';
+import {Suspense} from 'react';
+import {selectorFamily, useRecoilState, useRecoilValue} from 'recoil';
 import {cardListAtom} from "../atoms";
 import {MtgCardViewer} from "mtg-card-viewer";
+import {findCard} from "./SearchForm";
 
-// import {Mana} from "@saeris/react-mana";
+const CardData = ({cardName}) => {
+    return null
+    // const card = useRecoilValue(findCard(cardName))
+    // return (<div>
+    //     <h2>Card info</h2>
+    //     <p>Card found: {card.status}</p>
+    //     <p>{card.results.toString()}</p>
+    // </div>)
+}
 
 function replaceItemAtIndex(arr, index, newValue) {
     return [...arr.slice(0, index), newValue, ...arr.slice(index + 1)];
 }
-
 function removeItemAtIndex(arr, index) {
     return [...arr.slice(0, index), ...arr.slice(index + 1)];
 }
@@ -32,11 +40,14 @@ function CardItem(prop) {
     return (
         <div>
             <MtgCardViewer searchTerm={prop.card.name}/>
-            {/*{prop.card.name}*/}
             <input type="checkbox"
                    checked={prop.card.buyCard}
                    onChange={toggleCardBuy}/>
             <button onClick={deleteCard}>X</button>
+            {prop.card.name !== undefined && (
+                <Suspense fallback={<div>Loading...</div>}>
+                    <CardData cardName={prop.card.name}/>
+                </Suspense>)}
             {/*<Mana symbol={card.} cost fixed size="2x"/>*/}
         </div>
     );

@@ -33,12 +33,14 @@ async function scrapeCard(url) {
             // setCode: "PLACEHOLDER"
         }))
         return {
-            status: "Success.",
+            status: "success",
             results: cards,
         }
     } else {
         console.warn(`No card found at ${url}`)
-        return {status: "Error: No cards found."}
+        return {status: "error",
+            info: "no cards found"
+        }
     }
 }
 

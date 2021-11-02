@@ -1,1 +1,1 @@
-export const DEFAULT_BACKEND_HOST = "http://localhost:"
+export const DEFAULT_HOST = "http://localhost:"

@@ -10,6 +10,8 @@
     "dotenv": "^10.0.0",
     "esm": "^3.2.25",
     "express": "^4.17.1",
+    "immer": "^9.0.6",
+    "lodash": "^4.17.21",
     "mana-font": "^1.14.0",
     "mongodb": "^4.1.3",
     "mongoose": "^6.0.12",
@@ -29,7 +31,8 @@
   "scripts": {
     "start": "concurrently \"yarn run backend\" \"yarn run client\"",
     "client": "react-scripts start",
-    "backend": "nodemon backend-wrapper.js",
+    "backend-nodemon": "nodemon backend-wrapper.js",
+    "backend": "node backend-wrapper.js",
     "debug-scraper": "node testing/debugScraper-wrapper.js",
     "try": "node -r esm testing/try.js",
     "build": "react-scripts build",

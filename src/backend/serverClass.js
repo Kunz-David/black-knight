@@ -22,9 +22,7 @@ class Server {
     }
 
     setupMiddlewares() {
-        this.app.use(cors({
-            origin: "http://cernyrytir.cz/"
-        }));
+        this.app.use(cors());
         var allowCrossDomain = function (req, res, next) {
             res.header('Access-Control-Allow-Origin', "*");
             res.header('Access-Control-Allow-Methods', 'GET,PUT,POST,DELETE');
