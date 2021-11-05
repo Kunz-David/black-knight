@@ -1,6 +1,7 @@
 import scrapeCard from "./scraping/scrapeCard";
 import exactCardSearchURL from "./scraping/exactCardSearchURL";
 import Server from "./serverClass";
+import getNamedCardsRytir from "./scraping/getNamedCardsRytir";
 
 
 const server = new Server()
@@ -13,7 +14,7 @@ server.app.get('/api/card/:name', (req, res) => {
             error: "no params given"
         });
     } else {
-        scrapeCard(exactCardSearchURL(params.name))
+        getNamedCardsRytir(params.name)
             .then(r => res.json(r))
             .catch(error => console.log(error))
     }

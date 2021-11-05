@@ -1,8 +1,8 @@
+// note that the order matters here
 const cardConditions = {
-    "lightly played": "lightly played", // note that the order matters here
-    "played": "played",
-    // "near mint": is given as not having the above
-    "near mint": "this sting will never be found"
+    "lightly played": {searchPhrase: "lightly played", colorScheme: "yellow"},
+    "played": {searchPhrase: "played", colorScheme: "red"},
+    "near mint": {searchPhrase: "this sting will never be found", colorScheme: "green"},
 }
 
 export default cardConditions

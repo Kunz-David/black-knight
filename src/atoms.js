@@ -1,6 +1,7 @@
-import {atom, atomFamily, selectorFamily, DefaultValue} from "recoil";
+import {atom, atomFamily, selectorFamily, selector} from "recoil";
 import {get as loGet, has as loHas, set as loSet} from "lodash"
 import produce from 'immer'
+import {findCard} from "./components/SearchForm";
 
 export const cardListAtom = atom({
     key: "cardListState",
@@ -12,6 +13,7 @@ export const cardListAtom = atom({
     ]
 })
 
+// noinspection JSUnusedGlobalSymbols
 export const defaultCard = {
     cardName: null,
     cost: null,
@@ -23,17 +25,18 @@ export const defaultCard = {
     buyCount: 0,
 }
 
-export const buylistProperty = selectorFamily({
-    key: "buylistProperty",
+export const cardStripProperty = selectorFamily({
+    key: "cardStripProperty",
 
     get: ({cardName, path}) => ({get}) => {
         const cardStrip = get(cardStripsState(cardName))
+        if (!loHas(cardStrip, path)) console.debug(`cardStrip ${cardName} doesnt have the path ${path}.`)
         return loGet(cardStrip, path)
     },
 
     set: ({cardName, path}) => ({get, set}, newValue) => {
         const cardStrip = get(cardStripsState(cardName))
-        if (!loHas(cardStrip, path)) console.warn(`cardStrip ${cardName} doesnt have the path ${path}.`)
+        if (!loHas(cardStrip, path)) console.debug(`cardStrip ${cardName} doesnt have the path ${path}.`)
         const newCardStrip = produce(cardStrip, (draft) => {
             loSet(draft, path, newValue)
         })
@@ -41,9 +44,36 @@ export const buylistProperty = selectorFamily({
     }
 })
 
+// export const populateCardStrip = selectorFamily({
+//     key: "populateCardsStrip",
+//     set: ({cardName}) => ({get, set}) => {
+//         const cardStrip = get(cardStripsState(cardName))
+//         const foundResults = get(findCard(cardName))
+//         set(cardStrip, foundResults.results)
+//     }
+// })
+
+export const destroyAllStripsSelector = selector({
+    key: "destroyAllStrips",
+    get: () => [],
+    set: ({get, reset}) => {
+        const cardStripNames = get(cardStripsNamesState)
+        cardStripNames.forEach(
+            name => reset(cardStripsState(name))
+        )
+        reset(cardStripsNamesState)
+    }
+})
+
 export const cardStripsState = atomFamily({
     key: "cardStrip",
-    default: []
+    default: selectorFamily({
+        key: "cardStripDefault",
+        get: (cardName) => ({get}) => {
+            const foundResults = get(findCard(cardName))
+            return foundResults.results
+        }
+    })
 })
 
 export const cardStripsNamesState = atom({

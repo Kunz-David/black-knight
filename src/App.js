@@ -2,7 +2,8 @@ import './App.css';
 import Header from "./components/Header";
 import {MtgCardViewer} from 'mtg-card-viewer';
 import SearchForm from "./components/SearchForm";
-import CardsContainer from "./components/CardsContainer";
+import CardStripsContainer from "./components/CardStripsContainer";
+import CardStripsOperationsMenu from "./components/CardStripsOperationsMenu";
 
 
 function App() {
@@ -12,7 +13,8 @@ function App() {
             <p>Of all MTG cards, <MtgCardViewer searchTerm='lightning bolt'/> is my favorite!</p>
             {/*<Mana symbol="2b" cost fixed size="2x"/>*/}
             <SearchForm/>
-            <CardsContainer/>
+            <CardStripsOperationsMenu/>
+            <CardStripsContainer/>
         </div>
     )
 }

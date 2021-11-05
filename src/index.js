@@ -4,8 +4,8 @@ import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
 import {RecoilRoot} from 'recoil';
-import {ReactQueryDevtools} from 'react-query/devtools'
 import {QueryClient, QueryClientProvider} from 'react-query'
+import { ChakraProvider } from "@chakra-ui/react"
 
 const queryClient = new QueryClient()
 
@@ -13,8 +13,9 @@ ReactDOM.render(
     <React.StrictMode>
         <RecoilRoot>
             <QueryClientProvider client={queryClient}>
-                <App/>
-                <ReactQueryDevtools initialIsOpen={true}/>
+                <ChakraProvider>
+                    <App/>
+                </ChakraProvider>
             </QueryClientProvider>
         </RecoilRoot>
     </React.StrictMode>,
