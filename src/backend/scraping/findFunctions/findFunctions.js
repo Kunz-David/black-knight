@@ -1,4 +1,4 @@
-import findCosts from "./findCosts";
+import findPrices from "./findPrices";
 import findStocks from "./findStocks";
 import findSets from "./findSets";
 import findRarities from "./findRarities";
@@ -9,11 +9,11 @@ import findWebNames from "./findWebNames";
 import findImages from "./findImages";
 
 const findFunctions = {
-    "cost": findCosts,
+    "price": findPrices,
     "stock": findStocks,
     "set": findSets,
     "rarity": findRarities,
-    "treatment": findTreatments,
+    "treatments": findTreatments,
     "language": findLanguages,
     "condition": findConditions,
     "rytir_name": findWebNames,

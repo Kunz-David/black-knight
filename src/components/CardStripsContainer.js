@@ -1,29 +1,19 @@
 import React from 'react';
-import {atom, useRecoilState, useRecoilValue} from "recoil";
+import {useRecoilValue} from "recoil";
 import {cardStripsNamesState} from "../atoms";
+import {VStack} from "@chakra-ui/react";
 import CardStrip from "./CardStrip";
-import {Accordion} from "@chakra-ui/react";
 
-
-export const expandedAccordionItemsState = atom({
-    key: "expandedAccordionItems",
-    default: [],
-})
-
-function CardStripsContainer(props) {
-
+function CardStripsContainer() {
     const cardStripsNames = useRecoilValue(cardStripsNamesState)
-    const [expandedAccordionItems, setExpandedAccordionItems] = useRecoilState(expandedAccordionItemsState)
 
     console.log("cardStripsNames: " + cardStripsNames)
     console.log("cardStripsNames len: " + cardStripsNames.length)
 
     return (
-        <div>
-            <Accordion defaultIndex={expandedAccordionItems} index={expandedAccordionItems} allowMultiple onChange={setExpandedAccordionItems}>
-                {cardStripsNames.slice().reverse().map((cardName) => <CardStrip key={cardName} cardName={cardName}/>)}
-            </Accordion>
-        </div>
+        <VStack spacing={0}>
+            {cardStripsNames.map((cardName) => <CardStrip key={cardName} cardName={cardName}/>)}
+        </VStack>
     );
 }
 

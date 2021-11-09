@@ -1,25 +1,38 @@
 import React from 'react';
 import {Box, Button, Flex, Heading, Spacer} from "@chakra-ui/react";
-import {useRecoilValue, useSetRecoilState} from "recoil";
-import {expandedAccordionItemsState} from "./CardStripsContainer";
+import {selector, useSetRecoilState} from "recoil";
 import {cardStripsNamesState, destroyAllStripsSelector} from "../atoms";
 import {DeleteIcon} from "@chakra-ui/icons";
-import {range} from "lodash"
 import {BsDashSquareFill, BsPlusSquareFill} from "react-icons/all";
+import {cardStripVisibleState} from "./CardStrip";
+
+
+const visibilityAll = selector({
+    key: "visibilityAll",
+    get: () => [],
+    set: ({get, set}, visible) => {
+        const cardNames = get(cardStripsNamesState)
+        cardNames.forEach(cardName => {
+            set(cardStripVisibleState(cardName), visible)
+        })
+    }
+})
 
 
 const CardStripsOperationsMenu = () => {
 
-    const cardStripNames = useRecoilValue(cardStripsNamesState)
-    const setExpandedAccordionItems = useSetRecoilState(expandedAccordionItemsState)
+    // const cardStripNames = useRecoilValue(cardStripsNamesState)
+    const setVisibilityAll = useSetRecoilState(visibilityAll)
     const destroyAllStrips = useSetRecoilState(destroyAllStripsSelector)
 
     const expand = (event) => {
-        setExpandedAccordionItems(range(cardStripNames.length))
+        setVisibilityAll(true)
+        console.log("expand all")
     }
 
     const collapse = (event) => {
-        setExpandedAccordionItems([])
+        setVisibilityAll(false)
+        console.log("collapse all")
     }
 
     return (

@@ -1,9 +1,13 @@
 import React, {Suspense, useEffect} from 'react';
-import {atom, selectorFamily, useRecoilCallback, useRecoilState, useRecoilValue,} from 'recoil';
-import {cardStripsNamesState, cardStripsState} from "../atoms";
+import {atom, selectorFamily, useRecoilCallback, useRecoilValue,} from 'recoil';
+import {cardStripPrintIdsState, cardStripsNamesState, cardPrintsState} from "../atoms";
 import {DEFAULT_HOST} from "../utils/constants/backendHost";
 import {DEFAULT_BACKEND_PORT} from "../utils/constants/backendPort";
-import {expandedAccordionItemsState} from "./CardStripsContainer";
+import {min, range} from "lodash";
+import {Flex, useToast} from "@chakra-ui/react";
+import SearchOptionsModal from "./SearchOptionsModal";
+import SearchBar from "./SearchBar";
+import {cardStripPriceState} from "./CardStripOptions";
 
 async function getCardsFromBackend(cardName) {
     const host = DEFAULT_HOST || "http://172.20.5.160:"
@@ -20,87 +24,87 @@ export const findCard = selectorFamily({
     }
 })
 
-const inputCardNameState = atom({
-    key: "inputCardName",
-    default: "",
-})
-
-const searchCardNameState = atom({
+export const searchCardNameState = atom({
     key: "performSearch",
     default: "no card",
 })
 
 
-function SearchResults({cardName}) {
-    const results = useRecoilValue(findCard(cardName))
+function SearchResults({sorting}) {
+
+    const cardName = useRecoilValue(searchCardNameState)
+    const totalBuyAmount = 1
+    console.log("in search results with cardname: " + cardName)
+    const toast = useToast()
+    const search = useRecoilValue(findCard(cardName))
+
     const insertElement = useRecoilCallback(
-        ({set}) => (results) => {
-            if (results.status === "success") {
-                // add card strip name
-                set(cardStripsNamesState, (list) => [...list, cardName])
-                // set expanded accordion states
-                set(expandedAccordionItemsState, (list) => [0, ...list.map(id => id + 1)])
-                // add card strip
-                set(cardStripsState(cardName), (val) => ({
-                    name: cardName,
-                    cards: val.map(item => ({
-                        ...item,
-                        name: cardName,
-                        buyAmount: 0,
-                        info: "some placeholder info",
-                    })),
-                }))
-                console.log("Card Strip added: " + cardName)
+        ({set}) => (search) => {
+            if (search.status === "success") {
+                const results = search.results
+                // save the card to the list
+                set(cardStripsNamesState, val => [cardName, ...val])
+                // save the count of prints for card
+                set(cardStripPrintIdsState(cardName), results.length)
+                // fill in the prints
+                let buysRemaining = totalBuyAmount
+                let cardStripPrice = 0
+                range(results.length).forEach((printId) => {
+                    const buyAmount = min([results[printId].stock, buysRemaining])
+                    cardStripPrice += buyAmount * results[printId].price
+                    console.log("cardStripPrice: " + cardStripPrice)
+                    buysRemaining = buysRemaining - buyAmount
+                    set(cardPrintsState({cardName, printId}),
+                        {...results[printId],
+                            buyAmount: buyAmount,
+                        }
+                    )
+                })
+                // set the price of selected cards
+                console.log("setting cardStripPrice: " + cardStripPrice)
+                set(cardStripPriceState(cardName), cardStripPrice)
+                toast({
+                    title: "Card added.",
+                    status: "success",
+                    isClosable: true,
+                    duration: 2000,
+                })
+            } else {
+                toast({
+                    title: "Card not found.",
+                    status: "error",
+                    isClosable: true,
+                    duration: 2000,
+                })
+                console.log(`Card "${cardName}" not found in backend.`)
             }
         },
-        [cardName],
+        [cardName, totalBuyAmount],
     )
     // insertElement(results)
-    useEffect(() => insertElement(results), [insertElement, results])
+    useEffect(() => insertElement(search), [insertElement, search])
     return (<div>
-        {results.toString()}
+        {search.status.toString()}
     </div>)
 
 }
 
 
 function SearchForm() {
-    // card name
-    const [inputCardName, setInputCardName] = useRecoilState(inputCardNameState)
-    const [searchCardName, setSearchCardName] = useRecoilState(searchCardNameState)
 
-    const addCard = event => {
-        event.preventDefault()
-        setSearchCardName(inputCardName)
-        setInputCardName("")
-    }
-
-    const handleKeyDown = (event) => {
-        if (event.key === 'Enter') {
-            addCard(event)
-        }
-    }
+    const searchCardName = useRecoilValue(searchCardNameState)
 
     return (
-        <form>
-            <label>
-                Card:
-                <input
-                    type="text"
-                    name="Search for card..."
-                    value={inputCardName}
-                    onChange={({target: {value}}) => setInputCardName(value)}
-                    onKeyDown={handleKeyDown}
-                    required={true}
-                />
-                <button type={"button"} onClick={addCard}>Add</button>
-                <br/>
-                filled in: {inputCardName}
-            </label>
+        <div>
+            <Flex>
+                <SearchBar/>
+                <SearchOptionsModal />
+            </Flex>
             <Suspense fallback={<div>Searching...</div>}>
-                {searchCardName === "no card" ? <div>[empty placeholder]</div> : <SearchResults cardName={searchCardName}/>}
+                {searchCardName === "no card" ?
+                    null : <SearchResults/>}
             </Suspense>
-        </form>
+        </div>
     )
 }
 

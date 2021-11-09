@@ -4,17 +4,24 @@ import {MtgCardViewer} from 'mtg-card-viewer';
 import SearchForm from "./components/SearchForm";
 import CardStripsContainer from "./components/CardStripsContainer";
 import CardStripsOperationsMenu from "./components/CardStripsOperationsMenu";
+import ResultsBox from "./components/ResultsBox";
+import Body from "./components/Body";
+import {Divider} from "@chakra-ui/react";
 
 
 function App() {
     return (
         <div className="App">
             <Header/>
-            <p>Of all MTG cards, <MtgCardViewer searchTerm='lightning bolt'/> is my favorite!</p>
-            {/*<Mana symbol="2b" cost fixed size="2x"/>*/}
-            <SearchForm/>
-            <CardStripsOperationsMenu/>
-            <CardStripsContainer/>
+            <Body>
+                <p>Of all MTG cards, <MtgCardViewer searchTerm='lightning bolt'/> is my favorite!</p>
+                <SearchForm/>
+                <ResultsBox>
+                    <CardStripsOperationsMenu/>
+                    <Divider py={3}/>
+                    <CardStripsContainer/>
+                </ResultsBox>
+            </Body>
         </div>
     )
 }

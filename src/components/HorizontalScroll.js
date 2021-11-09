@@ -1,14 +1,14 @@
-import {Flex} from "@chakra-ui/react";
+import {HStack} from "@chakra-ui/react";
 
-const HorizontalScroll = ({contents}) => (
-    <Flex
+const HorizontalScroll = ({children}) => (
+    <HStack
+        spacing={2}
         position="sticky"
         top="0"
         bgColor="primary.100"
         zIndex="sticky"
-        flex-gap="sx"
         // height="60px"
-        alignItems="center"
+        alignItems="left"
         flexWrap="nowrap"
         overflowX="auto"
         px="2"
@@ -17,7 +17,7 @@ const HorizontalScroll = ({contents}) => (
             msOverflowStyle: "-ms-autohiding-scrollbar"
         }}
     >
-        {contents()}
-    </Flex>)
+        {children}
+    </HStack>)
 
 export default HorizontalScroll
