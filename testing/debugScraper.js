@@ -24,6 +24,7 @@ scrapeCard(rytirSearchURL).then(res => {
 
 const fetchHTML = async () => {
     try {
+        // noinspection UnnecessaryLocalVariableJS
         const html = await axios
             .request({
                 method: 'GET',

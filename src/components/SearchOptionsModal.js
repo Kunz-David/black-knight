@@ -2,17 +2,17 @@ import {
     Box,
     Button, Divider,
     Flex,
-    HStack, Input, Menu, MenuButton, MenuDivider, MenuGroup, MenuItem, MenuItemOption, MenuList, MenuOptionGroup,
+    HStack, Input, Menu, MenuButton, MenuItemOption, MenuList, MenuOptionGroup,
     Modal,
     ModalBody, ModalCloseButton,
     ModalContent, ModalFooter,
     ModalHeader,
-    ModalOverlay, Spacer, Text,
+    ModalOverlay, Text,
     useDisclosure, useNumberInput, VStack
 } from "@chakra-ui/react";
 import React from "react";
 import {searchProperty, searchState} from "../atoms";
-import {useRecoilState, useResetRecoilState, useRecoilValue} from "recoil";
+import {useRecoilState, useRecoilValue} from "recoil";
 import {ChevronDownIcon} from "@chakra-ui/icons";
 
 

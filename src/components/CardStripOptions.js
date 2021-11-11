@@ -1,5 +1,5 @@
 import React from 'react';
-import {Box, Button, Flex, Heading, HStack, Spacer, Text} from "@chakra-ui/react";
+import {Box, Heading, HStack, Spacer, Text} from "@chakra-ui/react";
 import {useSetRecoilState, atomFamily, useRecoilValue} from "recoil";
 import {cardStripVisibleState} from "./CardStrip";
 

@@ -1,5 +1,4 @@
 import scrapeCard from "./scraping/scrapeCard";
-import exactCardSearchURL from "./scraping/exactCardSearchURL";
 import Server from "./serverClass";
 import getNamedCardsRytir from "./scraping/getNamedCardsRytir";
 
@@ -26,7 +25,7 @@ server.app.get('/api/search', (req, res) => {
     const params = req.query
     // res.json(params)
     // res.send(params)
-    const url = "http://cernyrytir.cz/index.php3?" + (new URLSearchParams(params)).toString()
+    const url = "https://cernyrytir.cz/index.php3?" + (new URLSearchParams(params)).toString()
     console.log(url)
     scrapeCard(url)
         .then(r => res.json(r))

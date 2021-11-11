@@ -110,7 +110,7 @@ const cardSchema = new Schema({
     }
 })
 
-var CardModel = mongoose.model('Card', cardSchema);
+const CardModel = mongoose.model('Card', cardSchema);
 const bulkUrl = "https://c2.scryfall.com/file/scryfall-bulk/oracle-cards/oracle-cards-20211022090346.json"
 
 const getBulk = async (bulkUrl) => {

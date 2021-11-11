@@ -23,7 +23,7 @@ class Server {
 
     setupMiddlewares() {
         this.app.use(cors());
-        var allowCrossDomain = function (req, res, next) {
+        const allowCrossDomain = function (req, res, next) {
             res.header('Access-Control-Allow-Origin', "*");
             res.header('Access-Control-Allow-Methods', 'GET,PUT,POST,DELETE');
             res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");

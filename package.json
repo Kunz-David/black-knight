@@ -9,6 +9,7 @@
     "@emotion/styled": "^11",
     "@saeris/react-mana": "^1.0.3",
     "axios": "^0.22.0",
+    "body-parser": "^1.19.0",
     "concurrently": "^6.3.0",
     "cors": "^2.8.5",
     "dotenv": "^10.0.0",

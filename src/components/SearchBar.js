@@ -18,11 +18,7 @@ const SearchBar = () => {
     const addCard = event => {
         console.log("in add card input: " + inputCardName)
         event.preventDefault()
-        if (inputCardName === "" ||
-            inputCardName === null) {
-            console.log("prevented")
-            return
-        }
+        if (inputCardName === "") return
         setSearchCardName(inputCardName)
         setInputCardName("")
     }

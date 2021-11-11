@@ -14,9 +14,10 @@ function CardAmount({cardName, printId}) {
     // get stock
     const stock = useRecoilValue(cardPrintProperty({cardName, printId, path: "stock"}))
 
-    // get price
+    // get print price
     const price = useRecoilValue(cardPrintProperty({cardName, printId, path: "price"}))
 
+    // strip price setter
     const setStripPrice = useSetRecoilState(cardStripPriceState(cardName))
 
     const updateCardStripPrice = (val) => {
@@ -63,6 +64,7 @@ const CardBadge = ({children, ...restProps}) => {
 CardBadge.defaultProps = {
     borderRadius: "full",
     px: "2",
+    m: "1",
 };
 
 const CardTreatmentBadges = ({treatments}) => {
@@ -104,12 +106,13 @@ const CardPrint = ({cardName, printId}) => {
                    loading={"lazy"}
                    fallbackSrc={"https://static.wikia.nocookie.net/mtgsalvation_gamepedia/images/f/f8/Magic_card_back.jpg/revision/latest/scale-to-width-down/250?cb=20140813141013"}/>
             <Box p="2">
-
                 {cardPrint.condition && <CardConditionBadge condition={cardPrint.condition} />}
                 {cardPrint.treatments && <CardTreatmentBadges treatments={cardPrint.treatments} />}
                 {cardPrint.language !== "English" && <CardLanguageBadge language={cardPrint.language} />}
                 <Spacer />
                 {cardPrint.set}
+                <Spacer />
+                {cardPrint.price} Kč
             </Box>
             <Center>
                 <CardAmount cardName={cardName} printId={printId}/>
