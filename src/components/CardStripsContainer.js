@@ -7,8 +7,8 @@ import CardStrip from "./CardStrip";
 function CardStripsContainer() {
     const cardStripsNames = useRecoilValue(cardStripsNamesState)
 
-    console.log("cardStripsNames: " + cardStripsNames)
-    console.log("cardStripsNames len: " + cardStripsNames.length)
+    console.debug("cardStripsNames: " + cardStripsNames)
+    console.debug("cardStripsNames len: " + cardStripsNames.length)
 
     return (
         <VStack spacing={0}>

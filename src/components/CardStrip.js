@@ -1,16 +1,12 @@
-import {atomFamily, useRecoilValue} from "recoil";
+import {useRecoilValue} from "recoil";
 import {Box, Collapse, VStack} from "@chakra-ui/react";
 import CardPrints from "./CardPrints";
 import React from "react";
 import CardStripOptions from "./CardStripOptions";
-
-export const cardStripVisibleState = atomFamily({
-    key: "cardStripVisible",
-    default: true,
-})
+import {cardStripInfoProperty} from "../atoms";
 
 function CardStrip({cardName}) {
-    const cardStripVisible = useRecoilValue(cardStripVisibleState(cardName))
+    const cardStripVisible = useRecoilValue(cardStripInfoProperty({cardName, path: "visible"}))
 
     return (
         <VStack width={"full"}>

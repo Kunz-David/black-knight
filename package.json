@@ -23,7 +23,6 @@
     "mongodb": "^4.1.3",
     "mongoose": "^6.0.12",
     "morgan": "^1.10.0",
-    "mtg-card-viewer": "^0.1.5",
     "nodemon": "^2.0.13",
     "react": "^17.0.2",
     "react-dom": "^17.0.2",
@@ -31,11 +30,10 @@
     "react-icons": "^4.3.1",
     "react-query": "^3.29.0",
     "react-scripts": "4.0.3",
-    "recoil": "^0.4.1",
+    "recoil": "^0.5.2",
     "typescript": "^4.4.4",
     "web-vitals": "^1.1.2",
-    "windows-1250": "^3.0.2",
-    "xhr2": "^0.2.1"
+    "windows-1250": "^3.0.2"
   },
   "scripts": {
     "start": "concurrently \"yarn run backend\" \"yarn run client\"",

@@ -2,6 +2,10 @@
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
+## Show to friends
+Install ngrok and do
+`ngrok http 3000 -host-header="localhost:3000"` after launching locally.
+
 ## Available Scripts
 
 In the project directory, you can run:

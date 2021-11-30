@@ -1,29 +1,21 @@
 import React from 'react';
 import {useRecoilState, useRecoilValue, useSetRecoilState} from "recoil";
-import {cardPrintProperty, cardPrintsState} from "../atoms";
+import {cardPrintProperty, cardPrintsState, cardStripInfoProperty} from "../atoms";
 import {Badge, Box, Button, Center, HStack, Image, Input, Spacer, useNumberInput} from "@chakra-ui/react";
 import cardConditions from "../utils/cardConditions";
 import cardLanguages from "../utils/cardLanguages";
-import {cardStripPriceState} from "./CardStripOptions";
 
 function CardAmount({cardName, printId}) {
 
-    // get buyAmount
     const [buyAmount, setBuyAmount] = useRecoilState(cardPrintProperty({cardName, printId, path: "buyAmount"}))
-
-    // get stock
     const stock = useRecoilValue(cardPrintProperty({cardName, printId, path: "stock"}))
-
-    // get print price
     const price = useRecoilValue(cardPrintProperty({cardName, printId, path: "price"}))
-
-    // strip price setter
-    const setStripPrice = useSetRecoilState(cardStripPriceState(cardName))
+    const setStripPrice = useSetRecoilState(cardStripInfoProperty({cardName, path: "price"}))
+    // const setStripPrice = useSetRecoilState(cardStripPriceState(cardName))
 
     const updateCardStripPrice = (val) => {
         const updateAmount = val - buyAmount
         setStripPrice(prev => prev + (updateAmount * price))
-        // update buyAmount
         setBuyAmount(val)
     }
 
@@ -105,14 +97,17 @@ const CardPrint = ({cardName, printId}) => {
                    alt={cardPrint.rytir_name}
                    loading={"lazy"}
                    fallbackSrc={"https://static.wikia.nocookie.net/mtgsalvation_gamepedia/images/f/f8/Magic_card_back.jpg/revision/latest/scale-to-width-down/250?cb=20140813141013"}/>
-            <Box p="2">
-                {cardPrint.condition && <CardConditionBadge condition={cardPrint.condition} />}
-                {cardPrint.treatments && <CardTreatmentBadges treatments={cardPrint.treatments} />}
-                {cardPrint.language !== "English" && <CardLanguageBadge language={cardPrint.language} />}
-                <Spacer />
-                {cardPrint.set}
-                <Spacer />
-                {cardPrint.price} Kč
+            <Box p="2" alignContent={"center"}>
+                <Center>
+                    {cardPrint.condition && <CardConditionBadge condition={cardPrint.condition} />}
+                    {cardPrint.treatments && <CardTreatmentBadges treatments={cardPrint.treatments} />}
+                    {cardPrint.language !== "English" && <CardLanguageBadge language={cardPrint.language} />}
+                </Center>
+                <Center>
+                    {cardPrint.set}
+                    <Spacer />
+                    {cardPrint.price} Kč
+                </Center>
             </Box>
             <Center>
                 <CardAmount cardName={cardName} printId={printId}/>

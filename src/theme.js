@@ -27,4 +27,9 @@ const theme = extendTheme(
     withDefaultColorScheme({ colorScheme: "teal" }),
 );
 
+export const toastDefaults = {
+    isClosable: true,
+    duration: 2500,
+}
+
 export default theme;
