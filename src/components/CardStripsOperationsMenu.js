@@ -1,16 +1,14 @@
 import React from 'react';
 import {Box, Button, Flex, Heading, Spacer} from "@chakra-ui/react";
-import {selector, useRecoilTransaction_UNSTABLE, useSetRecoilState} from "recoil";
+import {selector, useRecoilCallback, useSetRecoilState} from "recoil";
 import {
-    cardPrintsState,
     cardStripInfoProperty,
-    cardStripInfoState,
-    cardStripPrintIdsState,
     cardStripsNamesState
 } from "../atoms";
 import {DeleteIcon} from "@chakra-ui/icons";
 import {BsDashSquareFill, BsPlusSquareFill} from "react-icons/all";
 import {searchCardNameState} from "./header/SearchForm";
+import {useDestroyStrip} from "../utils/destroyStrip";
 
 
 const visibilityAll = selector({
@@ -28,26 +26,20 @@ const visibilityAll = selector({
 const CardStripsOperationsMenu = () => {
 
     const setVisibilityAll = useSetRecoilState(visibilityAll)
+    const destroyStrip = useDestroyStrip()
 
-    const destroyAllStrips = useRecoilTransaction_UNSTABLE(({get, reset}) => () => {
-        const cardStripNames = get(cardStripsNamesState)
+    const destroyAllStrips = useRecoilCallback(({snapshot: {getLoadable}, reset}) => () => {
+        const cardStripNames = getLoadable(cardStripsNamesState).contents
         cardStripNames.forEach(
             cardName => {
-                get(cardStripPrintIdsState(cardName)).forEach(
-                    // reset prints
-                    printId => reset(cardPrintsState({cardName, printId}))
-                )
-                // reset print ids
-                reset(cardStripPrintIdsState(cardName))
-                // reset strip info
-                reset(cardStripInfoState(cardName))
+                destroyStrip(cardName)
             }
         )
         // reset names
         reset(cardStripsNamesState)
         // reset searchCard
         reset(searchCardNameState)
-    }, [])
+    })
 
     const expand = (event) => {
         setVisibilityAll(true)

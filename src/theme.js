@@ -2,6 +2,15 @@ import {extendTheme, withDefaultColorScheme, withDefaultProps} from '@chakra-ui/
 
 const theme = extendTheme(
     {
+        components: {
+          List: {
+              variants: {
+                  "autocomplete": {
+
+                  }
+              }
+          }
+        },
         colors: {
             myPurple:
                 {

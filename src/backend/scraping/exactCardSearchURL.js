@@ -1,3 +1,10 @@
+
+function makeItRytirReadable(url) {
+    console.log(url.replace("+", "%20").replace("%27", "%B4"))
+    return url.replace("+", "%20").replace("%27", "%B4")
+}
+
+
 function exactCardSearchURL(cardName) {
     let rytirSearchJSON = {
         "akce": 3,
@@ -5,7 +12,7 @@ function exactCardSearchURL(cardName) {
         "searchname": cardName
     }
     const rytirSearchParams = new URLSearchParams(rytirSearchJSON)
-    return ("https://cernyrytir.cz/index.php3?" + rytirSearchParams).replace("+", "%20")
+    return makeItRytirReadable("https://cernyrytir.cz/index.php3?" + rytirSearchParams)
 }
 
 export default exactCardSearchURL

@@ -16,7 +16,7 @@ function CardAmount({cardName, printId}) {
     const updateCardStripPrice = (val) => {
         const updateAmount = val - buyAmount
         setStripPrice(prev => prev + (updateAmount * price))
-        setBuyAmount(val)
+        setBuyAmount(parseInt(val))
     }
 
     const {

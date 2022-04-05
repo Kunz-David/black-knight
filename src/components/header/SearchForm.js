@@ -36,46 +36,51 @@ export const searchCardNameState = atom({
 function SearchResults() {
 
     const cardName = useRecoilValue(searchCardNameState)
-    // const totalBuyAmount = 1
     console.debug("in search results with cardname: " + cardName)
     const toast = useToast()
     const search = useRecoilValue(findCard(cardName))
 
     const insertElement = useRecoilCallback(
-        ({set, snapshot: {getLoadable}}) => (search) => {
+        ({set, snapshot: {getLoadable}, reset}) => (search) => {
             if (search.status === "success") {
+                const cardAlreadyOnList = getLoadable(cardStripsNamesState).contents.includes(cardName)
+                console.log("cardOnList " + cardAlreadyOnList)
+                if (!cardAlreadyOnList) {
+                    // save the card to the list
+                    set(cardStripsNamesState, val => [cardName, ...val])
+                }
+
                 // get search params:
                 const totalBuyAmount = getLoadable(searchProperty("buyAmount")).contents
                 const orderBy = getLoadable(searchProperty("orderBy")).contents
 
                 const results = search.results
-                // save the card to the list
-                set(cardStripsNamesState, val => [cardName, ...val])
                 // save the count of prints for card
                 const ids = orderBy === "Price - Asc." ? range(results.length).reverse() : range(results.length)
                 set(cardStripPrintIdsState(cardName), ids)
                 // fill in the prints
                 let buysRemaining = totalBuyAmount
-                let cardStripPrice = 0
+                let addedCardStripPrice = 0
                 ids.forEach((printId) => {
-                    const buyAmount = min([results[printId].stock, buysRemaining])
-                    cardStripPrice += buyAmount * results[printId].price
+                    const prevBuyAmount = getLoadable(cardPrintsState({cardName, printId})).contents.buyAmount ?? 0
+                    const buyAmount = min([results[printId].stock-prevBuyAmount, buysRemaining])
+                    addedCardStripPrice += buyAmount * results[printId].price
                     buysRemaining = buysRemaining - buyAmount
                     set(cardPrintsState({cardName, printId}),
                         {...results[printId],
-                            buyAmount: buyAmount,
+                            buyAmount: buyAmount + prevBuyAmount,
                         }
                     )
                 })
                 // set the price of selected cards
-                // set(cardStripPriceState(cardName), cardStripPrice)
-                set(cardStripInfoProperty({cardName, path: "price"}), cardStripPrice)
+                const prevCardStripPrice = getLoadable(cardStripInfoProperty({cardName, path: "price"})).contents ?? 0
+                set(cardStripInfoProperty({cardName, path: "price"}), prevCardStripPrice + addedCardStripPrice)
 
                 // create description:
                 let toastDescription
                 let toastStatus
                 if (totalBuyAmount > 0) { // did he want to buy
-                    toastDescription = `${totalBuyAmount-buysRemaining}/${totalBuyAmount} added for ${cardStripPrice} Kč`
+                    toastDescription = `${totalBuyAmount-buysRemaining}/${totalBuyAmount} added for ${addedCardStripPrice} Kč`
                     switch (totalBuyAmount-buysRemaining) {
                         case totalBuyAmount: // bought all
                             toastStatus = "success"
@@ -105,6 +110,10 @@ function SearchResults() {
                 })
                 console.log(`Card "${cardName}" not found in backend.`)
             }
+
+            // reset search state
+            reset(searchCardNameState)
+
         },
         [cardName],
     )
