@@ -1,4 +1,4 @@
-
+// replace ' and + in the url
 function makeItRytirReadable(url) {
     console.log(url.replace("+", "%20").replace("%27", "%B4"))
     return url.replace("+", "%20").replace("%27", "%B4")
