@@ -7,6 +7,7 @@ import {RecoilRoot} from 'recoil';
 import {QueryClient, QueryClientProvider} from 'react-query'
 import { ChakraProvider } from "@chakra-ui/react"
 import theme from "./theme";
+import {Suspense} from 'react';
 
 const queryClient = new QueryClient()
 
@@ -15,7 +16,9 @@ ReactDOM.render(
         <RecoilRoot>
             <QueryClientProvider client={queryClient}>
                 <ChakraProvider theme={theme}>
-                    <App/>
+                    <Suspense fallback={null}>
+                        <App/>
+                    </Suspense>
                 </ChakraProvider>
             </QueryClientProvider>
         </RecoilRoot>

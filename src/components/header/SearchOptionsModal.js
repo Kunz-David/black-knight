@@ -12,7 +12,7 @@ import {
 } from "@chakra-ui/react";
 import React from "react";
 import {searchProperty, searchState} from "../../atoms";
-import {useRecoilState, useRecoilValue, useResetRecoilState} from "recoil";
+import {useRecoilState, useResetRecoilState} from "recoil";
 import {ChevronDownIcon} from "@chakra-ui/icons";
 import { IoOptions} from "react-icons/io5";
 
@@ -103,11 +103,7 @@ function SearchOrder() {
 
 function SearchOptionsModal() {
     const { isOpen, onOpen, onClose } = useDisclosure()
-
     const useResetSearchOptions = useResetRecoilState(searchState)
-    const searchOptions = useRecoilValue(searchState)
-
-    console.debug("in search options modal ", searchOptions)
 
     return (
         <>

@@ -3,15 +3,15 @@ import {Flex, Input, InputGroup, InputLeftElement, VStack} from "@chakra-ui/reac
 import {SearchIcon} from "@chakra-ui/icons";
 import {
     atom, useRecoilState,
-    useSetRecoilState, useRecoilValue,
+    useSetRecoilState,
 } from "recoil";
-import {searchCardNameState} from "./SearchForm";
 import Autocomplete, {
     AUTOCOMPLETE_LEN,
-    autocompleteBestMatchState,
-    autocompleteListSelectionState, autocompleteListState,
+    autocompleteListSelectionState,
 } from "../Autocomplete";
 import {max, min} from "lodash";
+import AutocompleteFuzzy from "../AutocompleteFuzzy";
+import {Typeahead} from "react-typeahead";
 
 export const inputCardNameState = atom({
     key: "inputCardName",
@@ -19,7 +19,7 @@ export const inputCardNameState = atom({
     effects_UNSTABLE: []
 })
 
-export const updateInputCardNameState = atom({
+export const searchForCardState = atom({
     key: "updateInputCardName",
     default: false,
 })
@@ -27,13 +27,9 @@ export const updateInputCardNameState = atom({
 
 const SearchBar = () => {
 
-    // card name
     const [inputCardName, setInputCardName] = useRecoilState(inputCardNameState)
-    const setSearchCardName = useSetRecoilState(searchCardNameState)
-    const [autocompleteListSelection, setAutocompleteListSelection] = useRecoilState(autocompleteListSelectionState)
-    const setUpdateInputCardName = useSetRecoilState(updateInputCardNameState)
-    // const autocompleteList = useRecoilValue(autocompleteListState)
-    // const autocompleteBestMatch = useRecoilValue(autocompleteBestMatchState)
+    const setAutocompleteListSelection = useSetRecoilState(autocompleteListSelectionState)
+    const setSearchForCard = useSetRecoilState(searchForCardState)
 
 
     const searchTextChangeHandler = ({target: {value}}) => {
@@ -42,24 +38,14 @@ const SearchBar = () => {
 
     const enterHandler = event => {
         event.preventDefault()
-        if (autocompleteListSelection === -1) {
-            addCard()
-        } else {
-            setUpdateInputCardName(true)
-            // console.log(autocompleteList[autocompleteListSelection])
-        }
-    }
-
-    const addCard = () => {
         console.debug("in add card input: " + inputCardName)
         if (inputCardName === "") return
-        setSearchCardName(inputCardName)
-        // setSearchCardName(autocompleteBestMatch)
-        setInputCardName("")
+        setSearchForCard(true)
     }
 
     const downHandler = event => {
         event.preventDefault()
+        // TODO: limit to the actual number of autocompletes not AUTOCOMPLETE_LEN -> (problem because autocompleteListState is async)
         setAutocompleteListSelection((curval) => min([curval + 1, AUTOCOMPLETE_LEN-1]))
     }
 
@@ -79,27 +65,31 @@ const SearchBar = () => {
 
     return (
         <VStack width={"full"}>
+
             <Flex width={"full"} pr={[2, 5]} pl={2}>
-                    <InputGroup variant={"filled"} size={"lg"} colorScheme={"teal"}>
-                        <InputLeftElement
-                            pointerEvents="none"
-                            children={<SearchIcon color="gray.300" />}
-                        />
-                        <Input
-                            name={"Card search"}
-                            type="search"
-                            value={inputCardName}
-                            placeholder="Search for a card"
-                            // onChange={({target: {value}}) => setInputCardName(value)}
-                            onChange={searchTextChangeHandler}
-                            onKeyDown={handleKeyDown}
-                            required={true}
-                        />
-                    </InputGroup>
+                <InputGroup variant={"filled"} size={"lg"} colorScheme={"teal"}>
+                    <InputLeftElement
+                        pointerEvents="none"
+                        children={<SearchIcon color="gray.300" />}
+                    />
+                    <Input
+                        name={"Card search"}
+                        type="search"
+                        value={inputCardName}
+                        placeholder="Search for a card"
+                        // onChange={({target: {value}}) => setInputCardName(value)}
+                        onChange={searchTextChangeHandler}
+                        onKeyDown={handleKeyDown}
+                        required={true}
+                    />
+                </InputGroup>
             </Flex>
             <Flex width={"full"} pr={[2, 5]} pl={2}>
                 <Suspense fallback={<div>Loading :)</div>}>
-                    <Autocomplete />
+                    <VStack>
+                        {/*<Autocomplete />*/}
+                        <AutocompleteFuzzy />
+                    </VStack>
                 </Suspense>
             </Flex>
         </VStack>

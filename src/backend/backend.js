@@ -1,6 +1,7 @@
 import scrapeCard from "./scraping/scrapeCard";
 import Server from "./serverClass";
 import getNamedCardsRytir from "./scraping/getNamedCardsRytir";
+import express, {Router} from "express";
 
 
 const server = new Server()
@@ -31,12 +32,15 @@ server.app.get('/api/search', (req, res) => {
         .then(r => res.json(r))
         .catch(error => console.log(error))
 })
-
+//
+// const router = Router()
+// router.use(express.static('../../static_data/card_names.json'))
+// server.app.use('/card_names', router)
 
 // this shows the public folder: http://localhost:3001/favicon.ico
-// const router = Router()
-// router.use(express.static('./public'))
-// app.use('/', router)
+const router = Router()
+router.use(express.static('./static_data'))
+server.app.use('/cards/', router)
 
 
 // app.get('/', (req, res) => {

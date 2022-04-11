@@ -6,6 +6,10 @@ import {
     cardStripInfoProperty, cardStripInfoState,
 } from "../atoms";
 import {useDestroyStrip} from "../utils/destroyStrip";
+import {ReactComponent as CernyRytirLogo} from '../assets/cerny_rytir_ver1.svg';
+import {ReactComponent as CernyRytirLogoTwo} from '../assets/cerny_rytir_ver2.svg';
+import {ReactComponent as EDHRECLogo} from '../assets/edhrec.svg';
+
 
 
 function CardStripOptions({cardName}) {
@@ -18,6 +22,7 @@ function CardStripOptions({cardName}) {
     const destroyStrip = useDestroyStrip()
 
 
+
     const handleToggle = () => setCardStripVisible(val => !val)
 
     return (
@@ -28,9 +33,32 @@ function CardStripOptions({cardName}) {
                 onClick={handleToggle}
                 _hover={{ bg: "gray.200" }}
                 _focus={{ boxShadow: "inner" }}>
-            <Box p="2">
-                <Heading size="md">{cardName}</Heading>
-            </Box>
+            <HStack>
+                <Box p="2">
+                    <Heading size="md">{cardName}</Heading>
+                </Box>
+                <IconButton
+                    variant='ghost'
+                    colorScheme='black'
+                    aria-label='Černý Rytíř'
+                    size='xs'
+                    icon={<CernyRytirLogo width={20} height={20}/>}
+                />
+                <IconButton
+                    variant='ghost'
+                    colorScheme='black'
+                    aria-label='Černý Rytíř'
+                    size='xs'
+                    icon={<CernyRytirLogoTwo width={20} height={20}/>}
+                />
+                <IconButton
+                    variant='ghost'
+                    colorScheme='black'
+                    aria-label='EDHREC'
+                    size='xs'
+                    icon={<EDHRECLogo width={20} height={20}/>}
+                />
+            </HStack>
             <Spacer/>
             <Box>
                 <Text fontWeight={"semibold"}>

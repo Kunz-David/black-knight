@@ -1,6 +1,7 @@
-import {atom, atomFamily, selectorFamily} from "recoil";
+import {atom, atomFamily, errorSelector, selector, selectorFamily} from "recoil";
 import {get as loGet, has as loHas, set as loSet} from "lodash"
 import produce from 'immer'
+import fuzzySearch from 'fz-search';
 
 export const persistLocalStorage = ({onSet, setSelf, node, trigger, resetSelf}) => {
     const storedData = localStorage.getItem(node.key)
@@ -146,4 +147,28 @@ export const cardStripsNamesState = atom({
     key: "cardStripsNames",
     default: [],
     effects_UNSTABLE: [persistLocalStorage],
+})
+
+
+// get all cards
+const fetchAllCards = async () => {
+    const url = '/cards/card_names.json'
+    return await fetch(url).then((res) => res.json())
+}
+
+export const allCardsState = selector({
+    key: "allCards",
+    get: async () => await fetchAllCards(),
+})
+
+var defaultSearchState = new fuzzySearch({source: []})
+
+export var searcherState = atom({
+    key: "searcher",
+    default: errorSelector('Attempt to use Atom before initialization'),
+})
+
+export const searcherStateBloodhound = atom({
+    key: "searcherBloodhound",
+    default: errorSelector('Attempt to use Atom before initialization'),
 })

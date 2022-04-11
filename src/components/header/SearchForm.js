@@ -1,5 +1,10 @@
 import React, {Suspense, useEffect} from 'react';
-import {atom, selectorFamily, useRecoilCallback, useRecoilValue,} from 'recoil';
+import {
+    selector,
+    selectorFamily,
+    useRecoilCallback,
+    useRecoilValue,
+} from 'recoil';
 import {
     cardStripPrintIdsState,
     cardStripsNamesState,
@@ -10,8 +15,9 @@ import {
 import {min, range} from "lodash";
 import {Flex, useToast} from "@chakra-ui/react";
 import SearchOptionsModal from "./SearchOptionsModal";
-import SearchBar from "./SearchBar";
+import SearchBar, {inputCardNameState, searchForCardState} from "./SearchBar";
 import {toastDefaults} from "../../theme";
+import {autocompleteListSelectionState, autocompleteListState} from "../Autocomplete";
 
 async function getCardsFromBackend(cardName) {
     const url = `/api/card/${cardName}`
@@ -27,9 +33,17 @@ export const findCard = selectorFamily({
     }
 })
 
-export const searchCardNameState = atom({
-    key: "performSearch",
-    default: "no card",
+// returns the inputed card or the selected card in autocomplete
+export const searchCardNameState = selector({
+    key: "searchCardName",
+    get: ({get}) => {
+        if (get(autocompleteListSelectionState) === -1) {
+            // return get(inputCardNameState)
+            return get(autocompleteListState)[0] ?? "No card found"
+        } else {
+            return get(autocompleteListState)[get(autocompleteListSelectionState)]
+        }
+    }
 })
 
 
@@ -38,6 +52,7 @@ function SearchResults() {
     const cardName = useRecoilValue(searchCardNameState)
     console.debug("in search results with cardname: " + cardName)
     const toast = useToast()
+    console.log("cardName is :", cardName)
     const search = useRecoilValue(findCard(cardName))
 
     const insertElement = useRecoilCallback(
@@ -111,9 +126,9 @@ function SearchResults() {
                 console.log(`Card "${cardName}" not found in backend.`)
             }
 
-            // reset search state
-            reset(searchCardNameState)
-
+            reset(searchForCardState)
+            set(inputCardNameState, "")
+            set(autocompleteListSelectionState, -1)
         },
         [cardName],
     )
@@ -128,7 +143,7 @@ function SearchResults() {
 
 function SearchForm() {
 
-    const searchCardName = useRecoilValue(searchCardNameState)
+    const searchForCard = useRecoilValue(searchForCardState)
 
     return (
         <div>
@@ -137,7 +152,7 @@ function SearchForm() {
                 <SearchOptionsModal />
             </Flex>
             <Suspense fallback={<div>Searching...</div>}>
-                {searchCardName === "no card" ?
+                {searchForCard === false ?
                     null : <SearchResults/>}
             </Suspense>
         </div>

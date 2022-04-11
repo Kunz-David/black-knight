@@ -7,7 +7,6 @@ import {
 } from "../atoms";
 import {DeleteIcon} from "@chakra-ui/icons";
 import {BsDashSquareFill, BsPlusSquareFill} from "react-icons/all";
-import {searchCardNameState} from "./header/SearchForm";
 import {useDestroyStrip} from "../utils/destroyStrip";
 
 
@@ -37,8 +36,6 @@ const CardStripsOperationsMenu = () => {
         )
         // reset names
         reset(cardStripsNamesState)
-        // reset searchCard
-        reset(searchCardNameState)
     })
 
     const expand = (event) => {
