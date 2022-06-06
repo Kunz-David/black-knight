@@ -57,9 +57,10 @@ const Autocomplete = () => {
         <List spacing={"2"} variant={"outline"} width={"full"}>
             {autocompleteList.slice(0, AUTOCOMPLETE_LEN).map(
                 (item, index) => {
-                    return <ListItem key={item}
-                              width={"full"}
-                              style={index === autocompleteListSelection ? selectedStyle : defaultStyle}
+                    return <ListItem
+                                key={item}
+                                width={"full"}
+                                style={index === autocompleteListSelection ? selectedStyle : defaultStyle}
                     >
                         {item}
                     </ListItem>

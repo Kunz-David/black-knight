@@ -2,10 +2,18 @@ import scrapeCard from "./scraping/scrapeCard";
 import Server from "./serverClass";
 import getNamedCardsRytir from "./scraping/getNamedCardsRytir";
 import express, {Router} from "express";
+import axios from "axios";
+import getJSON from "./scraping/utils/getJSON";
 
 
 const server = new Server()
 server.listen()
+
+const setURL = "https://mtgjson.com/api/v5/SetList.json"
+
+const additionalInfo = {
+    setsPromise: getJSON(setURL)
+}
 
 server.app.get('/api/card/:name', (req, res) => {
     const params = req.params
@@ -14,7 +22,7 @@ server.app.get('/api/card/:name', (req, res) => {
             error: "no params given"
         });
     } else {
-        getNamedCardsRytir(params.name)
+        getNamedCardsRytir(params.name, additionalInfo)
             .then(r => res.json(r))
             .catch(error => console.log(error))
     }

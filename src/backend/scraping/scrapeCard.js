@@ -3,22 +3,10 @@ import getPageURLs from "./utils/getOtherPageURLs";
 import scrapeWithAllFunctions from "./scrapeWithAllFunctions";
 import scrapedToJsons from "./utils/scrapedToJsons";
 import searchSuccessful from "./utils/searchSuccessful";
-// import axios from "axios";
-
-//TODO: add set code to search
-
-// async function addSetCodes(cards) {
-//     const scryfallSets = await axios.get("https://api.scryfall.com/sets").then(res => res.data)
-//     console.log(scryfallSets)
-//     return scryfallSets
-// }
-//
-// function addSetCode(card) {
-//
-// }
+import addSet from "./addFunctions/addSet"
 
 // scrapes results of search from all the result pages
-async function scrapeCard(url) {
+async function scrapeCard(url, additionalInfo = {}) {
     const html = await getHTML(url)
     if (searchSuccessful(html)) {
         const otherURLs = getPageURLs(html, url)
@@ -28,10 +16,13 @@ async function scrapeCard(url) {
         const allResults = resultsPageOne.concat(resultsOtherPages)
         // add set shortcut
         // const sets = addSetCodes(allResults)
-        const cards = allResults.map(card => ({
-            ...card,
-            // setCode: "PLACEHOLDER"
-        }))
+        const cards = await Promise.all(
+            allResults.map(async card => ({
+                ...card,
+                ...(await addSet(card, additionalInfo.setsPromise)),
+                // setCode: "PLACEHOLDER"
+            }
+        )))
         return {
             status: "success",
             results: cards,

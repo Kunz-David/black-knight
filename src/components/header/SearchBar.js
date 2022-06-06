@@ -5,13 +5,13 @@ import {
     atom, useRecoilState,
     useSetRecoilState,
 } from "recoil";
-import Autocomplete, {
+import {
     AUTOCOMPLETE_LEN,
     autocompleteListSelectionState,
 } from "../Autocomplete";
 import {max, min} from "lodash";
-import AutocompleteFuzzy from "../AutocompleteFuzzy";
-import {Typeahead} from "react-typeahead";
+import AutocompleteFuzzySort from '../AutocompleteFuzzySort';
+import ErrorBoundary from '../ErrorBoundary';
 
 export const inputCardNameState = atom({
     key: "inputCardName",
@@ -87,8 +87,7 @@ const SearchBar = () => {
             <Flex width={"full"} pr={[2, 5]} pl={2}>
                 <Suspense fallback={<div>Loading :)</div>}>
                     <VStack>
-                        {/*<Autocomplete />*/}
-                        <AutocompleteFuzzy />
+                        <AutocompleteFuzzySort />
                     </VStack>
                 </Suspense>
             </Flex>

@@ -4,6 +4,7 @@ import {cardPrintProperty, cardPrintsState, cardStripInfoProperty} from "../atom
 import {Badge, Box, Button, Center, HStack, Image, Input, Spacer, useNumberInput} from "@chakra-ui/react";
 import cardConditions from "../utils/cardConditions";
 import cardLanguages from "../utils/cardLanguages";
+import SetIcon from './SetIcon';
 
 function CardAmount({cardName, printId}) {
 
@@ -105,6 +106,12 @@ const CardPrint = ({cardName, printId}) => {
                 </Center>
                 <Center>
                     {cardPrint.set}
+                    <SetIcon
+                        setName={cardPrint.set}
+                        keyruneCode={cardPrint.keyruneCode}
+                        rarity={cardPrint.rarity}
+                        size="1x"
+                        fixed/>
                     <Spacer />
                     {cardPrint.price} Kč
                 </Center>

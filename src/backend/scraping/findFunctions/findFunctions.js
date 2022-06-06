@@ -11,7 +11,7 @@ import findImages from "./findImages";
 const findFunctions = {
     "price": findPrices,
     "stock": findStocks,
-    "set": findSets,
+    "rytir_set": findSets,
     "rarity": findRarities,
     "treatments": findTreatments,
     "language": findLanguages,
