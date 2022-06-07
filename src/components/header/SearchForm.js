@@ -15,13 +15,14 @@ import {
 import {min, range} from "lodash";
 import {Flex, useToast} from "@chakra-ui/react";
 import SearchOptionsModal from "./SearchOptionsModal";
-import SearchBar, {inputCardNameState, searchForCardState} from "./SearchBar";
+import SearchBar, {autoCompArrowsListSelectionState, inputCardNameState, searchForCardState} from "./SearchBar";
 import {toastDefaults} from "../../theme";
-import {autocompleteListSelectionState, autocompleteListState} from "../Autocomplete";
+import {autocompleteListState, getAutoCompList} from "../AutocompleteFuzzySort";
 
+// TODO: add second search for cards containing "//" (search just front side)
 async function getCardsFromBackend(cardName) {
-    const url = `/api/card/${cardName}`
-    console.debug("search url: " + url.replace(" ", "%20"))
+    const url = `/api/card/${encodeURIComponent(cardName)}`
+    console.debug("search url: " + url)
     return await fetch(url).then((res) => res.json())
 }
 
@@ -29,7 +30,13 @@ export const findCard = selectorFamily({
     key: "cardName",
     get: (cardName) => async () => {
         console.log("Searching for " + cardName + " in backend")
-        return await getCardsFromBackend(cardName)
+        const result = await getCardsFromBackend(cardName)
+        if (result.status !== "success" && cardName.includes("/")) {
+            var frontSideName = cardName.split("/")[0].trim()
+            console.log(`"${cardName}" not found in backend searching for "${frontSideName}"`)
+            return await getCardsFromBackend(frontSideName)
+        }
+        return result
     }
 })
 
@@ -37,11 +44,12 @@ export const findCard = selectorFamily({
 export const searchCardNameState = selector({
     key: "searchCardName",
     get: ({get}) => {
-        if (get(autocompleteListSelectionState) === -1) {
+        if (get(autoCompArrowsListSelectionState) === -1) {
             // return get(inputCardNameState)
-            return get(autocompleteListState)[0] ?? "No card found"
+            // return getAutoCompList(get(inputCardNameState))?[0].target ?? "No card found"
+            return getAutoCompList(get(inputCardNameState))[0].target ?? "No card found"
         } else {
-            return get(autocompleteListState)[get(autocompleteListSelectionState)]
+            return getAutoCompList(get(inputCardNameState))[get(autoCompArrowsListSelectionState)].target
         }
     }
 })
@@ -128,7 +136,7 @@ function SearchResults() {
 
             reset(searchForCardState)
             set(inputCardNameState, "")
-            set(autocompleteListSelectionState, -1)
+            set(autoCompArrowsListSelectionState, -1)
         },
         [cardName],
     )

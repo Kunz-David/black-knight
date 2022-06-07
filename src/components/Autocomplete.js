@@ -10,7 +10,7 @@ import {inputCardNameState} from "./header/SearchBar";
 export const AUTOCOMPLETE_LEN = 5
 
 // selection from the autocomplete list
-export const autocompleteListSelectionState = atom({
+const autocompleteListSelectionState = atom({
     key: "autocompleteListSelector",
     default: -1,
 })

@@ -1,19 +1,20 @@
 import {atom, atomFamily, errorSelector, selector, selectorFamily} from "recoil";
 import {get as loGet, has as loHas, set as loSet} from "lodash"
 import produce from 'immer'
-import fuzzySearch from 'fz-search';
 
-export const persistLocalStorage = ({onSet, setSelf, node, trigger, resetSelf}) => {
+export const log = ({onSet}) => {
+    onSet((newValue, oldValue) => {
+      console.debug("Changed from ", oldValue, " to ", newValue);
+    });
+  }
+
+export const persistLocalStorage = ({onSet, setSelf, node}) => {
     const storedData = localStorage.getItem(node.key)
     if (storedData !== null) {
         setSelf(JSON.parse(storedData))
     }
 
     onSet((newCardStripNames, oldValue, isReset) => {
-        // console.log(node.key, " isReset", isReset)
-        // // console.log(node.key, " oldValue", oldValue)
-        // console.log(typeof newCardStripNames)
-        // console.log(newCardStripNames, newCardStripNames instanceof DefaultValue)
         if (isReset) {
             localStorage.removeItem(node.key)
         } else
@@ -159,16 +160,4 @@ const fetchAllCards = async () => {
 export const allCardsState = selector({
     key: "allCards",
     get: async () => await fetchAllCards(),
-})
-
-var defaultSearchState = new fuzzySearch({source: []})
-
-export var searcherState = atom({
-    key: "searcher",
-    default: errorSelector('Attempt to use Atom before initialization'),
-})
-
-export const searcherStateBloodhound = atom({
-    key: "searcherBloodhound",
-    default: errorSelector('Attempt to use Atom before initialization'),
 })

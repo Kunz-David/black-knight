@@ -13,9 +13,14 @@ import exactCardSearchURL from "../src/backend/scraping/exactCardSearchURL";
 // console.log(urlSearch)
 // const cardName = "Aether Vial"
 // const cardName = "Swamp"
-const cardName = "Dark confidant"
+// const cardName = "Dark confidant"
+var cardName
+cardName = "Cosima, God of the Voyage // The Omenkeel"
+cardName = "Cosima, God of the Voyage // The Omenkeel"
+
 
 const rytirSearchURL = exactCardSearchURL(cardName)
+console.log(rytirSearchURL)
 
 scrapeCard(rytirSearchURL).then(res => {
     console.log(res)

@@ -1,17 +1,9 @@
-import {Suspense} from 'react';
-import {Flex, Input, InputGroup, InputLeftElement, VStack} from "@chakra-ui/react";
-import {SearchIcon} from "@chakra-ui/icons";
-import {
-    atom, useRecoilState,
-    useSetRecoilState,
-} from "recoil";
-import {
-    AUTOCOMPLETE_LEN,
-    autocompleteListSelectionState,
-} from "../Autocomplete";
-import {max, min} from "lodash";
-import AutocompleteFuzzySort from '../AutocompleteFuzzySort';
-import ErrorBoundary from '../ErrorBoundary';
+import { SearchIcon } from "@chakra-ui/icons";
+import { Flex, Input, InputGroup, InputLeftElement, VStack } from "@chakra-ui/react";
+import { max, min } from "lodash";
+import { Suspense } from 'react';
+import { atom, useRecoilState, useRecoilValue, useSetRecoilState } from "recoil";
+import AutocompleteFuzzySort, { autcompleteListLengthState } from '../AutocompleteFuzzySort';
 
 export const inputCardNameState = atom({
     key: "inputCardName",
@@ -24,15 +16,22 @@ export const searchForCardState = atom({
     default: false,
 })
 
+// selection from the autocomplete list
+export const autoCompArrowsListSelectionState = atom({
+    key: "autoCompArrowsListSelectionState",
+    default: -1,
+})
+
 
 const SearchBar = () => {
 
     const [inputCardName, setInputCardName] = useRecoilState(inputCardNameState)
-    const setAutocompleteListSelection = useSetRecoilState(autocompleteListSelectionState)
+    const setAutocompleteListSelection = useSetRecoilState(autoCompArrowsListSelectionState)
     const setSearchForCard = useSetRecoilState(searchForCardState)
+    const autocompleteListLen = useRecoilValue(autcompleteListLengthState)
 
 
-    const searchTextChangeHandler = ({target: {value}}) => {
+    const searchTextChangeHandler = ({ target: { value } }) => {
         setInputCardName(value)
     }
 
@@ -45,8 +44,7 @@ const SearchBar = () => {
 
     const downHandler = event => {
         event.preventDefault()
-        // TODO: limit to the actual number of autocompletes not AUTOCOMPLETE_LEN -> (problem because autocompleteListState is async)
-        setAutocompleteListSelection((curval) => min([curval + 1, AUTOCOMPLETE_LEN-1]))
+        setAutocompleteListSelection((curval) => min([curval + 1, autocompleteListLen - 1]))
     }
 
     const upHandler = event => {
@@ -56,16 +54,15 @@ const SearchBar = () => {
 
     const handleKeyDown = async (event) => {
         const keyCallback = {
-            "Enter"      : enterHandler,
-            "ArrowUp"    : upHandler,
-            "ArrowDown"  : downHandler,
+            "Enter": enterHandler,
+            "ArrowUp": upHandler,
+            "ArrowDown": downHandler,
         }[event.key]
         keyCallback?.(event)
     }
 
     return (
-        <VStack width={"full"}>
-
+        <VStack width={"full"} style={{display: "inline-block"}}>
             <Flex width={"full"} pr={[2, 5]} pl={2}>
                 <InputGroup variant={"filled"} size={"lg"} colorScheme={"teal"}>
                     <InputLeftElement
@@ -86,9 +83,7 @@ const SearchBar = () => {
             </Flex>
             <Flex width={"full"} pr={[2, 5]} pl={2}>
                 <Suspense fallback={<div>Loading :)</div>}>
-                    <VStack>
-                        <AutocompleteFuzzySort />
-                    </VStack>
+                    <AutocompleteFuzzySort />
                 </Suspense>
             </Flex>
         </VStack>

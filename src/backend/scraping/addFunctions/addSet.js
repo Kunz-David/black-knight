@@ -30,7 +30,8 @@ function rename(rytirSet) {
         "Modern Horizons II": "Modern Horizons 2",
         "GS: Jiang Yanggu": "Global Series Jiang Yanggu & Mu Yanling",
         "RNA Guild Kits": "Guilds of Ravnica Guild Kits Set of 5",
-        "P - Promo Pack": "Media Insert"
+        "P - Promo Pack": "Media Insert",
+        "Timeshifted Remastered": "Time Spiral Timeshifted",
     }
     
     var newName = rytirSet
