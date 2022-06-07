@@ -19,7 +19,7 @@ import SearchBar, {autoCompArrowsListSelectionState, inputCardNameState, searchF
 import {toastDefaults} from "../../theme";
 import {autocompleteListState, getAutoCompList} from "../AutocompleteFuzzySort";
 
-// TODO: add second search for cards containing "//" (search just front side)
+
 async function getCardsFromBackend(cardName) {
     const url = `/api/card/${encodeURIComponent(cardName)}`
     console.debug("search url: " + url)
