@@ -32,6 +32,10 @@ function rename(rytirSet) {
         "RNA Guild Kits": "Guilds of Ravnica Guild Kits Set of 5",
         "P - Promo Pack": "Media Insert",
         "Timeshifted Remastered": "Time Spiral Timeshifted",
+        "Mystical Archive - JP": "Strixhaven Mystical Archive",
+        "P - Vanguard": "Vanguard Series",
+        "P - Prerelease MH2": "Modern Horizons 2",
+        "GRN Guild Kits": "GRN Guild Kit",
     }
     
     var newName = rytirSet

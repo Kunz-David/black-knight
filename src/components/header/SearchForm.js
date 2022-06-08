@@ -17,7 +17,7 @@ import {Flex, useToast} from "@chakra-ui/react";
 import SearchOptionsModal from "./SearchOptionsModal";
 import SearchBar, {autoCompArrowsListSelectionState, inputCardNameState, searchForCardState} from "./SearchBar";
 import {toastDefaults} from "../../theme";
-import {autocompleteListState, getAutoCompList} from "../AutocompleteFuzzySort";
+import {getAutoCompList} from "../AutocompleteFuzzySort";
 
 
 async function getCardsFromBackend(cardName) {
