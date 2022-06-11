@@ -71,6 +71,9 @@ function SearchResults() {
                 if (!cardAlreadyOnList) {
                     // save the card to the list
                     set(cardStripsNamesState, val => [cardName, ...val])
+                    set(cardStripInfoProperty({cardName, path: "rytirUrl"}), search.rytir_url)
+                    set(cardStripInfoProperty({cardName, path: "edhrecUrl"}), search.edhrec_url)
+                    set(cardStripInfoProperty({cardName, path: "scryfallUrl"}), search.scryfall.scryfall_uri)
                 }
 
                 // get search params:
