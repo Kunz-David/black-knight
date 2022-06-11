@@ -2,9 +2,10 @@ import React from 'react';
 import {Box, Center, Flex} from "@chakra-ui/react";
 import DebugButton from "./DebugButton";
 
-const Body = ({children}) => {
+function Body({children}) {
     return (
-        <div>
+        <div
+            onMouseMove={console.log("mouse moved")}>
             <Center>
                 <Box width={"full"} maxWidth={"7xl"} padding={[3, 7]}>
                     {children}

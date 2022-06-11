@@ -78,6 +78,7 @@ const SearchBar = () => {
                         onChange={searchTextChangeHandler}
                         onKeyDown={handleKeyDown}
                         required={true}
+                        autoFocus
                     />
                 </InputGroup>
             </Flex>
