@@ -74,6 +74,7 @@ function SearchResults() {
                     set(cardStripInfoProperty({cardName, path: "rytirUrl"}), search.rytir_url)
                     set(cardStripInfoProperty({cardName, path: "edhrecUrl"}), search.edhrec_url)
                     set(cardStripInfoProperty({cardName, path: "scryfallUrl"}), search.scryfall.scryfall_uri)
+                    set(cardStripInfoProperty({cardName, path: "manaCost"}), search.scryfall.mana_cost)
                 }
 
                 // get search params:

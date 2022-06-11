@@ -9,6 +9,8 @@ import {useDestroyStrip} from "../utils/destroyStrip";
 import {ReactComponent as CernyRytirLogo} from '../assets/cerny_rytir_ver1.svg';
 import {ReactComponent as CernyRytirLogoTwo} from '../assets/cerny_rytir_ver2.svg';
 import {ReactComponent as EDHRECLogo} from '../assets/edhrec.svg';
+import {ReactComponent as ScryfallLogo} from '../assets/scryfall_unified_color.svg';
+import ManaCost from './strip/ManaCost';
 
 function ButtonLink( {href, ...ButtonLinkProps} ) {
 
@@ -34,6 +36,9 @@ function CardStripOptions({cardName}) {
     const cardStripRytirUrl = useRecoilValue(cardStripInfoProperty({cardName, path: "rytirUrl"}))
     const cardStripEdhrecUrl = useRecoilValue(cardStripInfoProperty({cardName, path: "edhrecUrl"}))
     const cardStripScryfallUrl = useRecoilValue(cardStripInfoProperty({cardName, path: "scryfallUrl"}))
+    const cardStripManaCost = useRecoilValue(cardStripInfoProperty({cardName, path: "manaCost"}))
+
+    console.log({cardStripManaCost})
     // const cardStripInfo = useRecoilValue(cardStripInfoState(cardName))
     // const cardStripPrice = useRecoilValue(cardStripPriceState(cardName))
 
@@ -69,11 +74,12 @@ function CardStripOptions({cardName}) {
                 />
                 <ButtonLink
                     href={cardStripScryfallUrl}
-                    aria-label='EDHREC'
-                    icon={<EDHRECLogo width={20} height={20}/>}
+                    aria-label='Scryfall'
+                    icon={<ScryfallLogo width={20} height={20}/>}
                 />
             </HStack>
             <Spacer/>
+            <ManaCost value={cardStripManaCost}/>
             <Box>
                 <Text fontWeight={"semibold"}>
                     {cardStripPrice} Kč

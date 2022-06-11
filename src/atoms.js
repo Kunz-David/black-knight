@@ -88,6 +88,7 @@ const cardStripInfoDefault = {
     rytirUrl: undefined,
     edhrecUrl: undefined,
     scryfallUrl: undefined,
+    manaCost: null,
 }
 
 export const cardStripInfoState = atomFamily({
