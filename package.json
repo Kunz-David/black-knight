@@ -39,9 +39,9 @@
   },
   "scripts": {
     "start": "concurrently \"yarn run backend\" \"yarn run client\"",
-    "client": "react-scripts start",
+    "client": "PORT=3000 react-scripts start",
     "backend-nodemon": "nodemon backend-wrapper.js",
-    "backend": "node backend-wrapper.js",
+    "backend": "PORT=3001 node backend-wrapper.js",
     "debug-scraper": "node testing/debugScraper-wrapper.js",
     "try": "node -r esm testing/try.js",
     "try_autocomplete": "node -r esm testing/try_autocomplete.js",
