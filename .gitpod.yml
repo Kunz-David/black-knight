@@ -3,6 +3,7 @@
 # and commit this file to your remote git repository to share the goodness with others.
 
 tasks:
+  - before: yarn
   - name: Terminal 1
     init: yarn install
     command: yarn run backend
@@ -10,5 +11,6 @@ tasks:
     init: yarn install
     command: yarn run client
 
-
+ports:
+  - port: 3000
 
