@@ -85,6 +85,10 @@ const setPropertyFamilySelector = (family, key, path, emptyValue) => ({get, set}
 const cardStripInfoDefault = {
     visible: true,
     price: undefined,
+    rytirUrl: undefined,
+    edhrecUrl: undefined,
+    scryfallUrl: undefined,
+    manaCost: null,
 }
 
 export const cardStripInfoState = atomFamily({

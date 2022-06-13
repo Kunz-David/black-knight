@@ -25,6 +25,7 @@ async function scrapeCard(url, additionalInfo = {}) {
         )))
         return {
             status: "success",
+            rytir_url: url,
             results: cards,
         }
     } else {

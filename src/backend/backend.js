@@ -36,7 +36,7 @@ server.app.get('/api/search', (req, res) => {
     // res.send(params)
     const url = "https://cernyrytir.cz/index.php3?" + (new URLSearchParams(params)).toString()
     console.log(url)
-    scrapeCard(url)
+    scrapeCard(url, "blank_cardname")
         .then(r => res.json(r))
         .catch(error => console.log(error))
 })

@@ -19,7 +19,7 @@ function makeItRytirReadable(url) {
 }
 
 
-function exactCardSearchURL(cardName) {
+function exactRytirCardSearchURL(cardName) {
     let rytirSearchJSON = {
         "akce": 3,
         "searchtype": "card",
@@ -29,4 +29,4 @@ function exactCardSearchURL(cardName) {
     return makeItRytirReadable("https://cernyrytir.cz/index.php3?" + rytirSearchParams)
 }
 
-export default exactCardSearchURL
+export default exactRytirCardSearchURL
