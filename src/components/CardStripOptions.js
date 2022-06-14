@@ -38,10 +38,6 @@ function CardStripOptions({cardName}) {
     const cardStripScryfallUrl = useRecoilValue(cardStripInfoProperty({cardName, path: "scryfallUrl"}))
     const cardStripManaCost = useRecoilValue(cardStripInfoProperty({cardName, path: "manaCost"}))
 
-    console.log({cardStripManaCost})
-    // const cardStripInfo = useRecoilValue(cardStripInfoState(cardName))
-    // const cardStripPrice = useRecoilValue(cardStripPriceState(cardName))
-
     const destroyStrip = useDestroyStrip()
 
     const handleToggle = () => setCardStripVisible(val => !val)

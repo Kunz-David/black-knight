@@ -60,7 +60,7 @@ function SearchResults() {
     const cardName = useRecoilValue(searchCardNameState)
     console.debug("in search results with cardname: " + cardName)
     const toast = useToast()
-    console.log("cardName is :", cardName)
+    console.log("cardName is:", cardName)
     const search = useRecoilValue(findCard(cardName))
 
     const insertElement = useRecoilCallback(
