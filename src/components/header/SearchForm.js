@@ -1,4 +1,4 @@
-import React, {Suspense, useEffect} from 'react';
+import React, { Suspense, useEffect, useRef } from 'react';
 import {
     selector,
     selectorFamily,
@@ -12,12 +12,12 @@ import {
     searchProperty,
     cardStripInfoProperty
 } from "../../atoms";
-import {min, range} from "lodash";
-import {Flex, useToast} from "@chakra-ui/react";
+import { min, range } from "lodash";
+import { Flex, useToast } from "@chakra-ui/react";
 import SearchOptionsModal from "./SearchOptionsModal";
-import SearchBar, {autoCompArrowsListSelectionState, inputCardNameState, searchForCardState} from "./SearchBar";
-import {toastDefaults} from "../../theme";
-import {getAutoCompList} from "../AutocompleteFuzzySort";
+import SearchBar, { autoCompArrowsListSelectionState, inputCardNameState, searchForCardState } from "./SearchBar";
+import { toastDefaults } from "../../theme";
+import { getAutoCompList } from "../AutocompleteFuzzySort";
 
 
 async function getCardsFromBackend(cardName) {
@@ -43,10 +43,8 @@ export const findCard = selectorFamily({
 // returns the inputed card or the selected card in autocomplete
 export const searchCardNameState = selector({
     key: "searchCardName",
-    get: ({get}) => {
+    get: ({ get }) => {
         if (get(autoCompArrowsListSelectionState) === -1) {
-            // return get(inputCardNameState)
-            // return getAutoCompList(get(inputCardNameState))?[0].target ?? "No card found"
             return getAutoCompList(get(inputCardNameState))[0].target ?? "No card found"
         } else {
             return getAutoCompList(get(inputCardNameState))[get(autoCompArrowsListSelectionState)].target
@@ -62,19 +60,20 @@ function SearchResults() {
     const toast = useToast()
     console.log("cardName is:", cardName)
     const search = useRecoilValue(findCard(cardName))
+    const firstRenderRef = useRef(true);
 
     const insertElement = useRecoilCallback(
-        ({set, snapshot: {getLoadable}, reset}) => (search) => {
+        ({ set, snapshot: { getLoadable }, reset }) => (search) => {
             if (search.status === "success") {
                 const cardAlreadyOnList = getLoadable(cardStripsNamesState).contents.includes(cardName)
                 console.log("cardOnList " + cardAlreadyOnList)
                 if (!cardAlreadyOnList) {
                     // save the card to the list
                     set(cardStripsNamesState, val => [cardName, ...val])
-                    set(cardStripInfoProperty({cardName, path: "rytirUrl"}), search.rytir_url)
-                    set(cardStripInfoProperty({cardName, path: "edhrecUrl"}), search.edhrec_url)
-                    set(cardStripInfoProperty({cardName, path: "scryfallUrl"}), search.scryfall.scryfall_uri)
-                    set(cardStripInfoProperty({cardName, path: "manaCost"}), search.scryfall.mana_cost)
+                    set(cardStripInfoProperty({ cardName, path: "rytirUrl" }), search.rytir_url)
+                    set(cardStripInfoProperty({ cardName, path: "edhrecUrl" }), search.edhrec_url)
+                    set(cardStripInfoProperty({ cardName, path: "scryfallUrl" }), search.scryfall.scryfall_uri)
+                    set(cardStripInfoProperty({ cardName, path: "manaCost" }), search.scryfall.mana_cost)
                 }
 
                 // get search params:
@@ -89,26 +88,27 @@ function SearchResults() {
                 let buysRemaining = totalBuyAmount
                 let addedCardStripPrice = 0
                 ids.forEach((printId) => {
-                    const prevBuyAmount = getLoadable(cardPrintsState({cardName, printId})).contents.buyAmount ?? 0
-                    const buyAmount = min([results[printId].stock-prevBuyAmount, buysRemaining])
+                    const prevBuyAmount = getLoadable(cardPrintsState({ cardName, printId })).contents.buyAmount ?? 0
+                    const buyAmount = min([results[printId].stock - prevBuyAmount, buysRemaining])
                     addedCardStripPrice += buyAmount * results[printId].price
                     buysRemaining = buysRemaining - buyAmount
-                    set(cardPrintsState({cardName, printId}),
-                        {...results[printId],
+                    set(cardPrintsState({ cardName, printId }),
+                        {
+                            ...results[printId],
                             buyAmount: buyAmount + prevBuyAmount,
                         }
                     )
                 })
                 // set the price of selected cards
-                const prevCardStripPrice = getLoadable(cardStripInfoProperty({cardName, path: "price"})).contents ?? 0
-                set(cardStripInfoProperty({cardName, path: "price"}), prevCardStripPrice + addedCardStripPrice)
+                const prevCardStripPrice = getLoadable(cardStripInfoProperty({ cardName, path: "price" })).contents ?? 0
+                set(cardStripInfoProperty({ cardName, path: "price" }), prevCardStripPrice + addedCardStripPrice)
 
                 // create description:
                 let toastDescription
                 let toastStatus
                 if (totalBuyAmount > 0) { // did he want to buy
-                    toastDescription = `${totalBuyAmount-buysRemaining}/${totalBuyAmount} added for ${addedCardStripPrice} Kč`
-                    switch (totalBuyAmount-buysRemaining) {
+                    toastDescription = `${totalBuyAmount - buysRemaining}/${totalBuyAmount} added for ${addedCardStripPrice} Kč`
+                    switch (totalBuyAmount - buysRemaining) {
                         case totalBuyAmount: // bought all
                             toastStatus = "success"
                             break
@@ -145,7 +145,16 @@ function SearchResults() {
         [cardName],
     )
     // insertElement(results)
-    useEffect(() => insertElement(search), [insertElement, search])
+    useEffect(
+        () => {
+            if (firstRenderRef.current) {
+                firstRenderRef.current = false;
+                return;
+            }
+            insertElement(search)
+        },
+        [insertElement, search]
+    )
     return (<div>
         {search.status.toString()}
     </div>)
@@ -159,13 +168,13 @@ function SearchForm() {
 
     return (
         <div>
-            <Flex mb={[1,2,4]}>
-                <SearchBar/>
+            <Flex mb={[1, 2, 4]}>
+                <SearchBar />
                 <SearchOptionsModal />
             </Flex>
             <Suspense fallback={<div>Searching...</div>}>
                 {searchForCard === false ?
-                    null : <SearchResults/>}
+                    null : <SearchResults />}
             </Suspense>
         </div>
     )
