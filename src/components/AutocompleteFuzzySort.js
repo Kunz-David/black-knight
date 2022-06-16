@@ -1,6 +1,6 @@
-import { Flex, List, Box } from "@chakra-ui/react";
-import { atom, errorSelector, selector, useRecoilValue, useSetRecoilState } from "recoil";
-import { autoCompArrowsListSelectionState, inputCardNameState } from "./header/SearchBar";
+import { Flex, List, Box, background } from "@chakra-ui/react";
+import { atom, errorSelector, selector, useRecoilState, useRecoilValue, useSetRecoilState } from "recoil";
+import { autoCompListSelectionState, inputCardNameState, searchForCardState } from "./header/SearchBar";
 import fuzzysort from 'fuzzysort'
 import { useEffect } from "react";
 import cardsNames from "../data/card-names.json"
@@ -39,39 +39,15 @@ function Highlighted({result}) {
     )
 }
 
-// selection from the autocomplete list
-export const autoCompListSelectionState = selector({
-    key: "autoCompListSelectionState",
-    get: ({ get }) => {
-        const hoverIndex = get(autoCompHoverListSelectionState)
-        const arrowsIndex = get(autoCompArrowsListSelectionState)
-
-        if (hoverIndex !== -1) {
-            return hoverIndex
-        }  
-        return arrowsIndex
-    }
-})
-
-const autoCompHoverListSelectionState = atom({
-    key: "autoCompHoverListSelectionState",
-    default: -1
-})
-
-
 function AutocompleteListItem({item, index, inputCardName}) {
 
-    const autoCompListSelection = useRecoilValue(autoCompListSelectionState)
-    const setAutoCompHoverListSelection = useSetRecoilState(autoCompHoverListSelectionState)
+    const [autoCompListSelection, setAutoCompListSelection] = useRecoilState(autoCompListSelectionState)
+    const setSearchForCard = useSetRecoilState(searchForCardState)
     
     const selectedStyle = {
         color: "orange",
         fontWeight: "semibold",
-        border: 'none',
-        borderRadius: '2pt',
-        boxShadow: '0 0 0 1pt grey',
-        outline: 'none',
-        transition: '.15s'
+        backgroundColor: "#E2E8F0", // "gray.200" not being recognized...
     }
 
     const defaultStyle = {
@@ -80,11 +56,12 @@ function AutocompleteListItem({item, index, inputCardName}) {
 
     return (
         <Box
-            onMouseOver={() => setAutoCompHoverListSelection(index)}
-            onMouseOut={() => setAutoCompHoverListSelection(-1)}
+            onMouseOver={() => setAutoCompListSelection(index)}
+            onMouseOut={() => setAutoCompListSelection(-1)}
+            onClick={(event) => {setSearchForCard(true)}}
             width={"full"}
-            style={index === autoCompListSelection ? selectedStyle : defaultStyle}
             white-space={"nowrap"}
+            style={index === autoCompListSelection ? selectedStyle : defaultStyle}
             // _hover={selectedStyle}
         >
             <Highlighted result={item} />
@@ -93,18 +70,13 @@ function AutocompleteListItem({item, index, inputCardName}) {
 }
 
 
-function AutocompleteFuzzySort() {
+function AutocompleteFuzzySort({ autocompleteList }) {
 
-    // const listLen = useRecoilValue(autcompleteListLengthState)
     const setListLen = useSetRecoilState(autcompleteListLengthState)
-    const listLen = AUTOCOMP_MAX_LEN
+    const listLen = autocompleteList.length
     const inputCardName = useRecoilValue(inputCardNameState)
-    
-    const autocompleteList = getAutoCompList(inputCardName)
 
     useEffect(() => setListLen(autocompleteList.length), [autocompleteList, setListLen])
-    // useEffect(() => setAutocompleteList(autocompleteList), [autocompleteList])
-    // console.log("simple fuzzzy", autocompleteList.slice(0, listLen))
 
     return (
         <Flex width={"full"} pl={12} border={0} bgColor={"gray.300"}>
@@ -115,7 +87,7 @@ function AutocompleteFuzzySort() {
             >
                 {autocompleteList.slice(0, listLen).map(
                     (item, index) => {
-                        console.log(`${item.target}_${item._indexes.length}`)
+                        // console.log(`${item.target}_${item._indexes.length}`)
                         return (
                             <AutocompleteListItem item={item} index={index} inputCardName={inputCardName} key={`${item.target}_${item._indexes.length}`}/>
                         )

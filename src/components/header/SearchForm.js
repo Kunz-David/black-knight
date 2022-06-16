@@ -15,7 +15,7 @@ import {
 import { min, range } from "lodash";
 import { Flex, useToast } from "@chakra-ui/react";
 import SearchOptionsModal from "./SearchOptionsModal";
-import SearchBar, { autoCompArrowsListSelectionState, inputCardNameState, searchForCardState } from "./SearchBar";
+import SearchBar, { autoCompListSelectionState, inputCardNameState, searchForCardState } from "./SearchBar";
 import { toastDefaults } from "../../theme";
 import { getAutoCompList } from "../AutocompleteFuzzySort";
 
@@ -44,10 +44,10 @@ export const findCard = selectorFamily({
 export const searchCardNameState = selector({
     key: "searchCardName",
     get: ({ get }) => {
-        if (get(autoCompArrowsListSelectionState) === -1) {
+        if (get(autoCompListSelectionState) === -1) {
             return getAutoCompList(get(inputCardNameState))[0].target ?? "No card found"
         } else {
-            return getAutoCompList(get(inputCardNameState))[get(autoCompArrowsListSelectionState)].target
+            return getAutoCompList(get(inputCardNameState))[get(autoCompListSelectionState)].target
         }
     }
 })
@@ -140,7 +140,7 @@ function SearchResults() {
 
             reset(searchForCardState)
             set(inputCardNameState, "")
-            set(autoCompArrowsListSelectionState, -1)
+            set(autoCompListSelectionState, -1)
         },
         [cardName],
     )

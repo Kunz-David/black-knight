@@ -4,8 +4,7 @@ import DebugButton from "./DebugButton";
 
 function Body({children}) {
     return (
-        <div
-            onMouseMove={console.log("mouse moved")}>
+        <div>
             <Center>
                 <Box width={"full"} maxWidth={"7xl"} padding={[3, 7]}>
                     {children}

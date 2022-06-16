@@ -2,8 +2,8 @@ import { SearchIcon } from "@chakra-ui/icons";
 import { Flex, Input, InputGroup, InputLeftElement, VStack } from "@chakra-ui/react";
 import { max, min } from "lodash";
 import { Suspense } from 'react';
-import { atom, useRecoilState, useRecoilValue, useSetRecoilState } from "recoil";
-import AutocompleteFuzzySort, { autcompleteListLengthState } from '../AutocompleteFuzzySort';
+import { atom, useRecoilState, useSetRecoilState } from "recoil";
+import AutocompleteFuzzySort, { getAutoCompList } from '../AutocompleteFuzzySort';
 
 export const inputCardNameState = atom({
     key: "inputCardName",
@@ -17,8 +17,8 @@ export const searchForCardState = atom({
 })
 
 // selection from the autocomplete list
-export const autoCompArrowsListSelectionState = atom({
-    key: "autoCompArrowsListSelectionState",
+export const autoCompListSelectionState = atom({
+    key: "autoCompListSelectionState",
     default: -1,
 })
 
@@ -26,9 +26,11 @@ export const autoCompArrowsListSelectionState = atom({
 const SearchBar = () => {
 
     const [inputCardName, setInputCardName] = useRecoilState(inputCardNameState)
-    const setAutocompleteListSelection = useSetRecoilState(autoCompArrowsListSelectionState)
+    const setAutoCompListSelection = useSetRecoilState(autoCompListSelectionState)
     const setSearchForCard = useSetRecoilState(searchForCardState)
-    const autocompleteListLen = useRecoilValue(autcompleteListLengthState)
+    
+    const autocompleteList = getAutoCompList(inputCardName)
+    const autocompleteListLen = autocompleteList.length
 
 
     const searchTextChangeHandler = ({ target: { value } }) => {
@@ -44,12 +46,12 @@ const SearchBar = () => {
 
     const downHandler = event => {
         event.preventDefault()
-        setAutocompleteListSelection((curval) => min([curval + 1, autocompleteListLen - 1]))
+        setAutoCompListSelection((curval) => min([curval + 1, autocompleteListLen - 1]))
     }
 
     const upHandler = event => {
         event.preventDefault()
-        setAutocompleteListSelection((curval) => max([curval - 1, -1]))
+        setAutoCompListSelection((curval) => max([curval - 1, -1]))
     }
 
     const handleKeyDown = async (event) => {
@@ -74,6 +76,9 @@ const SearchBar = () => {
                         type="search"
                         value={inputCardName}
                         placeholder="Search for a card"
+                        _focus={{
+                            background: "gray.200"
+                        }}
                         // onChange={({target: {value}}) => setInputCardName(value)}
                         onChange={searchTextChangeHandler}
                         onKeyDown={handleKeyDown}
@@ -84,7 +89,7 @@ const SearchBar = () => {
             </Flex>
             <Flex width={"full"} pr={[2, 5]} pl={2}>
                 <Suspense fallback={<div>Loading :)</div>}>
-                    <AutocompleteFuzzySort />
+                    <AutocompleteFuzzySort autocompleteList={autocompleteList}/>
                 </Suspense>
             </Flex>
         </VStack>
