@@ -1,4 +1,4 @@
-import getPageCount from "./getPageCount";
+import getPageCount from "./getPageCount"
 
 // when the results are over multiple pages, get all the pages
 function getOtherPageURLs(html, url) {

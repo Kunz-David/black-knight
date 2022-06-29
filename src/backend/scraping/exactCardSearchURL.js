@@ -13,8 +13,8 @@ function makeItRytirReadable(url) {
         .replaceAll("%C3%A0", "?")
         .replaceAll("%C2%AE", "%AE")
         .replaceAll("The%20Ultimate%20Nightmare%20of%20Wizards%20of%20the%20Coast%C2%AE%20Customer%20Service",
-        "The%20Ultimate%20Nightmare%20of%20Wizards%20of%20the%20Coast%AE%20Cu")
-        
+            "The%20Ultimate%20Nightmare%20of%20Wizards%20of%20the%20Coast%AE%20Cu")
+
     return rytirUrl
 }
 

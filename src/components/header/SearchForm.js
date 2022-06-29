@@ -1,23 +1,23 @@
-import React, { Suspense, useEffect, useRef } from 'react';
+import { Suspense, useEffect, useRef } from 'react'
 import {
     selector,
     selectorFamily,
     useRecoilCallback,
     useRecoilValue,
-} from 'recoil';
+} from 'recoil'
 import {
     cardStripPrintIdsState,
     cardStripsNamesState,
     cardPrintsState,
     searchProperty,
     cardStripInfoProperty
-} from "../../atoms";
-import { min, range } from "lodash";
-import { Flex, useToast } from "@chakra-ui/react";
-import SearchOptionsModal from "./SearchOptionsModal";
-import SearchBar, { autoCompListSelectionState, inputCardNameState, searchForCardState } from "./SearchBar";
-import { toastDefaults } from "../../theme";
-import { getAutoCompList } from "../AutocompleteFuzzySort";
+} from "../../atoms"
+import { min, range } from "lodash"
+import { Flex, useToast } from "@chakra-ui/react"
+import SearchOptionsModal from "./SearchOptionsModal"
+import SearchBar, { autoCompListSelectionState, inputCardNameState, searchForCardState } from "./SearchBar"
+import { toastDefaults } from "../../theme"
+import { getAutoCompList } from "../AutocompleteFuzzySort"
 
 
 async function getCardsFromBackend(cardName) {
@@ -60,7 +60,7 @@ function SearchResults() {
     const toast = useToast()
     console.log("cardName is:", cardName)
     const search = useRecoilValue(findCard(cardName))
-    const firstRenderRef = useRef(true);
+    const firstRenderRef = useRef(true)
 
     const insertElement = useRecoilCallback(
         ({ set, snapshot: { getLoadable }, reset }) => (search) => {
@@ -148,8 +148,8 @@ function SearchResults() {
     useEffect(
         () => {
             if (firstRenderRef.current) {
-                firstRenderRef.current = false;
-                return;
+                firstRenderRef.current = false
+                return
             }
             insertElement(search)
         },
@@ -180,4 +180,4 @@ function SearchForm() {
     )
 }
 
-export default SearchForm;
+export default SearchForm

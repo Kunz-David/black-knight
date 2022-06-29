@@ -3,9 +3,9 @@ import {
     selector,
     selectorFamily,
     useRecoilValue,
-} from "recoil";
-import {Flex, List, ListItem} from "@chakra-ui/react";
-import {inputCardNameState} from "./header/SearchBar";
+} from "recoil"
+import { Flex, List, ListItem } from "@chakra-ui/react"
+import { inputCardNameState } from "./header/SearchBar"
 
 export const AUTOCOMPLETE_LEN = 5
 
@@ -25,7 +25,7 @@ const fetchAutocompleteList = async (input) => {
 // async wrapper selector waiting for autocomplete list
 const autocompleteListGetter = selectorFamily({
     key: "autocompleteListGetter",
-    get: (input) => async ({get}) => {
+    get: (input) => async () => {
         const res = await fetchAutocompleteList(input)
         console.log("res", res)
         return res
@@ -35,7 +35,7 @@ const autocompleteListGetter = selectorFamily({
 // autocomplete list, auto updated
 export const autocompleteListState = selector({
     key: "autocompleteList",
-    get: ({get}) => get(autocompleteListGetter(get(inputCardNameState))).data
+    get: ({ get }) => get(autocompleteListGetter(get(inputCardNameState))).data
 })
 
 const Autocomplete = () => {
@@ -58,9 +58,9 @@ const Autocomplete = () => {
             {autocompleteList.slice(0, AUTOCOMPLETE_LEN).map(
                 (item, index) => {
                     return <ListItem
-                                key={item}
-                                width={"full"}
-                                style={index === autocompleteListSelection ? selectedStyle : defaultStyle}
+                        key={item}
+                        width={"full"}
+                        style={index === autocompleteListSelection ? selectedStyle : defaultStyle}
                     >
                         {item}
                     </ListItem>
@@ -70,4 +70,4 @@ const Autocomplete = () => {
     </Flex>
 }
 
-export default Autocomplete;
+export default Autocomplete

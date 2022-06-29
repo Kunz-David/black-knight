@@ -1,4 +1,4 @@
-import axios from "axios";
+import axios from "axios"
 
 // returns a promise of the html
 async function getJSON(url) {

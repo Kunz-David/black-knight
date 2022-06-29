@@ -1,6 +1,8 @@
-import {HStack} from "@chakra-ui/react";
+import { HStack } from "@chakra-ui/react"
+import PropTypes from "prop-types"
 
-const HorizontalScroll = ({children}) => (
+
+const HorizontalScroll = ({ children }) => (
     <HStack
         spacing={2}
         position="sticky"
@@ -19,5 +21,9 @@ const HorizontalScroll = ({children}) => (
     >
         {children}
     </HStack>)
+
+HorizontalScroll.propTypes = {
+    children: PropTypes.node.isRequired
+}
 
 export default HorizontalScroll

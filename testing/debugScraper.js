@@ -1,8 +1,8 @@
 import axios from 'axios'
-import scrapeWithAllFunctions from "../src/backend/scraping/scrapeWithAllFunctions";
-import scrapedToJsons from "../src/backend/scraping/utils/scrapedToJsons";
-import scrapeCard from "../src/backend/scraping/scrapeCard";
-import exactCardSearchURL from "../src/backend/scraping/exactCardSearchURL";
+import scrapeWithAllFunctions from "../src/backend/scraping/scrapeWithAllFunctions"
+import scrapedToJsons from "../src/backend/scraping/utils/scrapedToJsons"
+import scrapeCard from "../src/backend/scraping/scrapeCard"
+import exactCardSearchURL from "../src/backend/scraping/exactCardSearchURL"
 
 // const cardJSON = require("../testing/aether_vial.json")
 
@@ -37,7 +37,7 @@ const fetchHTML = async () => {
                 responseType: 'arraybuffer',
             })
             .then(res => {
-                const decoder = new TextDecoder("windows-1250");
+                const decoder = new TextDecoder("windows-1250")
                 return decoder.decode(res.data)
             })
         // console.log(html);

@@ -1,4 +1,4 @@
-import { extendTheme, withDefaultColorScheme, withDefaultProps } from '@chakra-ui/react';
+import { extendTheme, withDefaultColorScheme, withDefaultProps } from '@chakra-ui/react'
 
 const theme = extendTheme(
     {
@@ -11,7 +11,7 @@ const theme = extendTheme(
                 }
             },
             Input: {
-                
+
             }
         },
         colors: {
@@ -37,11 +37,11 @@ const theme = extendTheme(
         components: ['Menu', 'Popover', "Collapse"],
     }),
     withDefaultColorScheme({ colorScheme: "teal" }),
-);
+)
 
 export const toastDefaults = {
     isClosable: true,
     duration: 2500,
 }
 
-export default theme;
+export default theme

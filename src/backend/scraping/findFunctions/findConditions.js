@@ -1,6 +1,6 @@
-import findWebNames from "./findWebNames";
-import cardConditions from "../../../utils/cardConditions";
-import fillEmptyWith from "./utils/fillEmptyWith";
+import findWebNames from "./findWebNames"
+import cardConditions from "../../../utils/cardConditions"
+import fillEmptyWith from "./utils/fillEmptyWith"
 
 
 function findTreatments(html) {

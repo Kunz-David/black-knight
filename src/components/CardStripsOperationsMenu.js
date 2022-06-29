@@ -1,22 +1,21 @@
-import React from 'react';
-import {Box, Button, Flex, Heading, Spacer} from "@chakra-ui/react";
-import {selector, useRecoilCallback, useSetRecoilState} from "recoil";
+import { Box, Button, Flex, Heading, Spacer } from "@chakra-ui/react"
+import { selector, useRecoilCallback, useSetRecoilState } from "recoil"
 import {
     cardStripInfoProperty,
     cardStripsNamesState
-} from "../atoms";
-import {DeleteIcon} from "@chakra-ui/icons";
-import {BsDashSquareFill, BsPlusSquareFill} from "react-icons/all";
-import {useDestroyStrip} from "../utils/destroyStrip";
+} from "../atoms"
+import { DeleteIcon } from "@chakra-ui/icons"
+import { BsDashSquareFill, BsPlusSquareFill } from "react-icons/all"
+import { useDestroyStrip } from "../utils/destroyStrip"
 
 
 const visibilityAll = selector({
     key: "visibilityAll",
     get: () => [],
-    set: ({get, set}, visible) => {
+    set: ({ get, set }, visible) => {
         const cardNames = get(cardStripsNamesState)
         cardNames.forEach(cardName => {
-            set(cardStripInfoProperty({cardName, path: "visible"}), visible)
+            set(cardStripInfoProperty({ cardName, path: "visible" }), visible)
         })
     }
 })
@@ -27,7 +26,7 @@ const CardStripsOperationsMenu = () => {
     const setVisibilityAll = useSetRecoilState(visibilityAll)
     const destroyStrip = useDestroyStrip()
 
-    const destroyAllStrips = useRecoilCallback(({snapshot: {getLoadable}, reset}) => () => {
+    const destroyAllStrips = useRecoilCallback(({ snapshot: { getLoadable }, reset }) => () => {
         const cardStripNames = getLoadable(cardStripsNamesState).contents
         cardStripNames.forEach(
             cardName => {
@@ -66,7 +65,7 @@ const CardStripsOperationsMenu = () => {
                 </Button>
             </Box>
         </Flex>
-    );
-};
+    )
+}
 
-export default CardStripsOperationsMenu;
+export default CardStripsOperationsMenu

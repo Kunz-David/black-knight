@@ -1,5 +1,5 @@
-import findFunctions from "../findFunctions/findFunctions";
-import toObject from "./toObject";
+import findFunctions from "../findFunctions/findFunctions"
+import toObject from "./toObject"
 
 const transpose = m => m[0].map((x, i) => m.map(x => x[i]))
 

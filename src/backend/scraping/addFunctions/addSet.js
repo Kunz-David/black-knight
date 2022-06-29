@@ -37,13 +37,13 @@ function rename(rytirSet) {
         "P - Prerelease MH2": "Modern Horizons 2",
         "GRN Guild Kits": "GRN Guild Kit",
     }
-    
+
     var newName = rytirSet
 
     newName = newName.replaceAll("Extras", "")
     newName = newName.replaceAll("´", "'")
     newName = newName.trim()
-    
+
     if (has(names, newName)) {
         newName = names[newName]
         // console.debug(`swiched "${rytirSet}" for "${newName}"`)
@@ -75,7 +75,7 @@ async function addSet(card, setsPromise) {
     var keyruneCode = "DEFAULT"
     var releaseDate = undefined
     var setType = undefined
-    
+
     if (searchResults.length !== 0) {
         keyruneCode = toLower(searchResults[0].obj.keyruneCode)
         releaseDate = searchResults[0].obj.releaseDate

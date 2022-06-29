@@ -1,11 +1,11 @@
-import { atom, atomFamily, errorSelector, selector, selectorFamily } from "recoil";
+import { atom, atomFamily, errorSelector, selector, selectorFamily } from "recoil"
 import { get as loGet, has as loHas, set as loSet } from "lodash"
 import produce from 'immer'
 
 export const log = ({ onSet }) => {
     onSet((newValue, oldValue) => {
-        console.debug("Changed from ", oldValue, " to ", newValue);
-    });
+        console.debug("Changed from ", oldValue, " to ", newValue)
+    })
 }
 
 export const persistLocalStorage = ({ onSet, setSelf, node }) => {

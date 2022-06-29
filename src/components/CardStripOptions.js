@@ -1,18 +1,15 @@
-import React from 'react';
-import {Box, Heading, HStack, IconButton, Link, Spacer, Text} from "@chakra-ui/react";
-import {useSetRecoilState, useRecoilValue} from "recoil";
-import {DeleteIcon} from "@chakra-ui/icons";
-import {
-    cardStripInfoProperty, cardStripInfoState,
-} from "../atoms";
-import {useDestroyStrip} from "../utils/destroyStrip";
-import {ReactComponent as CernyRytirLogo} from '../assets/cerny_rytir_ver1.svg';
-import {ReactComponent as CernyRytirLogoTwo} from '../assets/cerny_rytir_ver2.svg';
-import {ReactComponent as EDHRECLogo} from '../assets/edhrec.svg';
-import {ReactComponent as ScryfallLogo} from '../assets/scryfall_unified_color.svg';
-import ManaCost from './strip/ManaCost';
+import { Box, Heading, HStack, IconButton, Spacer, Text } from "@chakra-ui/react"
+import { useSetRecoilState, useRecoilValue } from "recoil"
+import { DeleteIcon } from "@chakra-ui/icons"
+import { cardStripInfoProperty } from "../atoms"
+import { useDestroyStrip } from "../utils/destroyStrip"
+import { ReactComponent as CernyRytirLogo } from '../assets/cerny_rytir_ver1.svg'
+import { ReactComponent as CernyRytirLogoTwo } from '../assets/cerny_rytir_ver2.svg'
+import { ReactComponent as EDHRECLogo } from '../assets/edhrec.svg'
+import { ReactComponent as ScryfallLogo } from '../assets/scryfall_unified_color.svg'
+import ManaCost from './strip/ManaCost'
 
-function ButtonLink( {href, ...ButtonLinkProps} ) {
+function ButtonLink({ href, ...ButtonLinkProps }) {
 
     return (
         <a href={href} target="_blank" rel='noopener noreferrer'>
@@ -29,14 +26,14 @@ function ButtonLink( {href, ...ButtonLinkProps} ) {
 
 // FIXME: buttons are in collapse, so clicking them also colapses
 
-function CardStripOptions({cardName}) {
+function CardStripOptions({ cardName }) {
 
-    const setCardStripVisible = useSetRecoilState(cardStripInfoProperty({cardName, path: "visible"}))
-    const cardStripPrice = useRecoilValue(cardStripInfoProperty({cardName, path: "price"}))
-    const cardStripRytirUrl = useRecoilValue(cardStripInfoProperty({cardName, path: "rytirUrl"}))
-    const cardStripEdhrecUrl = useRecoilValue(cardStripInfoProperty({cardName, path: "edhrecUrl"}))
-    const cardStripScryfallUrl = useRecoilValue(cardStripInfoProperty({cardName, path: "scryfallUrl"}))
-    const cardStripManaCost = useRecoilValue(cardStripInfoProperty({cardName, path: "manaCost"}))
+    const setCardStripVisible = useSetRecoilState(cardStripInfoProperty({ cardName, path: "visible" }))
+    const cardStripPrice = useRecoilValue(cardStripInfoProperty({ cardName, path: "price" }))
+    const cardStripRytirUrl = useRecoilValue(cardStripInfoProperty({ cardName, path: "rytirUrl" }))
+    const cardStripEdhrecUrl = useRecoilValue(cardStripInfoProperty({ cardName, path: "edhrecUrl" }))
+    const cardStripScryfallUrl = useRecoilValue(cardStripInfoProperty({ cardName, path: "scryfallUrl" }))
+    const cardStripManaCost = useRecoilValue(cardStripInfoProperty({ cardName, path: "manaCost" }))
 
     const destroyStrip = useDestroyStrip()
 
@@ -44,12 +41,12 @@ function CardStripOptions({cardName}) {
 
     return (
         <HStack width={"full"}
-                border={"2px solid"}
-                borderColor={"gray.300"}
-                rounded={"md"}
-                onClick={handleToggle}
-                _hover={{ bg: "gray.200" }}
-                _focus={{ boxShadow: "inner" }}>
+            border={"2px solid"}
+            borderColor={"gray.300"}
+            rounded={"md"}
+            onClick={handleToggle}
+            _hover={{ bg: "gray.200" }}
+            _focus={{ boxShadow: "inner" }}>
             <HStack>
                 <Box p="2">
                     <Heading size="md">{cardName}</Heading>
@@ -57,25 +54,25 @@ function CardStripOptions({cardName}) {
                 <ButtonLink
                     href={cardStripRytirUrl}
                     aria-label='Černý Rytíř'
-                    icon={<CernyRytirLogo width={20} height={20}/>}/>
+                    icon={<CernyRytirLogo width={20} height={20} />} />
                 <ButtonLink
                     href={cardStripRytirUrl}
                     aria-label='Černý Rytíř'
-                    icon={<CernyRytirLogoTwo width={20} height={20}/>}
+                    icon={<CernyRytirLogoTwo width={20} height={20} />}
                 />
                 <ButtonLink
                     href={cardStripEdhrecUrl}
                     aria-label='EDHREC'
-                    icon={<EDHRECLogo width={20} height={20}/>}
+                    icon={<EDHRECLogo width={20} height={20} />}
                 />
                 <ButtonLink
                     href={cardStripScryfallUrl}
                     aria-label='Scryfall'
-                    icon={<ScryfallLogo width={20} height={20}/>}
+                    icon={<ScryfallLogo width={20} height={20} />}
                 />
             </HStack>
-            <Spacer/>
-            <ManaCost value={cardStripManaCost}/>
+            <Spacer />
+            <ManaCost value={cardStripManaCost} />
             <Box>
                 <Text fontWeight={"semibold"}>
                     {cardStripPrice} Kč
@@ -96,4 +93,4 @@ function CardStripOptions({cardName}) {
     )
 }
 
-export default CardStripOptions;
+export default CardStripOptions

@@ -9,16 +9,15 @@ import {
     ModalHeader,
     ModalOverlay, Text,
     useDisclosure, useNumberInput, VStack
-} from "@chakra-ui/react";
-import React from "react";
-import {searchProperty, searchState} from "../../atoms";
-import {useRecoilState, useResetRecoilState} from "recoil";
-import {ChevronDownIcon} from "@chakra-ui/icons";
-import { IoOptions} from "react-icons/io5";
+} from "@chakra-ui/react"
+import { searchProperty, searchState } from "../../atoms"
+import { useRecoilState, useResetRecoilState } from "recoil"
+import { ChevronDownIcon } from "@chakra-ui/icons"
+import { IoOptions } from "react-icons/io5"
 
 
 
-function SearchBuyAmount({isDisabled}) {
+function SearchBuyAmount({ isDisabled }) {
 
     const path = "buyAmount"
     const [searchBuyAmount, setSearchBuyAmount] = useRecoilState(searchProperty(path))
@@ -48,14 +47,14 @@ function SearchBuyAmount({isDisabled}) {
             </OptionText>
             <HStack maxW="150px">
                 <Button {...dec} isDisabled={isDisabled}>-</Button>
-                <Input {...input} isDisabled={isDisabled} value={searchBuyAmount}/>
+                <Input {...input} isDisabled={isDisabled} value={searchBuyAmount} />
                 <Button {...inc} isDisabled={isDisabled}>+</Button>
             </HStack>
         </HStack>
     )
 }
 
-function OptionText({children}) {
+function OptionText({ children }) {
     return (
         <Text fontWeight="bold">
             {children}
@@ -113,20 +112,20 @@ function SearchOptionsModal() {
                 onClick={onOpen}
                 size={"lg"}
                 variant={"solid"}
-                fontSize={"1.6rem"}/>
+                fontSize={"1.6rem"} />
 
             <Modal size={"3xl"} blockScrollOnMount={false} isOpen={isOpen} onClose={onClose}>
                 <ModalOverlay />
                 <ModalContent>
                     <ModalHeader>Search Options</ModalHeader>
-                    <ModalCloseButton/>
+                    <ModalCloseButton />
                     <ModalBody>
                         <VStack>
                             <HStack spacing={5}>
                                 <SearchBuyAmount isDisabled={false} />
-                                <SearchOrder/>
+                                <SearchOrder />
                             </HStack>
-                            <Divider/>
+                            <Divider />
                             <Flex>
 
                             </Flex>

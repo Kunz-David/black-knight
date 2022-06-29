@@ -1,8 +1,8 @@
-import { Flex, List, Box, background } from "@chakra-ui/react";
-import { atom, errorSelector, selector, useRecoilState, useRecoilValue, useSetRecoilState } from "recoil";
-import { autoCompListSelectionState, inputCardNameState, searchForCardState } from "./header/SearchBar";
+import { Flex, List, Box } from "@chakra-ui/react"
+import { atom, errorSelector, selector, useRecoilState, useRecoilValue, useSetRecoilState } from "recoil"
+import { autoCompListSelectionState, inputCardNameState, searchForCardState } from "./header/SearchBar"
 import fuzzysort from 'fuzzysort'
-import { useEffect } from "react";
+import { useEffect } from "react"
 import cardsNames from "../data/card-names.json"
 
 const list = cardsNames.data
@@ -26,7 +26,7 @@ export const autcompleteListLengthState = atom({
     default: AUTOCOMP_MAX_LEN
 })
 
-function Highlighted({result}) {
+function Highlighted({ result }) {
 
     const style = {
         // color: "red",
@@ -39,11 +39,11 @@ function Highlighted({result}) {
     )
 }
 
-function AutocompleteListItem({item, index, inputCardName}) {
+function AutocompleteListItem({ item, index, inputCardName }) {
 
     const [autoCompListSelection, setAutoCompListSelection] = useRecoilState(autoCompListSelectionState)
     const setSearchForCard = useSetRecoilState(searchForCardState)
-    
+
     const selectedStyle = {
         color: "orange",
         fontWeight: "semibold",
@@ -58,11 +58,11 @@ function AutocompleteListItem({item, index, inputCardName}) {
         <Box
             onMouseOver={() => setAutoCompListSelection(index)}
             onMouseOut={() => setAutoCompListSelection(-1)}
-            onClick={(event) => {setSearchForCard(true)}}
+            onClick={(event) => { setSearchForCard(true) }}
             width={"full"}
             white-space={"nowrap"}
             style={index === autoCompListSelection ? selectedStyle : defaultStyle}
-            // _hover={selectedStyle}
+        // _hover={selectedStyle}
         >
             <Highlighted result={item} />
         </Box>
@@ -89,7 +89,7 @@ function AutocompleteFuzzySort({ autocompleteList }) {
                     (item, index) => {
                         // console.log(`${item.target}_${item._indexes.length}`)
                         return (
-                            <AutocompleteListItem item={item} index={index} inputCardName={inputCardName} key={`${item.target}_${item._indexes.length}`}/>
+                            <AutocompleteListItem item={item} index={index} inputCardName={inputCardName} key={`${item.target}_${item._indexes.length}`} />
                         )
                     }
                 )}
@@ -98,4 +98,4 @@ function AutocompleteFuzzySort({ autocompleteList }) {
     )
 }
 
-export default AutocompleteFuzzySort;
+export default AutocompleteFuzzySort

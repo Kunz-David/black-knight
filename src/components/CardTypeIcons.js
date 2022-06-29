@@ -1,4 +1,6 @@
-import { toLower } from "lodash";
+import { Text } from "@chakra-ui/react"
+import { toLower } from "lodash"
+import ManaSymbol from "./ManaSymbol"
 
 const cardTypes = [
     "artifact",
@@ -18,15 +20,15 @@ function getCardTypes(typeLine) {
     return types
 }
 
-function CardTypeIcons({ typeLine, ...manaProps}) {
+function CardTypeIcons({ typeLine, ...manaProps }) {
 
     const types = getCardTypes(typeLine)
-    
+
     return (
         <Text>
-            {types.map((type) => <ManaIcon key={type} symbol={type} {...manaProps}/>)}
+            {types.map((type) => <ManaSymbol key={type} symbol={type} {...manaProps} />)}
         </Text>
     )
 }
 
-export default CardTypeIcons;
+export default CardTypeIcons

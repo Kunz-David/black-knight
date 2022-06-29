@@ -1,17 +1,16 @@
-import React from 'react';
-import {useRecoilState, useRecoilValue, useSetRecoilState} from "recoil";
-import {cardPrintProperty, cardPrintsState, cardStripInfoProperty} from "../atoms";
-import {Badge, Box, Button, Center, HStack, Image, Input, Spacer, useNumberInput} from "@chakra-ui/react";
-import cardConditions from "../utils/cardConditions";
-import cardLanguages from "../utils/cardLanguages";
-import SetIcon from './SetIcon';
+import { useRecoilState, useRecoilValue, useSetRecoilState } from "recoil"
+import { cardPrintProperty, cardPrintsState, cardStripInfoProperty } from "../atoms"
+import { Badge, Box, Button, Center, HStack, Image, Input, Spacer, useNumberInput } from "@chakra-ui/react"
+import cardConditions from "../utils/cardConditions"
+import cardLanguages from "../utils/cardLanguages"
+import SetIcon from './SetIcon'
 
-function CardAmount({cardName, printId}) {
+function CardAmount({ cardName, printId }) {
 
-    const [buyAmount, setBuyAmount] = useRecoilState(cardPrintProperty({cardName, printId, path: "buyAmount"}))
-    const stock = useRecoilValue(cardPrintProperty({cardName, printId, path: "stock"}))
-    const price = useRecoilValue(cardPrintProperty({cardName, printId, path: "price"}))
-    const setStripPrice = useSetRecoilState(cardStripInfoProperty({cardName, path: "price"}))
+    const [buyAmount, setBuyAmount] = useRecoilState(cardPrintProperty({ cardName, printId, path: "buyAmount" }))
+    const stock = useRecoilValue(cardPrintProperty({ cardName, printId, path: "stock" }))
+    const price = useRecoilValue(cardPrintProperty({ cardName, printId, path: "price" }))
+    const setStripPrice = useSetRecoilState(cardStripInfoProperty({ cardName, path: "price" }))
     // const setStripPrice = useSetRecoilState(cardStripPriceState(cardName))
 
     const updateCardStripPrice = (val) => {
@@ -40,13 +39,13 @@ function CardAmount({cardName, printId}) {
     return (
         <HStack maxW="150px">
             <Button {...dec}>-</Button>
-            <Input {...input} value={buyAmount}/>
+            <Input {...input} value={buyAmount} />
             <Button {...inc}>+</Button>
         </HStack>
     )
 }
 
-const CardBadge = ({children, ...restProps}) => {
+const CardBadge = ({ children, ...restProps }) => {
     return (
         <Badge {...restProps} >
             {children}
@@ -58,9 +57,9 @@ CardBadge.defaultProps = {
     borderRadius: "full",
     px: "2",
     m: "1",
-};
+}
 
-const CardTreatmentBadges = ({treatments}) => {
+const CardTreatmentBadges = ({ treatments }) => {
 
     return (
         <div>
@@ -73,7 +72,7 @@ const CardTreatmentBadges = ({treatments}) => {
     )
 }
 
-const CardConditionBadge = ({condition}) => {
+const CardConditionBadge = ({ condition }) => {
     return (
         <CardBadge colorScheme={cardConditions[condition].colorScheme}>
             {condition}
@@ -81,7 +80,7 @@ const CardConditionBadge = ({condition}) => {
     )
 }
 
-const CardLanguageBadge = ({language}) => {
+const CardLanguageBadge = ({ language }) => {
     return (
         <CardBadge colorScheme={cardLanguages[language].colorScheme}>
             {language}
@@ -89,15 +88,15 @@ const CardLanguageBadge = ({language}) => {
     )
 }
 
-const CardPrint = ({cardName, printId}) => {
-    const cardPrint = useRecoilValue(cardPrintsState({cardName, printId}))
+const CardPrint = ({ cardName, printId }) => {
+    const cardPrint = useRecoilValue(cardPrintsState({ cardName, printId }))
 
     return (
         <Box maxW={"16rem"} borderWidth="1px" borderRadius="lg" padding={3} minWidth={"16rem"}>
             <Image src={cardPrint.rytir_image}
-                   alt={cardPrint.rytir_name}
-                   loading={"lazy"}
-                   fallbackSrc={"https://static.wikia.nocookie.net/mtgsalvation_gamepedia/images/f/f8/Magic_card_back.jpg/revision/latest/scale-to-width-down/250?cb=20140813141013"}/>
+                alt={cardPrint.rytir_name}
+                loading={"lazy"}
+                fallbackSrc={"https://static.wikia.nocookie.net/mtgsalvation_gamepedia/images/f/f8/Magic_card_back.jpg/revision/latest/scale-to-width-down/250?cb=20140813141013"} />
             <Box p="2" alignContent={"center"}>
                 <Center>
                     {cardPrint.condition && <CardConditionBadge condition={cardPrint.condition} />}
@@ -111,16 +110,16 @@ const CardPrint = ({cardName, printId}) => {
                         keyruneCode={cardPrint.keyruneCode}
                         rarity={cardPrint.rarity}
                         size="1x"
-                        fixed/>
+                        fixed />
                     <Spacer />
                     {cardPrint.price} Kč
                 </Center>
             </Box>
             <Center>
-                <CardAmount cardName={cardName} printId={printId}/>
+                <CardAmount cardName={cardName} printId={printId} />
             </Center>
         </Box>
     )
-};
+}
 
-export default CardPrint;
+export default CardPrint

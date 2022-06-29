@@ -1,9 +1,9 @@
-import scrapeCard from "./scraping/scrapeCard";
-import Server from "./serverClass";
-import getNamedCardsRytir from "./scraping/getNamedCardsRytir";
-import express, {Router} from "express";
-import axios from "axios";
-import getJSON from "./scraping/utils/getJSON";
+import scrapeCard from "./scraping/scrapeCard"
+import Server from "./serverClass"
+import getNamedCardsRytir from "./scraping/getNamedCardsRytir"
+import express, { Router } from "express"
+import axios from "axios"
+import getJSON from "./scraping/utils/getJSON"
 
 
 const server = new Server()
@@ -20,7 +20,7 @@ server.app.get('/api/card/:name', (req, res) => {
     if (!params) {
         res.json({
             error: "no params given"
-        });
+        })
     } else {
         getNamedCardsRytir(params.name, additionalInfo)
             .then(r => res.json(r))

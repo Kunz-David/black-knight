@@ -1,9 +1,9 @@
-import { SearchIcon } from "@chakra-ui/icons";
-import { Flex, Input, InputGroup, InputLeftElement, VStack } from "@chakra-ui/react";
-import { max, min } from "lodash";
-import { Suspense } from 'react';
-import { atom, useRecoilState, useSetRecoilState } from "recoil";
-import AutocompleteFuzzySort, { getAutoCompList } from '../AutocompleteFuzzySort';
+import { SearchIcon } from "@chakra-ui/icons"
+import { Flex, Input, InputGroup, InputLeftElement, VStack } from "@chakra-ui/react"
+import { max, min } from "lodash"
+import { Suspense } from 'react'
+import { atom, useRecoilState, useSetRecoilState } from "recoil"
+import AutocompleteFuzzySort, { getAutoCompList } from '../AutocompleteFuzzySort'
 
 export const inputCardNameState = atom({
     key: "inputCardName",
@@ -28,7 +28,7 @@ const SearchBar = () => {
     const [inputCardName, setInputCardName] = useRecoilState(inputCardNameState)
     const setAutoCompListSelection = useSetRecoilState(autoCompListSelectionState)
     const setSearchForCard = useSetRecoilState(searchForCardState)
-    
+
     const autocompleteList = getAutoCompList(inputCardName)
     const autocompleteListLen = autocompleteList.length
 
@@ -64,13 +64,14 @@ const SearchBar = () => {
     }
 
     return (
-        <VStack width={"full"} style={{display: "inline-block"}}>
+        <VStack width={"full"} style={{ display: "inline-block" }}>
             <Flex width={"full"} pr={[2, 5]} pl={2}>
                 <InputGroup variant={"filled"} size={"lg"} colorScheme={"teal"}>
                     <InputLeftElement
                         pointerEvents="none"
-                        children={<SearchIcon color="gray.300" />}
-                    />
+                    >
+                        <SearchIcon color="gray.300" />
+                    </InputLeftElement>
                     <Input
                         name={"Card search"}
                         type="search"
@@ -89,11 +90,11 @@ const SearchBar = () => {
             </Flex>
             <Flex width={"full"} pr={[2, 5]} pl={2}>
                 <Suspense fallback={<div>Loading :)</div>}>
-                    <AutocompleteFuzzySort autocompleteList={autocompleteList}/>
+                    <AutocompleteFuzzySort autocompleteList={autocompleteList} />
                 </Suspense>
             </Flex>
         </VStack>
     )
 }
 
-export default SearchBar;
+export default SearchBar

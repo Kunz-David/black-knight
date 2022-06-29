@@ -1,7 +1,7 @@
-import exactRytirCardSearchURL from "./exactCardSearchURL";
-import scrapeCard from "./scrapeCard";
-import { toLower } from "lodash";
-import addScryfallCard from "./addFunctions/addScryfallCard";
+import exactRytirCardSearchURL from "./exactCardSearchURL"
+import scrapeCard from "./scrapeCard"
+import { toLower } from "lodash"
+import addScryfallCard from "./addFunctions/addScryfallCard"
 
 function getEdhrecUrl(cardName) {
     let edhrecCardName = toLower(cardName)
@@ -18,7 +18,7 @@ async function scrapeNamedCard(url, cardName, additionalInfo) {
         result = {
             ...result,
             edhrec_url: getEdhrecUrl(cardName),
-            scryfall: {...(await addScryfallCard(cardName))}
+            scryfall: { ...(await addScryfallCard(cardName)) }
         }
     }
     return result

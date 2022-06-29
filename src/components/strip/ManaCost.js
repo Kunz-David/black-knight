@@ -15,8 +15,8 @@ function ManaCost({ value, ...manaProps }) {
     return (
         <Text>
             {symbols.map((symbol) =>
-                <ManaSymbol key={symbol + nanoid()} symbol={symbol} cost {...manaProps}/>
-                )}
+                <ManaSymbol key={symbol + nanoid()} symbol={symbol} cost {...manaProps} />
+            )}
         </Text>
     )
 }

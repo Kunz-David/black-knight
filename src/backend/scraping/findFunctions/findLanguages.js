@@ -1,6 +1,6 @@
-import findWebNames from "./findWebNames";
-import cardLanguages from "../../../utils/cardLanguages";
-import fillEmptyWith from "./utils/fillEmptyWith";
+import findWebNames from "./findWebNames"
+import cardLanguages from "../../../utils/cardLanguages"
+import fillEmptyWith from "./utils/fillEmptyWith"
 
 
 function findLanguages(html) {

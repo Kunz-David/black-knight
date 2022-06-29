@@ -1,5 +1,5 @@
-import scrapeWithFunction from "./scrapeWithFunction";
-import findFunctions from "./findFunctions/findFunctions";
+import scrapeWithFunction from "./scrapeWithFunction"
+import findFunctions from "./findFunctions/findFunctions"
 
 function scrapeWithAllFunctions(html) {
     const funs = Object.values(findFunctions)

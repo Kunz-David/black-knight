@@ -1,4 +1,4 @@
-import getJSON from "../src/backend/scraping/utils/getJSON";
+import getJSON from "../src/backend/scraping/utils/getJSON"
 
 
 const url = "https://api.scryfall.com/catalog/card-names"

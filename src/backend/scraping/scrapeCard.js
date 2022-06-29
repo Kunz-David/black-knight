@@ -1,8 +1,8 @@
-import getHTML from "./utils/getHTML";
-import getPageURLs from "./utils/getOtherPageURLs";
-import scrapeWithAllFunctions from "./scrapeWithAllFunctions";
-import scrapedToJsons from "./utils/scrapedToJsons";
-import searchSuccessful from "./utils/searchSuccessful";
+import getHTML from "./utils/getHTML"
+import getPageURLs from "./utils/getOtherPageURLs"
+import scrapeWithAllFunctions from "./scrapeWithAllFunctions"
+import scrapedToJsons from "./utils/scrapedToJsons"
+import searchSuccessful from "./utils/searchSuccessful"
 import addSet from "./addFunctions/addSet"
 
 // scrapes results of search from all the result pages
@@ -22,7 +22,7 @@ async function scrapeCard(url, additionalInfo = {}) {
                 ...(await addSet(card, additionalInfo.setsPromise)),
                 // setCode: "PLACEHOLDER"
             }
-        )))
+            )))
         return {
             status: "success",
             rytir_url: url,
@@ -30,7 +30,8 @@ async function scrapeCard(url, additionalInfo = {}) {
         }
     } else {
         console.warn(`No card found at ${url}`)
-        return {status: "error",
+        return {
+            status: "error",
             info: "no cards found"
         }
     }

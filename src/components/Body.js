@@ -1,8 +1,7 @@
-import React from 'react';
-import {Box, Center, Flex} from "@chakra-ui/react";
-import DebugButton from "./DebugButton";
+import { Box, Center, Flex } from "@chakra-ui/react"
+import DebugButton from "./DebugButton"
 
-function Body({children}) {
+function Body({ children }) {
     return (
         <div>
             <Center>
@@ -11,10 +10,10 @@ function Body({children}) {
                 </Box>
             </Center>
             <Flex position={"sticky"} bottom={1} right={1} padding={3} zIndex={1300}>
-                <DebugButton/>
+                <DebugButton />
             </Flex>
         </div>
     )
 }
 
-export default Body;
+export default Body
