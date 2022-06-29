@@ -77,7 +77,14 @@
             "react"
         ],
         "rules": {
-            "react/prop-types": "warn",
+            "react/prop-types": [
+                "warn",
+                {
+                    "ignore": [
+                        "children"
+                    ]
+                }
+            ],
             "no-unused-vars": "warn",
             "semi": [
                 2,

@@ -2,7 +2,7 @@ import scrapeCard from "./scraping/scrapeCard"
 import Server from "./serverClass"
 import getNamedCardsRytir from "./scraping/getNamedCardsRytir"
 import express, { Router } from "express"
-import axios from "axios"
+// import axios from "axios"
 import getJSON from "./scraping/utils/getJSON"
 
 
