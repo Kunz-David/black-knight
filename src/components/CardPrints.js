@@ -3,7 +3,12 @@ import { useRecoilValue } from 'recoil'
 import { cardStripPrintIdsState } from "../atoms"
 import CardPrint from "./CardPrint"
 import HorizontalScroll from "./header/HorizontalScroll"
+import PropTypes from "prop-types"
 
+
+CardPrints.propTypes = {
+    cardName: PropTypes.string
+}
 
 function CardPrints({ cardName }) {
 

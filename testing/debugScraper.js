@@ -48,6 +48,7 @@ const fetchHTML = async () => {
     }
 }
 
+// eslint-disable-next-line no-unused-vars
 const scrapedData = fetchHTML()
     .then(html => scrapeWithAllFunctions(html))
     .then(res => {

@@ -1,4 +1,5 @@
 import classnames from "classnames"
+import PropTypes from "prop-types"
 
 const sizes = [`2x`, `3x`, `4x`, `5x`, `6x`]
 const loyalties = ['loyalty-up', 'loyalty-down', 'loyalty-zero', 'loyalty-start']
@@ -11,6 +12,16 @@ const verboseMana = {
     g: "green",
 }
 
+ManaSymbol.propTypes = {
+    symbol: PropTypes.string,
+    size: PropTypes.string,
+    cost: PropTypes.bool,
+    half: PropTypes.bool,
+    shadow: PropTypes.bool,
+    fixed: PropTypes.bool,
+    loyalty: PropTypes.bool,
+}
+
 function ManaSymbol({
     symbol = ``,
     size = ``,
@@ -19,14 +30,13 @@ function ManaSymbol({
     half = false,
     fixed = false,
     loyalty = null,
-    className,
     ...props
 }) {
     return (
         <i
             title={verboseMana[symbol]}
             alt={verboseMana[symbol]}
-            className={classnames(className, {
+            className={classnames({
                 "ms": true,
                 [`ms-${symbol}`]: true,
                 [`ms-${size}`]: sizes.includes(size),

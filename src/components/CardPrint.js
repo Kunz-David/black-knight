@@ -4,6 +4,14 @@ import { Badge, Box, Button, Center, HStack, Image, Input, Spacer, useNumberInpu
 import cardConditions from "../utils/cardConditions"
 import cardLanguages from "../utils/cardLanguages"
 import SetIcon from './SetIcon'
+import PropTypes from "prop-types"
+
+const cardPrintType = {
+    cardName: PropTypes.string.isRequired,
+    printId: PropTypes.number.isRequired
+}
+
+CardAmount.propTypes = cardPrintType
 
 function CardAmount({ cardName, printId }) {
 
@@ -59,7 +67,11 @@ CardBadge.defaultProps = {
     m: "1",
 }
 
-const CardTreatmentBadges = ({ treatments }) => {
+CardTreatmentBadges.propTypes = {
+    treatments: PropTypes.arrayOf(PropTypes.string)
+}
+
+function CardTreatmentBadges({ treatments }) {
 
     return (
         <div>
@@ -72,7 +84,11 @@ const CardTreatmentBadges = ({ treatments }) => {
     )
 }
 
-const CardConditionBadge = ({ condition }) => {
+CardConditionBadge.propTypes = {
+    condition: PropTypes.string
+}
+
+function CardConditionBadge({ condition }) {
     return (
         <CardBadge colorScheme={cardConditions[condition].colorScheme}>
             {condition}
@@ -80,7 +96,11 @@ const CardConditionBadge = ({ condition }) => {
     )
 }
 
-const CardLanguageBadge = ({ language }) => {
+CardLanguageBadge.propTypes = {
+    language: PropTypes.string
+}
+
+function CardLanguageBadge({ language }) {
     return (
         <CardBadge colorScheme={cardLanguages[language].colorScheme}>
             {language}
@@ -88,7 +108,9 @@ const CardLanguageBadge = ({ language }) => {
     )
 }
 
-const CardPrint = ({ cardName, printId }) => {
+CardPrint.propTypes = cardPrintType
+
+function CardPrint({ cardName, printId }) {
     const cardPrint = useRecoilValue(cardPrintsState({ cardName, printId }))
 
     return (

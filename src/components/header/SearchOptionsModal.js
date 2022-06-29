@@ -14,10 +14,11 @@ import { searchProperty, searchState } from "../../atoms"
 import { useRecoilState, useResetRecoilState } from "recoil"
 import { ChevronDownIcon } from "@chakra-ui/icons"
 import { IoOptions } from "react-icons/io5"
+import PropTypes from "prop-types"
 
 
 
-function SearchBuyAmount({ isDisabled }) {
+function SearchBuyAmount({ isDisabled = false }) {
 
     const path = "buyAmount"
     const [searchBuyAmount, setSearchBuyAmount] = useRecoilState(searchProperty(path))
@@ -52,6 +53,10 @@ function SearchBuyAmount({ isDisabled }) {
             </HStack>
         </HStack>
     )
+}
+
+SearchBuyAmount.propTypes = {
+    isDisabled: PropTypes.bool
 }
 
 function OptionText({ children }) {

@@ -2,11 +2,11 @@ import { Text } from "@chakra-ui/react"
 import { toLower } from "lodash"
 import { nanoid } from 'nanoid'
 import ManaSymbol from "../ManaSymbol"
+import PropTypes from "prop-types"
 
 function manaList(manaCost) {
-    return toLower(manaCost).split(/\{+|\}+/).filter(e => e)
+    return toLower(manaCost).replaceAll('/', '').split(/\{+|\}+/).filter(e => e)
 }
-
 
 function ManaCost({ value, ...manaProps }) {
 
@@ -19,6 +19,10 @@ function ManaCost({ value, ...manaProps }) {
             )}
         </Text>
     )
+}
+
+ManaCost.propTypes = {
+    value: PropTypes.string.isRequired
 }
 
 export default ManaCost

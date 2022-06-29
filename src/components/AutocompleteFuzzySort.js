@@ -1,9 +1,10 @@
 import { Flex, List, Box } from "@chakra-ui/react"
-import { atom, errorSelector, selector, useRecoilState, useRecoilValue, useSetRecoilState } from "recoil"
+import { atom, errorSelector, useRecoilState, useRecoilValue, useSetRecoilState } from "recoil"
 import { autoCompListSelectionState, inputCardNameState, searchForCardState } from "./header/SearchBar"
 import fuzzysort from 'fuzzysort'
 import { useEffect } from "react"
 import cardsNames from "../data/card-names.json"
+import PropTypes from "prop-types"
 
 const list = cardsNames.data
 
@@ -26,6 +27,15 @@ export const autcompleteListLengthState = atom({
     default: AUTOCOMP_MAX_LEN
 })
 
+const fuzzysortItemType = PropTypes.shape({
+    target: PropTypes.string.isRequired,
+    score: PropTypes.number.isRequired,
+}).isRequired
+
+Highlighted.propTypes = {
+    result: fuzzysortItemType
+}
+
 function Highlighted({ result }) {
 
     const style = {
@@ -39,7 +49,12 @@ function Highlighted({ result }) {
     )
 }
 
-function AutocompleteListItem({ item, index, inputCardName }) {
+AutocompleteListItem.propTypes = {
+    item: fuzzysortItemType,
+    index: PropTypes.number.isRequired
+}
+
+function AutocompleteListItem({ item, index }) {
 
     const [autoCompListSelection, setAutoCompListSelection] = useRecoilState(autoCompListSelectionState)
     const setSearchForCard = useSetRecoilState(searchForCardState)
@@ -69,6 +84,10 @@ function AutocompleteListItem({ item, index, inputCardName }) {
     )
 }
 
+
+AutocompleteFuzzySort.propTypes = {
+    autocompleteList: PropTypes.array.isRequired
+}
 
 function AutocompleteFuzzySort({ autocompleteList }) {
 

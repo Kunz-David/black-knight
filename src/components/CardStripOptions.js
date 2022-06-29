@@ -8,6 +8,12 @@ import { ReactComponent as CernyRytirLogoTwo } from '../assets/cerny_rytir_ver2.
 import { ReactComponent as EDHRECLogo } from '../assets/edhrec.svg'
 import { ReactComponent as ScryfallLogo } from '../assets/scryfall_unified_color.svg'
 import ManaCost from './strip/ManaCost'
+import PropTypes from "prop-types"
+import { cardStripPropType } from "../propTypes"
+
+ButtonLink.propTypes = {
+    href: PropTypes.string
+}
 
 function ButtonLink({ href, ...ButtonLinkProps }) {
 
@@ -23,6 +29,8 @@ function ButtonLink({ href, ...ButtonLinkProps }) {
     )
 }
 
+
+CardStripOptions.propTypes = cardStripPropType
 
 // FIXME: buttons are in collapse, so clicking them also colapses
 
