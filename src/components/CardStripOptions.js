@@ -11,6 +11,7 @@ import ManaCost from './strip/ManaCost'
 import PropTypes from "prop-types"
 import { cardStripPropType } from "../propTypes"
 import CardTypeIcons from "./CardTypeIcons"
+import { get } from "lodash"
 
 ButtonLink.propTypes = {
     href: PropTypes.string
@@ -37,13 +38,18 @@ CardStripOptions.propTypes = cardStripPropType
 
 function CardStripOptions({ cardName }) {
 
+    const cardFaces = useRecoilValue(cardStripInfoProperty({ cardName, path: "card_faces" }))
+
+    const cardStripManaCost = cardFaces.map(obj => get(obj, "mana_cost"))
+    const cardStripTypeLine = cardFaces.map(obj => get(obj, "type_line"))
+
     const setCardStripVisible = useSetRecoilState(cardStripInfoProperty({ cardName, path: "visible" }))
     const cardStripPrice = useRecoilValue(cardStripInfoProperty({ cardName, path: "price" }))
-    const cardStripRytirUrl = useRecoilValue(cardStripInfoProperty({ cardName, path: "rytirUrl" }))
-    const cardStripEdhrecUrl = useRecoilValue(cardStripInfoProperty({ cardName, path: "edhrecUrl" }))
-    const cardStripScryfallUrl = useRecoilValue(cardStripInfoProperty({ cardName, path: "scryfallUrl" }))
-    const cardStripManaCost = useRecoilValue(cardStripInfoProperty({ cardName, path: "manaCost" }))
-    const cardStripTypeLine = useRecoilValue(cardStripInfoProperty({ cardName, path: "typeLine" }))
+    const cardStripRytirUrl = useRecoilValue(cardStripInfoProperty({ cardName, path: "rytir_url" }))
+    const cardStripEdhrecUrl = useRecoilValue(cardStripInfoProperty({ cardName, path: "edhrec_url" }))
+    const cardStripScryfallUrl = useRecoilValue(cardStripInfoProperty({ cardName, path: "scryfall_url" }))
+    // const cardStripManaCost = useRecoilValue(cardStripInfoProperty({ cardName, path: "mana_cost" }))
+    // const cardStripTypeLine = useRecoilValue(cardStripInfoProperty({ cardName, path: "type_line" }))
 
 
     const destroyStrip = useDestroyStrip()

@@ -19,8 +19,8 @@ function rename(rytirSet) {
         "Commander CMR": "Commander Legends",
         "Commander KHM": "Kaldheim Commander",
         "Commander AFR": "Forgotten Realms Commander",
-        "Commander VOC": "Crimson Vow Commander",
-        "Commander MIC": "Midnight Hunt Commander",
+        "Commander VOW": "Crimson Vow Commander",
+        "Commander MID": "Midnight Hunt Commander",
         "Commander NEO": "Neon Dynasty Commander",
         "Commander SNC": "New Capenna Commander",
         "Commander CLB": "Commander Legends: Battle for Baldur's Gate",
@@ -36,6 +36,7 @@ function rename(rytirSet) {
         "P - Vanguard": "Vanguard Series",
         "P - Prerelease MH2": "Modern Horizons 2",
         "GRN Guild Kits": "GRN Guild Kit",
+        "Kamigawa NEO": "Kamigawa: Neon Dynasty",
     }
 
     var newName = rytirSet

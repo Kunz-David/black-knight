@@ -12,12 +12,13 @@ import {
     searchProperty,
     cardStripInfoProperty
 } from "../../atoms"
-import { min, range } from "lodash"
+import { has, min, pick, range } from "lodash"
 import { Flex, useToast } from "@chakra-ui/react"
 import SearchOptionsModal from "./SearchOptionsModal"
 import SearchBar, { autoCompListSelectionState, inputCardNameState, searchForCardState } from "./SearchBar"
 import { toastDefaults } from "../../theme"
 import { getAutoCompList } from "../AutocompleteFuzzySort"
+import { getFaceObject } from '../../utils/cardFaceHelpers'
 
 
 async function getCardsFromBackend(cardName) {
@@ -44,16 +45,26 @@ export const findCard = selectorFamily({
 export const searchCardNameState = selector({
     key: "searchCardName",
     get: ({ get }) => {
-        if (get(autoCompListSelectionState) === -1) {
-            return getAutoCompList(get(inputCardNameState))[0].target ?? "No card found"
+        const autoCompList = getAutoCompList(get(inputCardNameState))
+        if (autoCompList?.length === 0) {
+            return "No card found"
+        } else if (get(autoCompListSelectionState) === -1) {
+            return autoCompList[0].target ?? "No card found"
         } else {
-            return getAutoCompList(get(inputCardNameState))[get(autoCompListSelectionState)].target
+            return autoCompList[get(autoCompListSelectionState)].target
         }
     }
 })
 
 
 function SearchResults() {
+
+    const faceKeys = [
+        "name",
+        "mana_cost",
+        "type_line",
+        "image_uris.png",
+    ]
 
     const cardName = useRecoilValue(searchCardNameState)
     console.debug("in search results with cardname: " + cardName)
@@ -70,11 +81,20 @@ function SearchResults() {
                 if (!cardAlreadyOnList) {
                     // save the card to the list
                     set(cardStripsNamesState, val => [cardName, ...val])
-                    set(cardStripInfoProperty({ cardName, path: "rytirUrl" }), search.rytir_url)
-                    set(cardStripInfoProperty({ cardName, path: "edhrecUrl" }), search.edhrec_url)
-                    set(cardStripInfoProperty({ cardName, path: "scryfallUrl" }), search.scryfall.scryfall_uri)
-                    set(cardStripInfoProperty({ cardName, path: "manaCost" }), search.scryfall.mana_cost)
-                    set(cardStripInfoProperty({ cardName, path: "typeLine" }), search.scryfall.type_line)
+                    set(cardStripInfoProperty({ cardName, path: "rytir_url" }), search.rytir_url)
+                    set(cardStripInfoProperty({ cardName, path: "edhrec_url" }), search.edhrec_url)
+                    set(cardStripInfoProperty({ cardName, path: "scryfall_url" }), search.scryfall.scryfall_uri)
+                    if (has(search.scryfall, "card_faces")) {
+                        const faces = getFaceObject(search.scryfall.card_faces, faceKeys)
+                        set(cardStripInfoProperty({ cardName, path: "card_faces" }), faces)
+                    } else {
+                        const faces = [{
+                            mana_cost: search.scryfall.mana_cost,
+                            type_line: search.scryfall.type_line
+                        }]
+                        set(cardStripInfoProperty({ cardName, path: "card_faces" }), faces)
+                    }
+                    // set(cardStripInfoProperty({ cardName, path: "type_line" }), search.scryfall.type_line)
                 }
 
                 // get search params:

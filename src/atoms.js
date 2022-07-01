@@ -42,8 +42,7 @@ const setPropertySelector = (atom, path, emptyValue) => ({ get, set }, newValue)
         return
     }
     if (!loHas(value, path)) {
-        console.error(`atom ${atom} doesnt have the path ${path}.`, value)
-        return
+        console.warn(`atom ${atom} doesnt have the path ${path}.`, value)
     }
     // do the work
     const newObject = produce(value, (draft) => {
@@ -54,11 +53,11 @@ const setPropertySelector = (atom, path, emptyValue) => ({ get, set }, newValue)
 const getPropertyFamilySelector = (family, key, path, emptyValue) => ({ get }) => {
     const value = get(family(key))
     if (value === emptyValue) {
-        console.warn("GET: family ", family, " with ", key, " is empty")
+        console.warn("GET: family ", family, " with key ", key, " is empty")
         return
     }
     if (!loHas(value, path)) {
-        console.error("GET: family ", family, " with ", key, " doesnt have the path ", path, "value: ", value)
+        console.error("GET: family ", family, " with key ", key, " doesnt have the path ", path, "value: ", value)
         return
     }
     // do the work
@@ -67,12 +66,11 @@ const getPropertyFamilySelector = (family, key, path, emptyValue) => ({ get }) =
 const setPropertyFamilySelector = (family, key, path, emptyValue) => ({ get, set }, newValue) => {
     const value = get(family(key))
     if (value === emptyValue) {
-        console.warn("SET: family ", family, " with ", key, " is empty")
+        console.warn("SET: family ", family, " with key ", key, " is empty")
         return
     }
     if (!loHas(value, path)) {
-        console.error("SET: family ", family, " with ", key, " doesnt have the path ", path, "value: ", value)
-        return
+        console.warn("SET: family ", family, " with key ", key, " doesnt have the path ", path, "value: ", value)
     }
     // do the work
     const newObject = produce(value, (draft) => {
@@ -85,11 +83,10 @@ const setPropertyFamilySelector = (family, key, path, emptyValue) => ({ get, set
 const cardStripInfoDefault = {
     visible: true,
     price: undefined,
-    rytirUrl: undefined,
-    edhrecUrl: undefined,
-    scryfallUrl: undefined,
-    manaCost: null,
-    typeLine: null,
+    rytir_url: undefined,
+    edhrec_url: undefined,
+    scryfall_url: undefined,
+    card_faces: undefined
 }
 
 export const cardStripInfoState = atomFamily({
