@@ -3,6 +3,8 @@ import scrapeWithAllFunctions from "../src/backend/scraping/scrapeWithAllFunctio
 import scrapedToJsons from "../src/backend/scraping/utils/scrapedToJsons"
 import scrapeCard from "../src/backend/scraping/scrapeCard"
 import exactCardSearchURL from "../src/backend/scraping/exactCardSearchURL"
+import { get } from 'lodash'
+import getNamedCardsRytir from '../src/backend/scraping/getNamedCardsRytir'
 
 // const cardJSON = require("../testing/aether_vial.json")
 
@@ -22,9 +24,18 @@ cardName = "Cosima, God of the Voyage // The Omenkeel"
 const rytirSearchURL = exactCardSearchURL(cardName)
 console.log(rytirSearchURL)
 
-scrapeCard(rytirSearchURL).then(res => {
-    console.log(res)
-    console.log(res.length)
+// scrapeCard(rytirSearchURL).then(res => {
+//     console.log(res)
+//     console.log(res.length)
+//     const typeline = get(res, "scryfall.typeline")
+//     console.log({ typeline })
+// })
+
+getNamedCardsRytir(cardName).then(res => {
+    // console.log(res)
+    const typeline = get(res, "scryfall.type_line")
+    console.log(res.scryfall.type_line)
+    console.log({ typeline })
 })
 
 const fetchHTML = async () => {

@@ -10,6 +10,7 @@ import { ReactComponent as ScryfallLogo } from '../assets/scryfall_unified_color
 import ManaCost from './strip/ManaCost'
 import PropTypes from "prop-types"
 import { cardStripPropType } from "../propTypes"
+import CardTypeIcons from "./CardTypeIcons"
 
 ButtonLink.propTypes = {
     href: PropTypes.string
@@ -42,6 +43,8 @@ function CardStripOptions({ cardName }) {
     const cardStripEdhrecUrl = useRecoilValue(cardStripInfoProperty({ cardName, path: "edhrecUrl" }))
     const cardStripScryfallUrl = useRecoilValue(cardStripInfoProperty({ cardName, path: "scryfallUrl" }))
     const cardStripManaCost = useRecoilValue(cardStripInfoProperty({ cardName, path: "manaCost" }))
+    const cardStripTypeLine = useRecoilValue(cardStripInfoProperty({ cardName, path: "typeLine" }))
+
 
     const destroyStrip = useDestroyStrip()
 
@@ -56,6 +59,7 @@ function CardStripOptions({ cardName }) {
             _hover={{ bg: "gray.200" }}
             _focus={{ boxShadow: "inner" }}>
             <HStack>
+                <CardTypeIcons typeLine={cardStripTypeLine} />
                 <Box p="2">
                     <Heading size="md">{cardName}</Heading>
                 </Box>
