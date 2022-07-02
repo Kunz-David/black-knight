@@ -39,12 +39,10 @@ const CardStripsOperationsMenu = () => {
 
     const expand = (event) => {
         setVisibilityAll(true)
-        console.debug("expand all")
     }
 
     const collapse = (event) => {
         setVisibilityAll(false)
-        console.debug("collapse all")
     }
 
     return (

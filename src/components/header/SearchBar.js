@@ -39,7 +39,6 @@ const SearchBar = () => {
 
     const enterHandler = event => {
         event.preventDefault()
-        console.debug("in add card input: " + inputCardName)
         if (inputCardName === "") return
         setSearchForCard(true)
     }

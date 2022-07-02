@@ -23,8 +23,6 @@ function SearchBuyAmount({ isDisabled = false }) {
     const path = "buyAmount"
     const [searchBuyAmount, setSearchBuyAmount] = useRecoilState(searchProperty(path))
 
-    console.debug("in search buy amount ", searchBuyAmount)
-
     const {
         getInputProps,
         getIncrementButtonProps,
@@ -71,8 +69,6 @@ function SearchOrder() {
 
     const path = "orderBy"
     const [searchOrderBy, setSearchOrderBy] = useRecoilState(searchProperty(path))
-
-    console.debug("is search order ", searchOrderBy)
 
     return (
         <HStack>

@@ -114,7 +114,15 @@ function CardPrint({ cardName, printId }) {
     const cardPrint = useRecoilValue(cardPrintsState({ cardName, printId }))
 
     return (
-        <Box maxW={"16rem"} borderWidth="1px" borderRadius="lg" padding={3} minWidth={"16rem"}>
+        <Box maxW={"16rem"}
+            borderWidth="1px"
+            borderRadius="lg"
+            padding={3}
+            minWidth={"16rem"}
+            borderColor={"gray.400"}
+            backgroundColor={"gray.400"}
+            opacity={cardPrint.stock === 0 ? 0.5 : 1}
+        >
             <Image src={cardPrint.rytir_image}
                 alt={cardPrint.rytir_name}
                 loading={"lazy"}

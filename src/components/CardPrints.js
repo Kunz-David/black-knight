@@ -14,8 +14,6 @@ function CardPrints({ cardName }) {
 
     const cardPrintIds = useRecoilValue(cardStripPrintIdsState(cardName))
 
-    console.debug("cardPrintIds in CardPrints: " + cardPrintIds)
-
     return (
         <div>
             <Suspense fallback={<div>Loading...</div>}>

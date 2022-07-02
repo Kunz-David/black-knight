@@ -19,7 +19,7 @@ function FaceManaCost({ cost, ...manaProps }) {
             padding={1}>
             {cost.map((symbol) => {
                 const key = symbol + nanoid()
-                return <ManaSymbol key={key} symbol={symbol} cost fixed={true} {...manaProps} />
+                return <ManaSymbol key={key} symbol={symbol} cost shadow fixed={true} {...manaProps} />
             }
             )}
         </HStack>
