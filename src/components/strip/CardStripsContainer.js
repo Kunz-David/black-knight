@@ -1,7 +1,7 @@
 import { useRecoilValue } from "recoil"
-import { cardStripsNamesState } from "../atoms"
+import { cardStripsNamesState } from "../../atoms"
 import { VStack } from "@chakra-ui/react"
-import CardStrip from "./strip/CardStrip"
+import CardStrip from "./CardStrip"
 
 function CardStripsContainer() {
     const cardStripsNames = useRecoilValue(cardStripsNamesState)

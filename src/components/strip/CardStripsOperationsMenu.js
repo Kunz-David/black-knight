@@ -3,10 +3,10 @@ import { selector, useRecoilCallback, useSetRecoilState } from "recoil"
 import {
     cardStripInfoProperty,
     cardStripsNamesState
-} from "../atoms"
+} from "../../atoms"
 import { DeleteIcon } from "@chakra-ui/icons"
 import { BsDashSquareFill, BsPlusSquareFill } from "react-icons/all"
-import { useDestroyStrip } from "../utils/destroyStrip"
+import { useDestroyStrip } from "../../utils/destroyStrip"
 
 
 const visibilityAll = selector({

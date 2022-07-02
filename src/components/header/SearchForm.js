@@ -17,7 +17,7 @@ import { Flex, useToast } from "@chakra-ui/react"
 import SearchOptionsModal from "./SearchOptionsModal"
 import SearchBar, { autoCompListSelectionState, inputCardNameState, searchForCardState } from "./SearchBar"
 import { toastDefaults } from "../../theme"
-import { getAutoCompList } from "../AutocompleteFuzzySort"
+import { getAutoCompList } from "./AutocompleteFuzzySort"
 import { getFaceObject } from '../../utils/cardFaceHelpers'
 
 

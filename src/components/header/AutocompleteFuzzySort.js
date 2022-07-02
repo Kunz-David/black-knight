@@ -1,9 +1,9 @@
 import { Flex, List, Box } from "@chakra-ui/react"
 import { atom, errorSelector, useRecoilState, useRecoilValue, useSetRecoilState } from "recoil"
-import { autoCompListSelectionState, inputCardNameState, searchForCardState } from "./header/SearchBar"
+import { autoCompListSelectionState, inputCardNameState, searchForCardState } from "./SearchBar"
 import fuzzysort from 'fuzzysort'
 import { useEffect } from "react"
-import cardsNames from "../data/card-names.json"
+import cardsNames from "../../data/card-names.json"
 import PropTypes from "prop-types"
 
 const list = cardsNames.data

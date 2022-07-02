@@ -1,8 +1,8 @@
 import { Suspense } from 'react'
 import { useRecoilValue } from 'recoil'
-import { cardStripPrintIdsState } from "../atoms"
-import CardPrint from "./CardPrint"
-import HorizontalScroll from "./header/HorizontalScroll"
+import { cardStripPrintIdsState } from "../../atoms"
+import CardPrint from "./print/CardPrint"
+import HorizontalScroll from "../HorizontalScroll"
 import PropTypes from "prop-types"
 
 

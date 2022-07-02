@@ -7,10 +7,10 @@ import { ReactComponent as CernyRytirLogo } from '../../assets/cerny_rytir_ver1.
 import { ReactComponent as CernyRytirLogoTwo } from '../../assets/cerny_rytir_ver2.svg'
 import { ReactComponent as EDHRECLogo } from '../../assets/edhrec.svg'
 import { ReactComponent as ScryfallLogo } from '../../assets/scryfall_unified_color.svg'
-import ManaCost from './ManaCost'
+import ManaCost from './print/ManaCost'
 import PropTypes from "prop-types"
 import { cardStripPropType } from "../../propTypes"
-import CardTypeIcons from "../CardTypeIcons"
+import CardTypeIcons from "./print/CardTypeIcons"
 import { get } from "lodash"
 
 ButtonLink.propTypes = {

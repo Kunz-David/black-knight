@@ -1,7 +1,7 @@
 import './App.css'
 import SearchForm from "./components/header/SearchForm"
-import CardStripsContainer from "./components/CardStripsContainer"
-import CardStripsOperationsMenu from "./components/CardStripsOperationsMenu"
+import CardStripsContainer from "./components/strip/CardStripsContainer"
+import CardStripsOperationsMenu from "./components/strip/CardStripsOperationsMenu"
 import ResultsBox from "./components/ResultsBox"
 import Body from "./components/Body"
 import { Divider } from "@chakra-ui/react"

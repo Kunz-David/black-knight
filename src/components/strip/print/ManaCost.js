@@ -1,7 +1,7 @@
 import { Divider, Flex, HStack, StackDivider, Text } from "@chakra-ui/react"
 import { toLower } from "lodash"
 import { nanoid } from 'nanoid'
-import ManaSymbol from "../ManaSymbol"
+import ManaSymbol from "./ManaSymbol"
 import PropTypes from "prop-types"
 
 function manaList(faceManaCosts) {

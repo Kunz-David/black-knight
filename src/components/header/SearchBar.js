@@ -3,7 +3,7 @@ import { Flex, Input, InputGroup, InputLeftElement, VStack } from "@chakra-ui/re
 import { max, min } from "lodash"
 import { Suspense } from 'react'
 import { atom, useRecoilState, useSetRecoilState } from "recoil"
-import AutocompleteFuzzySort, { getAutoCompList } from '../AutocompleteFuzzySort'
+import AutocompleteFuzzySort, { getAutoCompList } from './AutocompleteFuzzySort'
 
 export const inputCardNameState = atom({
     key: "inputCardName",

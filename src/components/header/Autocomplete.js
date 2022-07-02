@@ -5,7 +5,7 @@ import {
     useRecoilValue,
 } from "recoil"
 import { Flex, List, ListItem } from "@chakra-ui/react"
-import { inputCardNameState } from "./header/SearchBar"
+import { inputCardNameState } from "./SearchBar"
 
 export const AUTOCOMPLETE_LEN = 5
 

@@ -1,8 +1,8 @@
 import { useRecoilState, useRecoilValue, useSetRecoilState } from "recoil"
-import { cardPrintProperty, cardPrintsState, cardStripInfoProperty } from "../atoms"
+import { cardPrintProperty, cardPrintsState, cardStripInfoProperty } from "../../../atoms"
 import { Badge, Box, Button, Center, HStack, Image, Input, Spacer, useNumberInput } from "@chakra-ui/react"
-import cardConditions from "../utils/cardConditions"
-import cardLanguages from "../utils/cardLanguages"
+import cardConditions from "../../../utils/cardConditions"
+import cardLanguages from "../../../utils/cardLanguages"
 import SetIcon from './SetIcon'
 import PropTypes from "prop-types"
 
