@@ -1,16 +1,16 @@
 import { Box, Heading, HStack, IconButton, Spacer, Text } from "@chakra-ui/react"
 import { useSetRecoilState, useRecoilValue } from "recoil"
 import { DeleteIcon } from "@chakra-ui/icons"
-import { cardStripInfoProperty } from "../atoms"
-import { useDestroyStrip } from "../utils/destroyStrip"
-import { ReactComponent as CernyRytirLogo } from '../assets/cerny_rytir_ver1.svg'
-import { ReactComponent as CernyRytirLogoTwo } from '../assets/cerny_rytir_ver2.svg'
-import { ReactComponent as EDHRECLogo } from '../assets/edhrec.svg'
-import { ReactComponent as ScryfallLogo } from '../assets/scryfall_unified_color.svg'
-import ManaCost from './strip/ManaCost'
+import { cardStripInfoProperty } from "../../atoms"
+import { useDestroyStrip } from "../../utils/destroyStrip"
+import { ReactComponent as CernyRytirLogo } from '../../assets/cerny_rytir_ver1.svg'
+import { ReactComponent as CernyRytirLogoTwo } from '../../assets/cerny_rytir_ver2.svg'
+import { ReactComponent as EDHRECLogo } from '../../assets/edhrec.svg'
+import { ReactComponent as ScryfallLogo } from '../../assets/scryfall_unified_color.svg'
+import ManaCost from './ManaCost'
 import PropTypes from "prop-types"
-import { cardStripPropType } from "../propTypes"
-import CardTypeIcons from "./CardTypeIcons"
+import { cardStripPropType } from "../../propTypes"
+import CardTypeIcons from "../CardTypeIcons"
 import { get } from "lodash"
 
 ButtonLink.propTypes = {

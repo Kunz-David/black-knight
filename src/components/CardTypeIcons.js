@@ -58,8 +58,6 @@ CardTypeIcons.propTypes = {
     typeLine: PropTypes.arrayOf(PropTypes.string)
 }
 
-// FIXME: "Hostile Hostel // Creeping Inn" having 3 types
-
 function CardTypeIcons({ typeLine, ...manaProps }) {
 
     const faceTypes = getCardTypes(typeLine)

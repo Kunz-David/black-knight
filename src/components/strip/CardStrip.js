@@ -1,9 +1,9 @@
 import { useRecoilValue } from "recoil"
 import { Box, Collapse, VStack } from "@chakra-ui/react"
-import CardPrints from "./CardPrints"
+import CardPrints from "../CardPrints"
 import CardStripOptions from "./CardStripOptions"
-import { cardStripInfoProperty } from "../atoms"
-import { cardStripPropType } from "../propTypes"
+import { cardStripInfoProperty } from "../../atoms"
+import { cardStripPropType } from "../../propTypes"
 
 CardStrip.propTypes = cardStripPropType
 

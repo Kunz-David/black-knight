@@ -26,9 +26,6 @@ function FaceManaCost({ cost, ...manaProps }) {
     )
 }
 
-
-// FIXME: "Golden Guardian // Gold-Forge Garrison" not having cost
-
 function ManaCost({ value, ...manaProps }) {
 
     const faceCosts = manaList(value)
