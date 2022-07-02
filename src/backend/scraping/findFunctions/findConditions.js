@@ -3,7 +3,7 @@ import cardConditions from "../../../utils/cardConditions"
 import fillEmptyWith from "./utils/fillEmptyWith"
 
 
-function findTreatments(html) {
+function findConditions(html) {
     const names = findWebNames(html)
     const foundConditions = names.map(name => Object
         .keys(cardConditions)
@@ -11,4 +11,4 @@ function findTreatments(html) {
     return fillEmptyWith(foundConditions, "near mint")
 }
 
-export default findTreatments
+export default findConditions

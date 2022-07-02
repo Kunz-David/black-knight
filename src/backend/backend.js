@@ -4,6 +4,7 @@ import getNamedCardsRytir from "./scraping/getNamedCardsRytir"
 import express, { Router } from "express"
 // import axios from "axios"
 import getJSON from "./scraping/utils/getJSON"
+import sendBuyCardPostReq from "./scraping/utils/sendBuyCardPostReq"
 
 
 const server = new Server()
@@ -14,6 +15,21 @@ const setURL = "https://mtgjson.com/api/v5/SetList.json"
 const additionalInfo = {
     setsPromise: getJSON(setURL)
 }
+
+
+server.app.get('/api/card/buy/:code/:amount', (req, res) => {
+    const params = req.params
+    if (!params) {
+        res.json({
+            error: "no params given"
+        })
+    } else {
+        sendBuyCardPostReq(params.code, params.amount)
+            .then(r => res.json(r))
+            .catch(error => console.log(error))
+    }
+})
+
 
 server.app.get('/api/card/:name', (req, res) => {
     const params = req.params

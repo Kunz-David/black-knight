@@ -27,6 +27,7 @@
         "nanoid": "^4.0.0",
         "nodemon": "^2.0.13",
         "prop-types": "^15.8.1",
+        "qs": "^6.11.0",
         "react": "^18",
         "react-dom": "^18",
         "react-horizontal-scrolling-menu": "^2.5.1",
@@ -41,7 +42,7 @@
     "scripts": {
         "start": "concurrently \"yarn run backend\" \"yarn run client\"",
         "client": "PORT=3000 react-scripts start",
-        "backend-nodemon": "nodemon backend-wrapper.js",
+        "backend-nodemon": "PORT=3001 nodemon backend-wrapper.js",
         "backend": "PORT=3001 node backend-wrapper.js",
         "debug-scraper": "node testing/debugScraper-wrapper.js",
         "try": "node -r esm testing/try.js",
