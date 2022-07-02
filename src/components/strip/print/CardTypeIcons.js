@@ -1,5 +1,5 @@
-import { Badge, HStack, StackDivider, Text } from "@chakra-ui/react"
-import { toLower, uniq } from "lodash"
+import { Badge, HStack, StackDivider } from "@chakra-ui/react"
+import { toLower } from "lodash"
 import ManaSymbol from "./ManaSymbol"
 import PropTypes from "prop-types"
 import { nanoid } from "nanoid"

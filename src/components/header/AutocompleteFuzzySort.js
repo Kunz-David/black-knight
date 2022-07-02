@@ -1,6 +1,6 @@
-import { Flex, List, Box } from "@chakra-ui/react"
+import { Flex, List, Box, useToast } from "@chakra-ui/react"
 import { atom, errorSelector, useRecoilState, useRecoilValue, useSetRecoilState } from "recoil"
-import { autoCompListSelectionState, inputCardNameState, searchForCardState } from "./SearchBar"
+import { autoCompListSelectionState, inputCardNameState, searchCardState } from "./SearchBar"
 import fuzzysort from 'fuzzysort'
 import { useEffect } from "react"
 import cardsNames from "../../data/card-names.json"
@@ -37,14 +37,9 @@ Highlighted.propTypes = {
 }
 
 function Highlighted({ result }) {
-
-    const style = {
-        // color: "red",
-    }
-
     return (
         <span white-space="nowrap">
-            {fuzzysort.highlight(result, (match, i) => <b style={style} key={`${match}_${i}`}>{match}</b>)}
+            {fuzzysort.highlight(result, (match, i) => <b key={`${match}_${i}`}>{match}</b>)}
         </span>
     )
 }
@@ -57,7 +52,9 @@ AutocompleteListItem.propTypes = {
 function AutocompleteListItem({ item, index }) {
 
     const [autoCompListSelection, setAutoCompListSelection] = useRecoilState(autoCompListSelectionState)
-    const setSearchForCard = useSetRecoilState(searchForCardState)
+    const searchForCard = useRecoilValue(searchCardState)
+
+    const toast = useToast()
 
     const selectedStyle = {
         color: "orange",
@@ -68,12 +65,11 @@ function AutocompleteListItem({ item, index }) {
     const defaultStyle = {
     }
 
-
     return (
         <Box
             onMouseOver={() => setAutoCompListSelection(index)}
             onMouseOut={() => setAutoCompListSelection(-1)}
-            onClick={(event) => { setSearchForCard(true) }}
+            onClick={(event) => { searchForCard(toast) }}
             width={"full"}
             white-space={"nowrap"}
             style={index === autoCompListSelection ? selectedStyle : defaultStyle}

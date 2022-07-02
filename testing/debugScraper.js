@@ -1,7 +1,6 @@
 import axios from 'axios'
 import scrapeWithAllFunctions from "../src/backend/scraping/scrapeWithAllFunctions"
 import scrapedToJsons from "../src/backend/scraping/utils/scrapedToJsons"
-import scrapeCard from "../src/backend/scraping/scrapeCard"
 import exactCardSearchURL from "../src/backend/scraping/exactCardSearchURL"
 import { get } from 'lodash'
 import getNamedCardsRytir from '../src/backend/scraping/getNamedCardsRytir'
