@@ -7,6 +7,7 @@ import findLanguages from "./findLanguages"
 import findConditions from "./findConditions"
 import findWebNames from "./findWebNames"
 import findImages from "./findImages"
+import findBuyCode from "./findBuyCode"
 
 const findFunctions = {
     "name": findWebNames,
@@ -17,7 +18,8 @@ const findFunctions = {
     "treatments": findTreatments,
     "language": findLanguages,
     "condition": findConditions,
-    "image": findImages
+    "image": findImages,
+    "buy_code": findBuyCode,
 }
 
 export default findFunctions

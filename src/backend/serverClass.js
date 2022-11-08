@@ -12,6 +12,7 @@ class Server {
         this.paths = {
             api: "/api",
             searchCard: "/api/card",
+            buyCard: "api/card/buy"
             // homepage: "/api/homepage",
         }
 
@@ -56,7 +57,11 @@ class Server {
         }
 
         this.app.use(errorHandler)
-        this.app.use(this.paths.api, logger("dev"))
+
+        Object.values(this.paths).forEach(path => {
+            this.app.use(path, logger("dev"))
+        });
+        // this.app.use(this.paths.api, logger("dev"))
     }
 
     listen() {

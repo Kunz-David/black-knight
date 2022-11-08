@@ -94,7 +94,7 @@ const cardStripInfoDefault = {
 export const cardStripInfoState = atomFamily({
     key: "cardStripInfo",
     default: cardStripInfoDefault,
-    effects_UNSTABLE: [persistLocalStorage],
+    effects: [persistLocalStorage],
 })
 
 export const cardStripInfoProperty = selectorFamily({
@@ -137,21 +137,21 @@ const cardPrintsStateDefault = []
 export const cardPrintsState = atomFamily({
     key: "prints",
     default: cardPrintsStateDefault,
-    effects_UNSTABLE: [persistLocalStorage],
+    effects: [persistLocalStorage],
 })
 
 // cardName => printIds
 export const cardStripPrintIdsState = atomFamily({
     key: "cardStripPrintIds",
     default: [],
-    effects_UNSTABLE: [persistLocalStorage],
+    effects: [persistLocalStorage],
 })
 
 // () => cardNames
 export const cardStripsNamesState = atom({
     key: "cardStripsNames",
     default: [],
-    effects_UNSTABLE: [persistLocalStorage],
+    effects: [persistLocalStorage],
 })
 
 

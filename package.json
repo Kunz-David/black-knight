@@ -27,13 +27,14 @@
         "nanoid": "^4.0.0",
         "nodemon": "^2.0.13",
         "prop-types": "^15.8.1",
+        "qs": "^6.11.0",
         "react": "^18",
         "react-dom": "^18",
         "react-horizontal-scrolling-menu": "^2.5.1",
         "react-icons": "^4.3.1",
         "react-query": "^3.29.0",
         "react-scripts": "4.0.3",
-        "recoil": "^0.5.2",
+        "recoil": "^0.7.3",
         "typescript": "^4.4.4",
         "web-vitals": "^1.1.2",
         "windows-1250": "^3.0.2"
@@ -41,7 +42,7 @@
     "scripts": {
         "start": "concurrently \"yarn run backend\" \"yarn run client\"",
         "client": "PORT=3000 react-scripts start",
-        "backend-nodemon": "nodemon backend-wrapper.js",
+        "backend-nodemon": "PORT=3001 nodemon backend-wrapper.js",
         "backend": "PORT=3001 node backend-wrapper.js",
         "debug-scraper": "node testing/debugScraper-wrapper.js",
         "try": "node -r esm testing/try.js",
@@ -74,9 +75,11 @@
             "sourceType": "module"
         },
         "plugins": [
-            "react"
+            "react",
+            "unused-imports"
         ],
         "rules": {
+            "unused-imports/no-unused-imports": "warn",
             "react/prop-types": [
                 "warn",
                 {
@@ -107,6 +110,7 @@
     "proxy": "http://localhost:3001",
     "devDependencies": {
         "eslint-plugin-react": "^7.30.1",
+        "eslint-plugin-unused-imports": "^2.0.0",
         "react-error-overlay": "6.0.9"
     }
 }

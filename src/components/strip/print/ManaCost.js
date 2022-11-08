@@ -1,4 +1,4 @@
-import { Divider, Flex, HStack, StackDivider, Text } from "@chakra-ui/react"
+import { Flex, HStack, StackDivider } from "@chakra-ui/react"
 import { toLower } from "lodash"
 import { nanoid } from 'nanoid'
 import ManaSymbol from "./ManaSymbol"
