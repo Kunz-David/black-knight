@@ -46,7 +46,7 @@ export const searchCardNameState = selector({
     key: "searchCardName",
     get: ({ get }) => {
         const autoCompList = getAutoCompList(get(inputCardNameState))
-        if (autoCompList?.length == 0) {
+        if (autoCompList?.length === 0) {
             return "No card found"
         } else if (get(autoCompListSelectionState) === -1) {
             return autoCompList[0].target ?? "No card found"

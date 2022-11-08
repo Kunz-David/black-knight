@@ -35,6 +35,7 @@ const getPropertySelector = (atom, path, emptyValue) => ({ get }) => {
     // do the work
     return loGet(value, path)
 }
+
 const setPropertySelector = (atom, path, emptyValue) => ({ get, set }, newValue) => {
     const value = get(atom)
     if (value === emptyValue) {
@@ -50,6 +51,7 @@ const setPropertySelector = (atom, path, emptyValue) => ({ get, set }, newValue)
     })
     set(atom, newObject)
 }
+
 const getPropertyFamilySelector = (family, key, path, emptyValue) => ({ get }) => {
     const value = get(family(key))
     if (value === emptyValue) {

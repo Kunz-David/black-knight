@@ -1,10 +1,10 @@
 import axios from 'axios'
-import scrapeWithAllFunctions from "../src/backend/scraping/scrapeWithAllFunctions"
-import scrapedToJsons from "../src/backend/scraping/utils/scrapedToJsons"
-import scrapeCard from "../src/backend/scraping/scrapeCard"
-import exactCardSearchURL from "../src/backend/scraping/exactCardSearchURL"
+import scrapeWithAllFunctions from "../src/backend/rytir/scrapeWithAllFunctions"
+import scrapedToJsons from "../src/backend/rytir/utils/scrapedToJsons"
+import scrapeCard from "../src/backend/rytir/scrapeCard"
+import exactCardSearchURL from "../src/backend/rytir/exactRytirCardSearchURL"
 import { get } from 'lodash'
-import getNamedCardsRytir from '../src/backend/scraping/getNamedCardsRytir'
+import getNamedCards from '../src/backend/rytir/getNamedCards'
 
 // const cardJSON = require("../testing/aether_vial.json")
 
@@ -31,7 +31,7 @@ console.log(rytirSearchURL)
 //     console.log({ typeline })
 // })
 
-getNamedCardsRytir(cardName).then(res => {
+getNamedCards(cardName).then(res => {
     // console.log(res)
     const typeline = get(res, "scryfall.type_line")
     console.log(res.scryfall.type_line)

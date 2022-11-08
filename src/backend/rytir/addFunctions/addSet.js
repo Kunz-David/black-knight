@@ -15,10 +15,8 @@ function rename(rytirSet) {
         "10th Edition": "Tenth Edition",
         "Commander Coll.: Black": "Commander Collection: Black",
         "P - Grand Prix": "Grand Prix Promos",
-        "P - Prerelease DOM": "Dominaria",
         "P - Promo Pack": "Media Insert",
         "P - Vanguard": "Vanguard Series",
-        "P - Prerelease MH2": "Modern Horizons 2",
         "P - Prerelease CLB": "Battle for Baldur's Gate Promos",
         "P - Prerelease SNC": "Streets of New Capenna Promos",
         "P - Prerelease NEO": "Kamigawa: Neon Dynasty Promos",
@@ -73,9 +71,10 @@ function rename(rytirSet) {
         "Mystical Archive - JP": "Strixhaven Mystical Archive",
         "GRN Guild Kits": "GRN Guild Kit",
         "Kamigawa NEO": "Kamigawa: Neon Dynasty",
+        "Double Masters 2022 Ext.": "Double Masters 2022: Extras"
     }
 
-    var newName = rytirSet
+    let newName = rytirSet
 
     newName = newName.replaceAll("Extras", "")
     newName = newName.replaceAll("´", "'")
@@ -83,7 +82,7 @@ function rename(rytirSet) {
 
     if (has(names, newName)) {
         newName = names[newName]
-        // console.debug(`swiched "${rytirSet}" for "${newName}"`)
+        // console.debug(`switched "${rytirSet}" for "${newName}"`)
     }
 
     return newName
@@ -102,16 +101,16 @@ async function addSet(card, setsPromise) {
         return null
     }
 
-    var searchSet = card.rytir_set
+    let searchSet = card.rytir_set
 
     const sets = (await setsPromise).data
 
     searchSet = rename(searchSet)
-    var searchResults = fuzzysort.go(searchSet, sets, options)
+    let searchResults = fuzzysort.go(searchSet, sets, options)
 
-    var keyruneCode = "DEFAULT"
-    var releaseDate = undefined
-    var setType = undefined
+    let keyruneCode = "DEFAULT"
+    let releaseDate = undefined
+    let setType = undefined
 
     if (searchResults.length !== 0) {
         keyruneCode = toLower(searchResults[0].obj.keyruneCode)
@@ -122,9 +121,9 @@ async function addSet(card, setsPromise) {
     }
 
     return {
-        set: searchSet,
-        keyruneCode,
+        name: searchSet,
         releaseDate,
+        keyruneCode,
         setType
     }
 }

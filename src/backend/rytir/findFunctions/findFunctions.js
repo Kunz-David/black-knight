@@ -9,6 +9,7 @@ import findWebNames from "./findWebNames"
 import findImages from "./findImages"
 
 const findFunctions = {
+    "name": findWebNames,
     "price": findPrices,
     "stock": findStocks,
     "rytir_set": findSets,
@@ -16,8 +17,7 @@ const findFunctions = {
     "treatments": findTreatments,
     "language": findLanguages,
     "condition": findConditions,
-    "rytir_name": findWebNames,
-    "rytir_image": findImages
+    "image": findImages
 }
 
 export default findFunctions

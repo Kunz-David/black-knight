@@ -1,6 +1,6 @@
 // replace ' and + in the url
 function makeItRytirReadable(url) {
-    var rytirUrl = url
+    let rytirUrl = url
         .replaceAll("+", "%20")
         .replaceAll("%27", "%B4")
         .replaceAll("%C3%BB", "u")

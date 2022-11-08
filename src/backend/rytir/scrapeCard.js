@@ -19,14 +19,13 @@ async function scrapeCard(url, additionalInfo = {}) {
         const cards = await Promise.all(
             allResults.map(async card => ({
                 ...card,
-                ...(await addSet(card, additionalInfo.setsPromise)),
-                // setCode: "PLACEHOLDER"
+                set: await addSet(card, additionalInfo.setsPromise),
             }
             )))
         return {
             status: "success",
             rytir_url: url,
-            results: cards,
+            cards: cards,
         }
     } else {
         console.warn(`No card found at ${url}`)
