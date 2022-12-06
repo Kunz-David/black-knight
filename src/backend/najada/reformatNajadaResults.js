@@ -1,4 +1,5 @@
 import cardConditions from "../../utils/cardConditions"
+import languagesNajada from "./domainTranslation/languagesNajada"
 
 function insertIf(condition, ...elements) {
     return condition ? elements : []
@@ -23,6 +24,7 @@ function reformatItem(item) {
                 ...insertIf(article.additional_properties.is_altered, "altered"),
                 ...insertIf(article.additional_properties.is_signed, "signed"),
             ],
+            language: article.language_code,
             condition: article.condition,
             image: item.image_url,
         }

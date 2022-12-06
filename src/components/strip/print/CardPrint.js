@@ -123,8 +123,8 @@ function CardPrint({ cardName, printId }) {
             backgroundColor={"gray.400"}
             opacity={cardPrint.stock === 0 ? 0.5 : 1}
         >
-            <Image src={cardPrint.rytir_image}
-                alt={cardPrint.rytir_name}
+            <Image src={cardPrint.image}
+                alt={cardPrint.name}
                 loading={"lazy"}
                 fallbackSrc={"https://static.wikia.nocookie.net/mtgsalvation_gamepedia/images/f/f8/Magic_card_back.jpg/revision/latest/scale-to-width-down/250?cb=20140813141013"} />
             <Box p="2" alignContent={"center"}>
@@ -134,10 +134,10 @@ function CardPrint({ cardName, printId }) {
                     {cardPrint.language !== "English" && <CardLanguageBadge language={cardPrint.language} />}
                 </Center>
                 <Center>
-                    {cardPrint.set}
+                    {cardPrint.set.name}
+                    ({cardPrint.set.releaseDate})
                     <SetIcon
-                        setName={cardPrint.set}
-                        keyruneCode={cardPrint.keyruneCode}
+                        set={cardPrint.set}
                         rarity={cardPrint.rarity}
                         size="1x"
                         fixed />

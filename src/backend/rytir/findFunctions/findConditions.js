@@ -8,7 +8,7 @@ function findConditions(html) {
     const foundConditions = names.map(name => Object
         .keys(cardConditionsRytirSearch)
         .find(treatment => name.includes(cardConditionsRytirSearch[treatment].searchPhrase)))
-    return fillEmptyWith(foundConditions, "near mint")
+    return fillEmptyWith(foundConditions, "Near Mint")
 }
 
 export default findConditions

@@ -14,7 +14,7 @@ export const inputCardNameState = atom({
 })
 
 export async function getCardsFromBackend(cardName) {
-    const url = `/api/card/${encodeURIComponent(cardName)}`
+    const url = `/api/rytir_legacy/${encodeURIComponent(cardName)}`
     console.debug("search url: " + url)
     return await fetch(url).then((res) => res.json())
 }
@@ -95,7 +95,7 @@ export const searchCardState = selector({
                 const totalBuyAmount = snapshot.getLoadable(searchProperty("buyAmount")).contents
                 const orderBy = snapshot.getLoadable(searchProperty("orderBy")).contents
 
-                const results = search.results
+                const results = search.cards
                 // save the count of prints for card
                 const ids = orderBy === "Price - Asc." ? range(results.length).reverse() : range(results.length)
                 set(cardStripPrintIdsState(cardName), ids)

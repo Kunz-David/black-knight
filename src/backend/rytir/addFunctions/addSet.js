@@ -60,6 +60,7 @@ function rename(rytirSet) {
         "Commander MID": "Midnight Hunt Commander",
         "Commander NEO": "Neon Dynasty Commander",
         "Commander SNC": "New Capenna Commander",
+        "Commander DMU": " Dominaria United Commander",
         "Commander CLB": "Commander Legends: Battle for Baldur's Gate",
         "Baldur´s Gate": "Commander Legends: Battle for Baldur's Gate",
         "Commander Coll.: Green": "Commander Collection: Green",

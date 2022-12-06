@@ -1,10 +1,13 @@
-import scrapeCard from "./scraping/scrapeCard"
+import scrapeCard from "./rytir/scrapeCard"
 import Server from "./serverClass"
-import getNamedCardsRytir from "./scraping/getNamedCardsRytir"
 import express, { Router } from "express"
 // import axios from "axios"
 import getJSON from "./rytir/utils/getJSON"
-import sendBuyCardPostReq from "./scraping/utils/sendBuyCardPostReq"
+import sendBuyCardPostReq from "./rytir/utils/sendBuyCardPostReq"
+import getNamedCards from "./getNamedCards"
+import getNamedCardsRytir from "./rytir/getNamedCardsRytir"
+import {getRAWNajadaCardSearch} from "./najada/getNamedCardsNajada"
+import getNamedCardsRytirLEGACY from "./rytir/getNamedCardsRytirLEGACY"
 
 const server = new Server()
 server.listen()
@@ -15,7 +18,7 @@ const additionalInfo = {
     setsPromise: getJSON(setURL)
 }
 
-
+// not working:
 server.app.get('/api/card/buy/:code/:amount', (req, res) => {
     const params = req.params
     if (!params) {
@@ -29,7 +32,6 @@ server.app.get('/api/card/buy/:code/:amount', (req, res) => {
     }
 })
 
-
 server.app.get('/api/card/:name', (req, res) => {
     const params = req.params
     if (!params) {
@@ -38,6 +40,46 @@ server.app.get('/api/card/:name', (req, res) => {
         })
     } else {
         getNamedCards(params.name, additionalInfo)
+            .then(r => res.json(r))
+            .catch(error => console.log(error))
+    }
+})
+
+server.app.get('/api/rytir/:name', (req, res) => {
+    const params = req.params
+    if (!params) {
+        res.json({
+            error: "no params given"
+        })
+    } else {
+        getNamedCardsRytir(params.name, additionalInfo)
+            .then(r => res.json(r))
+            .catch(error => console.log(error))
+    }
+})
+
+server.app.get('/api/raw_najada/:name', (req, res) => {
+    const params = req.params
+    if (!params) {
+        res.json({
+            error: "no params given"
+        })
+    } else {
+        getRAWNajadaCardSearch(params.name)
+            .then(r => res.json(r))
+            //.then(r => console.log(r))
+            .catch(error => console.log(error))
+    }
+})
+
+server.app.get('/api/rytir_legacy/:name', (req, res) => {
+    const params = req.params
+    if (!params) {
+        res.json({
+            error: "no params given"
+        })
+    } else {
+        getNamedCardsRytirLEGACY(params.name, additionalInfo)
             .then(r => res.json(r))
             .catch(error => console.log(error))
     }

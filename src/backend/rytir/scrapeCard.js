@@ -4,6 +4,7 @@ import scrapeWithAllFunctions from "./scrapeWithAllFunctions"
 import scrapedToJsons from "./utils/scrapedToJsons"
 import searchSuccessful from "./utils/searchSuccessful"
 import addSet from "./addFunctions/addSet"
+import isEmpty from "../../utils/isEmtpy"
 
 // scrapes results of search from all the result pages
 async function scrapeCard(url, additionalInfo = {}) {
@@ -19,7 +20,7 @@ async function scrapeCard(url, additionalInfo = {}) {
         const cards = await Promise.all(
             allResults.map(async card => ({
                 ...card,
-                set: await addSet(card, additionalInfo.setsPromise),
+                set: !isEmpty(additionalInfo) && await addSet(card, additionalInfo.setsPromise),
             }
             )))
         return {

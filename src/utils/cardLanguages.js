@@ -4,7 +4,7 @@ const cardLanguages = {
     "Chinese": { searchPhrase: " chinese", colorScheme: "orange", },
     "Korean": { searchPhrase: "korean", colorScheme: "orange", },
     "non-English": { searchPhrase: "non-english", colorScheme: "orange", },
-    "English": { searchPhrase: "this will never be found", colorScheme: "orange", },
+    "English": { searchPhrase: "this will never be found", colorScheme: "green", },
 } // english is given by the absence of the others
 
 export default cardLanguages

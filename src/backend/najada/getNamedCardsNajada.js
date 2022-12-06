@@ -20,13 +20,25 @@ async function getExactNajadaCardSearch(cardName) {
     return axios(request)
 }
 
+export async function getRAWNajadaCardSearch(cardName) {
+    let data = {}
+    try {
+        const rawNajada = await getExactNajadaCardSearch(cardName)
+        data = {
+            ...rawNajada.data
+        }
+    } catch (err) {
+        console.log(err)
+    }
+    return data
+}
+
 async function getNamedCardsNajada(cardName) {
     let data = {status: "error"}
     try {
         const response = await getExactNajadaCardSearch(cardName)
         data.status = "success"
         data.cards = reformatNajadaResults(response.data)
-        console.log(data)
     } catch (err) {
         console.log(err)
     }

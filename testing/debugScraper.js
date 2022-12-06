@@ -8,7 +8,7 @@ import getNamedCardsRytir from '../src/backend/rytir/getNamedCardsRytir'
 import sendBuyCardPostReq from '../src/backend/rytir/utils/sendBuyCardPostReq'
 
 const code = 3127135
-import getNamedCards from '../src/backend/rytir/getNamedCards'
+import getNamedCards from '../src/backend/getNamedCards'
 
 sendBuyCardPostReq(code, -1)
     .then(r => {
