@@ -40,7 +40,7 @@ SetIcon.propTypes = {
         name: PropTypes.string.isRequired,
         keyruneCode: PropTypes.string.isRequired,
         releaseDate: PropTypes.string.isRequired,
-        setType: PropTypes.string.isRequired
+        setType: PropTypes.string
         }).isRequired,
     size: PropTypes.string.isRequired,
     rarity: PropTypes.string.isRequired,

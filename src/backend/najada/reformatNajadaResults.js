@@ -1,8 +1,15 @@
-import cardConditions from "../../utils/cardConditions"
-import languagesNajada from "./domainTranslation/languagesNajada"
+import cardLanguages from "../../utils/cardLanguages"
 
 function insertIf(condition, ...elements) {
     return condition ? elements : []
+}
+
+function keyGivenPhrase(object, location, phrase, def="This should not happen") {
+    for (const [key, value] of Object.entries(object)) {
+        if (value[location] === phrase)
+            return key
+    }
+    return def
 }
 
 function reformatItem(item) {
@@ -24,7 +31,7 @@ function reformatItem(item) {
                 ...insertIf(article.additional_properties.is_altered, "altered"),
                 ...insertIf(article.additional_properties.is_signed, "signed"),
             ],
-            language: article.language_code,
+            language: keyGivenPhrase(cardLanguages, "najadaSearchPhrase", article.language_code),
             condition: article.condition,
             image: item.image_url,
         }

@@ -7,7 +7,7 @@ function findLanguages(html) {
     const names = findWebNames(html)
     const foundLanguages = names.map(name => Object
         .keys(cardLanguages)
-        .find(treatment => name.includes(cardLanguages[treatment])))
+        .find(language => name.includes(cardLanguages[language].rytirSearchPhrase)))
     return fillEmptyWith(foundLanguages, "English")
 }
 

@@ -8,6 +8,7 @@ import getNamedCards from "./getNamedCards"
 import getNamedCardsRytir from "./rytir/getNamedCardsRytir"
 import {getRAWNajadaCardSearch} from "./najada/getNamedCardsNajada"
 import getNamedCardsRytirLEGACY from "./rytir/getNamedCardsRytirLEGACY"
+import getNamedCardsCombined from "./getNamedCardsCombined"
 
 const server = new Server()
 server.listen()
@@ -80,6 +81,19 @@ server.app.get('/api/rytir_legacy/:name', (req, res) => {
         })
     } else {
         getNamedCardsRytirLEGACY(params.name, additionalInfo)
+            .then(r => res.json(r))
+            .catch(error => console.log(error))
+    }
+})
+
+server.app.get('/api/both/:name', (req, res) => {
+    const params = req.params
+    if (!params) {
+        res.json({
+            error: "no params given"
+        })
+    } else {
+        getNamedCardsCombined(params.name, additionalInfo)
             .then(r => res.json(r))
             .catch(error => console.log(error))
     }

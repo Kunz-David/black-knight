@@ -19,7 +19,7 @@ const findFunctions = {
     "language": findLanguages,
     "condition": findConditions,
     "image": findImages,
-    "buy_code": findBuyCode,
+    "id": findBuyCode,
 }
 
 export default findFunctions

@@ -14,7 +14,7 @@ export const inputCardNameState = atom({
 })
 
 export async function getCardsFromBackend(cardName) {
-    const url = `/api/rytir_legacy/${encodeURIComponent(cardName)}`
+    const url = `/api/both/${encodeURIComponent(cardName)}`
     console.debug("search url: " + url)
     return await fetch(url).then((res) => res.json())
 }

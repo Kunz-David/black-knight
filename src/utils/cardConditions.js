@@ -1,14 +1,9 @@
 const cardConditions = {
-    // rytir
-    "Lightly Played": { colorScheme: "yellow" },
-    "Played": { colorScheme: "red" },
-    "Near Mint": { colorScheme: "green" },
-    // najada
-    "NM": { hint: "Near Mint", colorScheme: "green" },
-    "EX": { hint: "Excellent", colorScheme: "green" },
-    "GD": { hint: "Good", colorScheme: "yellow" },
-    "PL": { hint: "Played", colorScheme: "red" },
-    "HP": { hint: "Heavily Played", colorScheme: "red" },
+    "NM": { hint: "Near Mint", rytirSearchPhrase: "does exist", colorScheme: "green" },
+    "EX": { hint: "Excellent", rytirSearchPhrase: "does not exist", colorScheme: "green" },
+    "GD": { hint: "Good", rytirSearchPhrase: "lightly played", colorScheme: "yellow" },
+    "PL": { hint: "Played", rytirSearchPhrase: "played", colorScheme: "red" },
+    "HP": { hint: "Heavily Played", rytirSearchPhrase: "does not exist", colorScheme: "red" },
 }
 
 export default cardConditions
